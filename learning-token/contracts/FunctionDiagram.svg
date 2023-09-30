@@ -1,0 +1,609 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="544pt" height="2068pt" viewBox="0.00 0.00 544.45 2068.00">
+<g id="graph0" class="graph" transform="translate(15.709925798558515,2040.9689166140986) scale(0.9761911622152473)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="none" points="-4,4 -4,-2064 540.45,-2064 540.45,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterLearningToken">
+
+<path fill="#445773" stroke="#445773" d="M20,-232C20,-232 516.45,-232 516.45,-232 522.45,-232 528.45,-238 528.45,-244 528.45,-244 528.45,-1903 528.45,-1903 528.45,-1909 522.45,-1915 516.45,-1915 516.45,-1915 20,-1915 20,-1915 14,-1915 8,-1909 8,-1903 8,-1903 8,-244 8,-244 8,-238 14,-232 20,-232" style=""/>
+<text text-anchor="middle" x="268.22" y="-1898.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">LearningToken</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterCounters.Counter">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M386.54,-93C386.54,-93 477.84,-93 477.84,-93 483.84,-93 489.84,-99 489.84,-105 489.84,-105 489.84,-212 489.84,-212 489.84,-218 483.84,-224 477.84,-224 477.84,-224 386.54,-224 386.54,-224 380.54,-224 374.54,-218 374.54,-212 374.54,-212 374.54,-105 374.54,-105 374.54,-99 380.54,-93 386.54,-93" style=""/>
+<text text-anchor="middle" x="432.19" y="-207.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Counters.Counter</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterOwnable">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M355.98,-8C355.98,-8 508.4,-8 508.4,-8 514.4,-8 520.4,-14 520.4,-20 520.4,-20 520.4,-73 520.4,-73 520.4,-79 514.4,-85 508.4,-85 508.4,-85 355.98,-85 355.98,-85 349.98,-85 343.98,-79 343.98,-73 343.98,-73 343.98,-20 343.98,-20 343.98,-14 349.98,-8 355.98,-8" style=""/>
+<text text-anchor="middle" x="432.19" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">Ownable</text>
+</g>
+<g id="clust4" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="88.97,-1923 88.97,-2052 467.19,-2052 467.19,-1923 88.97,-1923" style=""/>
+<text text-anchor="middle" x="278.08" y="-2035.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- LearningToken.&lt;Constructor&gt; -->
+<g id="node1" class="node" pointer-events="visible" data-name="LearningToken.&lt;Constructor&gt;">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-1864" rx="67.55" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1859.8" font-family="Times,serif" font-size="14.00" style="">&lt;Constructor&gt;</text>
+</g>
+<!-- LearningToken.getInstitutionId -->
+<g id="node2" class="node" pointer-events="visible" data-name="LearningToken.getInstitutionId">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="432.19" cy="-1698" rx="70.66" ry="18" style=""/>
+<text text-anchor="middle" x="432.19" y="-1693.8" font-family="Times,serif" font-size="14.00" style="">getInstitutionId</text>
+</g>
+<!-- LearningToken.getLearnerId -->
+<g id="node3" class="node" pointer-events="visible" data-name="LearningToken.getLearnerId">
+
+<ellipse fill="#f2c383" stroke="#f2c383" stroke-width="3" cx="161.97" cy="-1810" rx="60.79" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1805.8" font-family="Times,serif" font-size="14.00" style="">getLearnerId</text>
+</g>
+<!-- LearningToken.getLearnerCourseDetails -->
+<g id="node4" class="node" pointer-events="visible" data-name="LearningToken.getLearnerCourseDetails">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-1756" rx="107.63" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1751.8" font-family="Times,serif" font-size="14.00" style="">getLearnerCourseDetails</text>
+</g>
+<!-- LearningToken.registerLearner -->
+<g id="node5" class="node" pointer-events="visible" data-name="LearningToken.registerLearner">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="161.97" cy="-420" rx="70.02" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-415.8" font-family="Times,serif" font-size="14.00" style="">registerLearner</text>
+</g>
+<!-- Counters.Counter.current -->
+<g id="node35" class="node" pointer-events="visible" data-name="Counters.Counter.current">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="432.19" cy="-119" rx="38.26" ry="18" style=""/>
+<text text-anchor="middle" x="432.19" y="-114.8" font-family="Times,serif" font-size="14.00" style="">current</text>
+</g>
+<!-- LearningToken.registerLearner&#45;&gt;Counters.Counter.current -->
+<g id="edge1" class="edge" data-name="LearningToken.registerLearner-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M231.22,-415.24C258.64,-412.21 288.33,-404.39 307.93,-384 384.81,-304.02 271.81,-221.3 343.93,-137 353.48,-125.84 367.55,-119.22 381.61,-115.74" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="382.21,-119.19 391.41,-113.94 380.95,-112.3 382.21,-119.19" style=""/>
+</g>
+<!-- LearningToken.registerLearner&#45;&gt;Counters.Counter.current -->
+<g id="edge2" class="edge" data-name="LearningToken.registerLearner-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M218.06,-432.09C248.7,-432.43 285.13,-425.72 307.93,-402 384.81,-322.02 271.81,-239.3 343.93,-155 354.32,-142.86 370.05,-136.09 385.31,-131.8" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="386.07,-135.22 394.95,-129.43 384.4,-128.42 386.07,-135.22" style=""/>
+</g>
+<!-- Counters.Counter.increment -->
+<g id="node36" class="node" pointer-events="visible" data-name="Counters.Counter.increment">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="432.19" cy="-173" rx="49.79" ry="18" style=""/>
+<text text-anchor="middle" x="432.19" y="-168.8" font-family="Times,serif" font-size="14.00" style="">increment</text>
+</g>
+<!-- LearningToken.registerLearner&#45;&gt;Counters.Counter.increment -->
+<g id="edge3" class="edge" data-name="LearningToken.registerLearner-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M232.77,-422.63C259.45,-419.99 288.17,-412.16 307.93,-393 361.81,-340.75 300.83,-289.45 343.93,-228 354.25,-213.28 369.9,-201.65 385.11,-192.94" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="386.7,-196.06 393.89,-188.27 383.41,-189.88 386.7,-196.06" style=""/>
+</g>
+<!-- LearningToken.registerInstructor -->
+<g id="node6" class="node" pointer-events="visible" data-name="LearningToken.registerInstructor">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="161.97" cy="-528" rx="77.57" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-523.8" font-family="Times,serif" font-size="14.00" style="">registerInstructor</text>
+</g>
+<!-- LearningToken.registerInstructor&#45;&gt;Counters.Counter.current -->
+<g id="edge4" class="edge" data-name="LearningToken.registerInstructor-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M238.03,-522.87C263.64,-519.4 290.25,-511.22 307.93,-492 361.62,-433.65 293.71,-198.36 343.93,-137 353.41,-125.42 367.75,-118.71 382.09,-115.3" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="382.34,-118.81 391.58,-113.64 381.13,-111.92 382.34,-118.81" style=""/>
+</g>
+<!-- LearningToken.registerInstructor&#45;&gt;Counters.Counter.current -->
+<g id="edge5" class="edge" data-name="LearningToken.registerInstructor-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M222.43,-540.47C252.31,-540.31 286.61,-533.17 307.93,-510 361.62,-451.65 293.71,-216.36 343.93,-155 354.05,-142.63 369.73,-135.82 385.02,-131.55" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.8,-134.96 394.7,-129.21 384.15,-128.16 385.8,-134.96" style=""/>
+</g>
+<!-- LearningToken.registerInstructor&#45;&gt;Counters.Counter.increment -->
+<g id="edge6" class="edge" data-name="LearningToken.registerInstructor-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M239.98,-530.74C264.86,-527.59 290.49,-519.39 307.93,-501 392.14,-412.2 277.91,-331.05 343.93,-228 353.63,-212.86 369.14,-201.14 384.42,-192.48" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="386.03,-195.58 393.27,-187.85 382.79,-189.38 386.03,-195.58" style=""/>
+</g>
+<!-- LearningToken.registerInstitution -->
+<g id="node7" class="node" pointer-events="visible" data-name="LearningToken.registerInstitution">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="161.97" cy="-366" rx="79.89" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-361.8" font-family="Times,serif" font-size="14.00" style="">registerInstitution</text>
+</g>
+<!-- LearningToken.registerInstitution&#45;&gt;Counters.Counter.current -->
+<g id="edge7" class="edge" data-name="LearningToken.registerInstitution-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M224.2,-353.44C253.27,-349.95 286.3,-342.63 307.93,-321 369.64,-259.31 285.9,-193.16 343.93,-128 355.83,-114.64 374.19,-107.81 391.01,-105.89" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="391.13,-109.39 400.98,-105.5 390.85,-102.4 391.13,-109.39" style=""/>
+</g>
+<!-- LearningToken.registerInstitution&#45;&gt;Counters.Counter.current -->
+<g id="edge8" class="edge" data-name="LearningToken.registerInstitution-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M242.83,-367.74C266.59,-364.26 290.82,-356.1 307.93,-339 369.64,-277.31 285.9,-211.16 343.93,-146 353.46,-135.3 367.13,-128.79 380.83,-124.85" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="381.43,-128.3 390.36,-122.59 379.82,-121.49 381.43,-128.3" style=""/>
+</g>
+<!-- LearningToken.registerInstitution&#45;&gt;Counters.Counter.current -->
+<g id="edge9" class="edge" data-name="LearningToken.registerInstitution-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M197.86,-383.5C230.81,-389.18 279.33,-385.6 307.93,-357 369.64,-295.31 285.9,-229.16 343.93,-164 356.83,-149.52 377.32,-142.71 395.21,-137.59" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="396.04,-140.99 404.71,-134.89 394.14,-134.25 396.04,-140.99" style=""/>
+</g>
+<!-- LearningToken.registerInstitution&#45;&gt;Counters.Counter.increment -->
+<g id="edge10" class="edge" data-name="LearningToken.registerInstitution-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M243.06,-366.15C266.28,-362.49 290.14,-354.63 307.93,-339 346.9,-304.78 312.09,-268.94 343.93,-228 355.06,-213.69 371.02,-202.1 386.26,-193.32" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="387.89,-196.42 395.02,-188.59 384.56,-190.26 387.89,-196.42" style=""/>
+</g>
+<!-- LearningToken.addInstructorToInstitution -->
+<g id="node8" class="node" pointer-events="visible" data-name="LearningToken.addInstructorToInstitution">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="161.97" cy="-1532" rx="112.91" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1527.8" font-family="Times,serif" font-size="14.00" style="">addInstructorToInstitution</text>
+</g>
+<!-- LearningToken.checkInstructorCourseAccess -->
+<g id="node9" class="node" pointer-events="visible" data-name="LearningToken.checkInstructorCourseAccess">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="298.3,-1466.54 298.3,-1481.46 218.44,-1492 105.5,-1492 25.64,-1481.46 25.64,-1466.54 105.5,-1456 218.44,-1456 298.3,-1466.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="302.3,-1463.04 302.3,-1484.96 218.7,-1496 105.23,-1496 21.63,-1484.96 21.63,-1463.04 105.23,-1452 218.7,-1452 302.3,-1463.04" style=""/>
+<text text-anchor="middle" x="161.97" y="-1469.8" font-family="Times,serif" font-size="14.00" style="">checkInstructorCourseAccess</text>
+</g>
+<!-- LearningToken.createCourse -->
+<g id="node10" class="node" pointer-events="visible" data-name="LearningToken.createCourse">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="161.97" cy="-474" rx="61.38" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-469.8" font-family="Times,serif" font-size="14.00" style="">createCourse</text>
+</g>
+<!-- LearningToken.createCourse&#45;&gt;Counters.Counter.current -->
+<g id="edge11" class="edge" data-name="LearningToken.createCourse-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M196.4,-457.75C229.68,-453 279.75,-450.08 307.93,-420 400.05,-321.68 257.66,-222.49 343.93,-119 358.62,-101.38 384.56,-95.05 404.35,-97.75" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="403.37,-101.11 413.93,-100.26 405.14,-94.34 403.37,-101.11" style=""/>
+</g>
+<!-- LearningToken.createCourse&#45;&gt;Counters.Counter.current -->
+<g id="edge12" class="edge" data-name="LearningToken.createCourse-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M223.35,-470.23C252.93,-467.93 286.66,-460.7 307.93,-438 400.05,-339.68 257.66,-240.49 343.93,-137 353.34,-125.72 367.36,-119.06 381.43,-115.59" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="382.05,-119.04 391.26,-113.8 380.79,-112.15 382.05,-119.04" style=""/>
+</g>
+<!-- LearningToken.createCourse&#45;&gt;Counters.Counter.current -->
+<g id="edge14" class="edge" data-name="LearningToken.createCourse-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M211.23,-486.08C243.25,-487.65 283.69,-481.87 307.93,-456 400.05,-357.68 257.66,-258.49 343.93,-155 354.16,-142.72 369.86,-135.93 385.14,-131.65" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.91,-135.07 394.8,-129.3 384.26,-128.27 385.91,-135.07" style=""/>
+</g>
+<!-- LearningToken.createCourse&#45;&gt;Counters.Counter.current -->
+<g id="edge15" class="edge" data-name="LearningToken.createCourse-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M180.27,-492.58C210.93,-507.18 274.67,-509.5 307.93,-474 400.05,-375.68 257.66,-276.49 343.93,-173 358.76,-155.21 385.06,-148.93 404.92,-141.81" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="406.15,-145.09 414.06,-138.03 403.48,-138.62 406.15,-145.09" style=""/>
+</g>
+<!-- LearningToken.createCourse&#45;&gt;Counters.Counter.increment -->
+<g id="edge13" class="edge" data-name="LearningToken.createCourse-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M223.31,-469.81C252.69,-467.38 286.26,-460.13 307.93,-438 376.94,-367.52 289.41,-301.2 343.93,-219 352.12,-206.65 364.14,-196.54 376.65,-188.81" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="378.02,-192.05 385.04,-184.11 374.61,-185.94 378.02,-192.05" style=""/>
+</g>
+<!-- LearningToken.createCourse&#45;&gt;Counters.Counter.increment -->
+<g id="edge16" class="edge" data-name="LearningToken.createCourse-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M211.91,-485.79C243.6,-487.03 283.4,-481.06 307.93,-456 376.94,-385.52 289.41,-319.2 343.93,-237 355.95,-218.88 376.19,-205.58 394.16,-195.64" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="395.68,-198.79 402.85,-191 392.38,-192.62 395.68,-198.79" style=""/>
+</g>
+<!-- LearningToken.setTokenMetadata -->
+<g id="node11" class="node" pointer-events="visible" data-name="LearningToken.setTokenMetadata">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="161.97" cy="-1362" rx="82.22" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1357.8" font-family="Times,serif" font-size="14.00" style="">setTokenMetadata</text>
+</g>
+<!-- LearningToken.addLearnerToCourse -->
+<g id="node12" class="node" pointer-events="visible" data-name="LearningToken.addLearnerToCourse">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="161.97" cy="-1308" rx="93.17" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1303.8" font-family="Times,serif" font-size="14.00" style="">addLearnerToCourse</text>
+</g>
+<!-- LearningToken.onlyInstitution -->
+<g id="node13" class="node" pointer-events="visible" data-name="LearningToken.onlyInstitution">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="235.47,-1690.54 235.47,-1705.46 192.41,-1716 131.52,-1716 88.46,-1705.46 88.46,-1690.54 131.52,-1680 192.41,-1680 235.47,-1690.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="239.47,-1687.41 239.47,-1708.59 192.9,-1720 131.04,-1720 84.46,-1708.59 84.46,-1687.41 131.04,-1676 192.9,-1676 239.47,-1687.41" style=""/>
+<text text-anchor="middle" x="161.97" y="-1693.8" font-family="Times,serif" font-size="14.00" style="">onlyInstitution</text>
+</g>
+<!-- LearningToken.onlyInstitution&#45;&gt;LearningToken.getInstitutionId -->
+<g id="edge17" class="edge" data-name="LearningToken.onlyInstitution-&gt;LearningToken.getInstitutionId">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M240.91,-1698C274.37,-1698 313.53,-1698 347.6,-1698" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="347.36,-1701.5 357.36,-1698 347.36,-1694.5 347.36,-1701.5" style=""/>
+</g>
+<!-- LearningToken.onlyInstructor -->
+<g id="node14" class="node" pointer-events="visible" data-name="LearningToken.onlyInstructor">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="233.29,-1188.54 233.29,-1203.46 191.51,-1214 132.42,-1214 90.64,-1203.46 90.64,-1188.54 132.42,-1178 191.51,-1178 233.29,-1188.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="237.3,-1185.43 237.3,-1206.57 192.01,-1218 131.92,-1218 86.63,-1206.57 86.63,-1185.43 131.92,-1174 192.01,-1174 237.3,-1185.43" style=""/>
+<text text-anchor="middle" x="161.97" y="-1191.8" font-family="Times,serif" font-size="14.00" style="">onlyInstructor</text>
+</g>
+<!-- LearningToken.checkTokenTransferIsAllowed -->
+<g id="node15" class="node" pointer-events="visible" data-name="LearningToken.checkTokenTransferIsAllowed">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="303.9,-1126.54 303.9,-1141.46 220.76,-1152 103.18,-1152 20.03,-1141.46 20.03,-1126.54 103.18,-1116 220.76,-1116 303.9,-1126.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="307.9,-1123.02 307.9,-1144.98 221.01,-1156 102.92,-1156 16.03,-1144.98 16.03,-1123.02 102.92,-1112 221.01,-1112 307.9,-1123.02" style=""/>
+<text text-anchor="middle" x="161.97" y="-1129.8" font-family="Times,serif" font-size="14.00" style="">checkTokenTransferIsAllowed</text>
+</g>
+<!-- LearningToken.safeTransferFrom -->
+<g id="node16" class="node" pointer-events="visible" data-name="LearningToken.safeTransferFrom">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-1076" rx="80.43" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1071.8" font-family="Times,serif" font-size="14.00" style="">safeTransferFrom</text>
+</g>
+<!-- LearningToken.safeBatchTransferFrom -->
+<g id="node17" class="node" pointer-events="visible" data-name="LearningToken.safeBatchTransferFrom">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-1022" rx="102.98" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1017.8" font-family="Times,serif" font-size="14.00" style="">safeBatchTransferFrom</text>
+</g>
+<!-- LearningToken.getLearnersAddress -->
+<g id="node18" class="node" pointer-events="visible" data-name="LearningToken.getLearnersAddress">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="432.19" cy="-1026" rx="88.02" ry="18" style=""/>
+<text text-anchor="middle" x="432.19" y="-1021.8" font-family="Times,serif" font-size="14.00" style="">getLearnersAddress</text>
+</g>
+<!-- LearningToken.mintAttendanceToken -->
+<g id="node19" class="node" pointer-events="visible" data-name="LearningToken.mintAttendanceToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-690" rx="97.27" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-685.8" font-family="Times,serif" font-size="14.00" style="">mintAttendanceToken</text>
+</g>
+<!-- LearningToken.mintAttendanceToken&#45;&gt;LearningToken.getLearnersAddress -->
+<g id="edge18" class="edge" data-name="LearningToken.mintAttendanceToken-&gt;LearningToken.getLearnersAddress">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M258.66,-693.85C276.48,-698.25 293.89,-705.46 307.93,-717 330.61,-735.63 395,-919.53 420.55,-994.47" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="417.21,-995.52 423.74,-1003.86 423.84,-993.27 417.21,-995.52" style=""/>
+</g>
+<!-- LearningToken._mint -->
+<g id="node33" class="node" pointer-events="visible" data-name="LearningToken._mint">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="432.19" cy="-1138" rx="33.64" ry="18" style=""/>
+<text text-anchor="middle" x="432.19" y="-1133.8" font-family="Times,serif" font-size="14.00" style="">_mint</text>
+</g>
+<!-- LearningToken.mintAttendanceToken&#45;&gt;LearningToken._mint -->
+<g id="edge19" class="edge" data-name="LearningToken.mintAttendanceToken-&gt;LearningToken._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M260.58,-690.83C278.47,-695.42 295.41,-703.47 307.93,-717 358.94,-772.11 311.09,-985.47 343.93,-1053 356.26,-1078.35 379.41,-1100.35 398.77,-1115.61" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="396.54,-1118.32 406.63,-1121.55 400.76,-1112.73 396.54,-1118.32" style=""/>
+</g>
+<!-- LearningToken.mintAttendanceToken&#45;&gt;Counters.Counter.current -->
+<g id="edge20" class="edge" data-name="LearningToken.mintAttendanceToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M253.1,-682.63C273.83,-678.17 293.88,-669.77 307.93,-654 384.57,-568.03 272.4,-227.26 343.93,-137 353.3,-125.18 367.76,-118.41 382.22,-115.04" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="382.55,-118.53 391.83,-113.42 381.39,-111.63 382.55,-118.53" style=""/>
+</g>
+<!-- LearningToken.mintAttendanceToken&#45;&gt;Counters.Counter.current -->
+<g id="edge21" class="edge" data-name="LearningToken.mintAttendanceToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M240.25,-701.85C265.31,-699.33 290.98,-691.01 307.93,-672 384.57,-586.03 272.4,-245.26 343.93,-155 353.86,-142.47 369.49,-135.63 384.8,-131.38" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.6,-134.79 394.51,-129.06 383.97,-127.98 385.6,-134.79" style=""/>
+</g>
+<!-- LearningToken.mintAttendanceToken&#45;&gt;Counters.Counter.increment -->
+<g id="edge22" class="edge" data-name="LearningToken.mintAttendanceToken-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M260.46,-689.5C278.47,-684.91 295.49,-676.77 307.93,-663 372.95,-591.02 293.61,-310.92 343.93,-228 353.19,-212.75 368.45,-201.04 383.64,-192.43" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.21,-195.56 392.47,-187.83 381.98,-189.35 385.21,-195.56" style=""/>
+</g>
+<!-- LearningToken.batchMintAttendanceToken -->
+<g id="node20" class="node" pointer-events="visible" data-name="LearningToken.batchMintAttendanceToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-636" rx="119.24" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-631.8" font-family="Times,serif" font-size="14.00" style="">batchMintAttendanceToken</text>
+</g>
+<!-- LearningToken.batchMintAttendanceToken&#45;&gt;LearningToken.getLearnersAddress -->
+<g id="edge23" class="edge" data-name="LearningToken.batchMintAttendanceToken-&gt;LearningToken.getLearnersAddress">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M273.38,-643.35C286.03,-647.86 297.94,-654.2 307.93,-663 347.17,-697.55 327.35,-725.41 343.93,-775 370.48,-854.38 403.23,-947.33 420.05,-994.73" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="416.7,-995.74 423.34,-1003.99 423.29,-993.4 416.7,-995.74" style=""/>
+</g>
+<!-- LearningToken.batchMintAttendanceToken&#45;&gt;LearningToken._mint -->
+<g id="edge24" class="edge" data-name="LearningToken.batchMintAttendanceToken-&gt;LearningToken._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M276.75,-641.94C288.52,-646.75 299.31,-653.54 307.93,-663 366.58,-727.31 306.44,-974.45 343.93,-1053 356.07,-1078.44 379.23,-1100.44 398.64,-1115.68" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="396.43,-1118.39 406.53,-1121.61 400.64,-1112.8 396.43,-1118.39" style=""/>
+</g>
+<!-- LearningToken.batchMintAttendanceToken&#45;&gt;Counters.Counter.current -->
+<g id="edge25" class="edge" data-name="LearningToken.batchMintAttendanceToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M264.22,-625.71C280.84,-620.8 296.38,-612.85 307.93,-600 376.91,-523.24 279.51,-217.62 343.93,-137 353.27,-125.31 367.58,-118.57 381.93,-115.17" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="382.19,-118.68 391.44,-113.52 380.99,-111.78 382.19,-118.68" style=""/>
+</g>
+<!-- LearningToken.batchMintAttendanceToken&#45;&gt;Counters.Counter.current -->
+<g id="edge26" class="edge" data-name="LearningToken.batchMintAttendanceToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M282.44,-636.67C292.01,-632.1 300.74,-626 307.93,-618 376.91,-541.24 279.51,-235.62 343.93,-155 353.91,-142.51 369.55,-135.68 384.86,-131.42" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.65,-134.83 394.56,-129.1 384.02,-128.02 385.65,-134.83" style=""/>
+</g>
+<!-- LearningToken.batchMintAttendanceToken&#45;&gt;Counters.Counter.increment -->
+<g id="edge27" class="edge" data-name="LearningToken.batchMintAttendanceToken-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M276.73,-630.04C288.5,-625.24 299.3,-618.45 307.93,-609 365.3,-546.22 299.39,-300.44 343.93,-228 353.27,-212.81 368.56,-201.11 383.74,-192.49" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.31,-195.62 392.55,-187.89 382.07,-189.41 385.31,-195.62" style=""/>
+</g>
+<!-- LearningToken.getInstructorDetails -->
+<g id="node21" class="node" pointer-events="visible" data-name="LearningToken.getInstructorDetails">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-860" rx="87.96" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-855.8" font-family="Times,serif" font-size="14.00" style="">getInstructorDetails</text>
+</g>
+<!-- LearningToken.getCourseDetails -->
+<g id="node22" class="node" pointer-events="visible" data-name="LearningToken.getCourseDetails">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-806" rx="77.59" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-801.8" font-family="Times,serif" font-size="14.00" style="">getCourseDetails</text>
+</g>
+<!-- LearningToken.mintScoreToken -->
+<g id="node23" class="node" pointer-events="visible" data-name="LearningToken.mintScoreToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-1416" rx="75.3" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1411.8" font-family="Times,serif" font-size="14.00" style="">mintScoreToken</text>
+</g>
+<!-- LearningToken.mintScoreToken&#45;&gt;LearningToken.getLearnersAddress -->
+<g id="edge28" class="edge" data-name="LearningToken.mintScoreToken-&gt;LearningToken.getLearnersAddress">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M237.75,-1419.04C263.33,-1416.11 289.98,-1407.97 307.93,-1389 393.56,-1298.5 288.21,-1222.43 343.93,-1111 355.53,-1087.81 376.03,-1067.33 394.25,-1052.29" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="396.31,-1055.13 401.98,-1046.18 391.96,-1049.64 396.31,-1055.13" style=""/>
+</g>
+<!-- LearningToken.mintScoreToken&#45;&gt;LearningToken._mint -->
+<g id="edge29" class="edge" data-name="LearningToken.mintScoreToken-&gt;LearningToken._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M238.37,-1415.07C262.55,-1411.53 288.15,-1404.01 307.93,-1389 380.83,-1333.67 413.21,-1223.71 425.21,-1169.59" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="428.58,-1170.57 427.21,-1160.06 421.73,-1169.13 428.58,-1170.57" style=""/>
+</g>
+<!-- LearningToken.mintScoreToken&#45;&gt;Counters.Counter.current -->
+<g id="edge30" class="edge" data-name="LearningToken.mintScoreToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M236.91,-1411.79C263.19,-1408.56 290.54,-1400.33 307.93,-1380 397.76,-1275.02 260.33,-247.01 343.93,-137 353.06,-124.99 367.45,-118.18 381.94,-114.82" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="382.29,-118.31 391.58,-113.21 381.14,-111.4 382.29,-118.31" style=""/>
+</g>
+<!-- LearningToken.mintScoreToken&#45;&gt;Counters.Counter.current -->
+<g id="edge31" class="edge" data-name="LearningToken.mintScoreToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M218.75,-1429.03C249.82,-1429.75 286.46,-1423.09 307.93,-1398 397.76,-1293.02 260.33,-265.01 343.93,-155 353.7,-142.15 369.49,-135.25 384.98,-131.03" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.33,-134.55 394.26,-128.86 383.73,-127.73 385.33,-134.55" style=""/>
+</g>
+<!-- LearningToken.mintScoreToken&#45;&gt;Counters.Counter.increment -->
+<g id="edge32" class="edge" data-name="LearningToken.mintScoreToken-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M236.89,-1420.16C263.16,-1417.54 290.52,-1409.31 307.93,-1389 391.94,-1291.03 279.84,-340.02 343.93,-228 352.79,-212.52 367.96,-200.76 383.2,-192.17" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="384.79,-195.29 392.07,-187.59 381.58,-189.06 384.79,-195.29" style=""/>
+</g>
+<!-- LearningToken.batchMintScoreToken -->
+<g id="node24" class="node" pointer-events="visible" data-name="LearningToken.batchMintScoreToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-1254" rx="97.28" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1249.8" font-family="Times,serif" font-size="14.00" style="">batchMintScoreToken</text>
+</g>
+<!-- LearningToken.batchMintScoreToken&#45;&gt;LearningToken.getLearnersAddress -->
+<g id="edge33" class="edge" data-name="LearningToken.batchMintScoreToken-&gt;LearningToken.getLearnersAddress">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M259.39,-1251.01C277.15,-1246.54 294.35,-1239.08 307.93,-1227 348.26,-1191.12 315.73,-1157.03 343.93,-1111 357.66,-1088.59 378.63,-1067.9 396.57,-1052.55" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="398.64,-1055.38 404.1,-1046.3 394.17,-1049.99 398.64,-1055.38" style=""/>
+</g>
+<!-- LearningToken.batchMintScoreToken&#45;&gt;LearningToken._mint -->
+<g id="edge34" class="edge" data-name="LearningToken.batchMintScoreToken-&gt;LearningToken._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M247.99,-1244.62C268.15,-1240.66 289.22,-1235.01 307.93,-1227 344.49,-1211.34 380.72,-1183.27 404.34,-1162.84" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="406.52,-1165.58 411.69,-1156.33 401.88,-1160.34 406.52,-1165.58" style=""/>
+</g>
+<!-- LearningToken.batchMintScoreToken&#45;&gt;Counters.Counter.current -->
+<g id="edge35" class="edge" data-name="LearningToken.batchMintScoreToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M253.87,-1246.9C274.46,-1242.41 294.25,-1233.92 307.93,-1218 386.26,-1126.86 271.01,-232.53 343.93,-137 353.08,-125.01 367.49,-118.2 381.97,-114.84" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="382.32,-118.33 391.6,-113.23 381.16,-111.43 382.32,-118.33" style=""/>
+</g>
+<!-- LearningToken.batchMintScoreToken&#45;&gt;Counters.Counter.current -->
+<g id="edge36" class="edge" data-name="LearningToken.batchMintScoreToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M238,-1266.44C263.92,-1264.27 290.74,-1256 307.93,-1236 386.26,-1144.86 271.01,-250.53 343.93,-155 353.73,-142.17 369.53,-135.27 385.01,-131.06" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.35,-134.57 394.29,-128.88 383.75,-127.76 385.35,-134.57" style=""/>
+</g>
+<!-- LearningToken.batchMintScoreToken&#45;&gt;Counters.Counter.increment -->
+<g id="edge37" class="edge" data-name="LearningToken.batchMintScoreToken-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M260.59,-1254.04C278.7,-1249.43 295.73,-1241.16 307.93,-1227 380.44,-1142.86 288.53,-324.27 343.93,-228 352.83,-212.54 368.01,-200.78 383.24,-192.19" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="384.83,-195.31 392.11,-187.61 381.62,-189.09 384.83,-195.31" style=""/>
+</g>
+<!-- LearningToken.transferHelpingToken -->
+<g id="node25" class="node" pointer-events="visible" data-name="LearningToken.transferHelpingToken">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="161.97" cy="-258" rx="96.12" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-253.8" font-family="Times,serif" font-size="14.00" style="">transferHelpingToken</text>
+</g>
+<!-- Ownable.safeTransferFrom -->
+<g id="node37" class="node" pointer-events="visible" data-name="Ownable.safeTransferFrom">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="432.19" cy="-34" rx="80.43" ry="18" style=""/>
+<text text-anchor="middle" x="432.19" y="-29.8" font-family="Times,serif" font-size="14.00" style="">safeTransferFrom</text>
+</g>
+<!-- LearningToken.transferHelpingToken&#45;&gt;Ownable.safeTransferFrom -->
+<g id="edge38" class="edge" data-name="LearningToken.transferHelpingToken-&gt;Ownable.safeTransferFrom">
+
+<path fill="none" stroke="white" stroke-width="2" d="M180.94,-239.01C212.33,-206.36 279.93,-138.35 343.93,-89 358.06,-78.11 374.4,-67.37 389.1,-58.31" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="390.62,-61.47 397.36,-53.3 387,-55.49 390.62,-61.47" style=""/>
+</g>
+<!-- LearningToken.&lt;Receive Ether&gt; -->
+<g id="node26" class="node" pointer-events="visible" data-name="LearningToken.&lt;Receive Ether&gt;">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="161.97" cy="-582" rx="76.21" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-577.8" font-family="Times,serif" font-size="14.00" style="">&lt;Receive Ether&gt;</text>
+</g>
+<!-- LearningToken.mintHelpingToken -->
+<g id="node27" class="node" pointer-events="visible" data-name="LearningToken.mintHelpingToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-1640" rx="84.55" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1635.8" font-family="Times,serif" font-size="14.00" style="">mintHelpingToken</text>
+</g>
+<!-- LearningToken.mintHelpingToken&#45;&gt;LearningToken.getLearnersAddress -->
+<g id="edge39" class="edge" data-name="LearningToken.mintHelpingToken-&gt;LearningToken.getLearnersAddress">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M247.04,-1642.4C269.86,-1638.71 292.5,-1630.28 307.93,-1613 382.44,-1529.59 296.79,-1212.42 343.93,-1111 354.79,-1087.64 375.06,-1067.28 393.33,-1052.34" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="395.38,-1055.18 401.11,-1046.26 391.07,-1049.66 395.38,-1055.18" style=""/>
+</g>
+<!-- LearningToken.mintHelpingToken&#45;&gt;LearningToken._mint -->
+<g id="edge40" class="edge" data-name="LearningToken.mintHelpingToken-&gt;LearningToken._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M247.79,-1640.1C269.68,-1636.17 291.64,-1628.19 307.93,-1613 373.92,-1551.46 415.1,-1266.53 427.34,-1170.04" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="430.8,-1170.58 428.56,-1160.23 423.86,-1169.72 430.8,-1170.58" style=""/>
+</g>
+<!-- LearningToken.batchMintHelpingToken -->
+<g id="node28" class="node" pointer-events="visible" data-name="LearningToken.batchMintHelpingToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-1586" rx="106.52" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-1581.8" font-family="Times,serif" font-size="14.00" style="">batchMintHelpingToken</text>
+</g>
+<!-- LearningToken.batchMintHelpingToken&#45;&gt;LearningToken.getLearnersAddress -->
+<g id="edge41" class="edge" data-name="LearningToken.batchMintHelpingToken-&gt;LearningToken.getLearnersAddress">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M268.6,-1583.18C283.55,-1578.33 297.39,-1570.7 307.93,-1559 374.79,-1484.8 301.45,-1201.39 343.93,-1111 354.89,-1087.69 375.16,-1067.32 393.42,-1052.37" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="395.46,-1055.22 401.17,-1046.3 391.14,-1049.71 395.46,-1055.22" style=""/>
+</g>
+<!-- LearningToken.batchMintHelpingToken&#45;&gt;LearningToken._mint -->
+<g id="edge42" class="edge" data-name="LearningToken.batchMintHelpingToken-&gt;LearningToken._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M266.63,-1581.21C281.82,-1576.6 296.25,-1569.56 307.93,-1559 366.98,-1505.62 411.78,-1258.7 426.23,-1169.91" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="429.64,-1170.72 427.77,-1160.29 422.73,-1169.61 429.64,-1170.72" style=""/>
+</g>
+<!-- LearningToken.transferInstructorScoringToken -->
+<g id="node29" class="node" pointer-events="visible" data-name="LearningToken.transferInstructorScoringToken">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="161.97" cy="-312" rx="132.56" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-307.8" font-family="Times,serif" font-size="14.00" style="">transferInstructorScoringToken</text>
+</g>
+<!-- LearningToken.transferInstructorScoringToken&#45;&gt;Ownable.safeTransferFrom -->
+<g id="edge43" class="edge" data-name="LearningToken.transferInstructorScoringToken-&gt;Ownable.safeTransferFrom">
+
+<path fill="none" stroke="white" stroke-width="2" d="M280.89,-303.22C290.9,-298.73 300.16,-292.79 307.93,-285 370.48,-222.29 294.29,-162.35 343.93,-89 352.79,-75.91 365.92,-65.31 379.31,-57.03" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="380.96,-60.12 387.91,-52.13 377.49,-54.04 380.96,-60.12" style=""/>
+</g>
+<!-- LearningToken.mintInstructorScoreToken -->
+<g id="node30" class="node" pointer-events="visible" data-name="LearningToken.mintInstructorScoreToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-968" rx="112.89" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-963.8" font-family="Times,serif" font-size="14.00" style="">mintInstructorScoreToken</text>
+</g>
+<!-- LearningToken.mintInstructorScoreToken&#45;&gt;LearningToken.getLearnersAddress -->
+<g id="edge44" class="edge" data-name="LearningToken.mintInstructorScoreToken-&gt;LearningToken.getLearnersAddress">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M242.14,-981.83C263.55,-985.81 286.67,-990.35 307.93,-995 325.62,-998.87 344.64,-1003.44 362.32,-1007.87" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="361.42,-1011.26 371.98,-1010.32 363.14,-1004.47 361.42,-1011.26" style=""/>
+</g>
+<!-- LearningToken.mintInstructorScoreToken&#45;&gt;LearningToken._mint -->
+<g id="edge45" class="edge" data-name="LearningToken.mintInstructorScoreToken-&gt;LearningToken._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M265.85,-976.11C280.8,-980.34 295.36,-986.4 307.93,-995 332.98,-1012.12 324.92,-1029.35 343.93,-1053 361.73,-1075.15 384.89,-1097.47 402.87,-1113.67" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="400.46,-1116.21 410.26,-1120.22 405.1,-1110.97 400.46,-1116.21" style=""/>
+</g>
+<!-- LearningToken.mintInstructorScoreToken&#45;&gt;Counters.Counter.current -->
+<g id="edge46" class="edge" data-name="LearningToken.mintInstructorScoreToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M262.34,-958.65C279.77,-953.78 296.08,-945.62 307.93,-932 365.97,-865.29 289.86,-206.96 343.93,-137 353.16,-125.06 367.58,-118.27 382.05,-114.91" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="382.39,-118.4 391.68,-113.29 381.24,-111.5 382.39,-118.4" style=""/>
+</g>
+<!-- LearningToken.mintInstructorScoreToken&#45;&gt;Counters.Counter.current -->
+<g id="edge47" class="edge" data-name="LearningToken.mintInstructorScoreToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M271.85,-973.4C285.63,-968.59 298.27,-961.11 307.93,-950 365.97,-883.29 289.86,-224.96 343.93,-155 353.8,-142.23 369.62,-135.34 385.09,-131.12" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.43,-134.64 394.36,-128.93 383.83,-127.82 385.43,-134.64" style=""/>
+</g>
+<!-- LearningToken.mintInstructorScoreToken&#45;&gt;Counters.Counter.increment -->
+<g id="edge48" class="edge" data-name="LearningToken.mintInstructorScoreToken-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M273.59,-963.81C286.68,-958.89 298.66,-951.6 307.93,-941 360.15,-881.29 303.87,-296.46 343.93,-228 352.94,-212.6 368.15,-200.86 383.37,-192.26" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="384.95,-195.39 392.22,-187.68 381.73,-189.17 384.95,-195.39" style=""/>
+</g>
+<!-- LearningToken.batchMintInstructorScoreToken -->
+<g id="node31" class="node" pointer-events="visible" data-name="LearningToken.batchMintInstructorScoreToken">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="161.97" cy="-914" rx="134.86" ry="18" style=""/>
+<text text-anchor="middle" x="161.97" y="-909.8" font-family="Times,serif" font-size="14.00" style="">batchMintInstructorScoreToken</text>
+</g>
+<!-- LearningToken.batchMintInstructorScoreToken&#45;&gt;LearningToken.getLearnersAddress -->
+<g id="edge49" class="edge" data-name="LearningToken.batchMintInstructorScoreToken-&gt;LearningToken.getLearnersAddress">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M263.22,-926.97C278.51,-930.57 293.87,-935.15 307.93,-941 342.22,-955.25 376.63,-980.07 400.34,-999.22" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="397.85,-1001.71 407.79,-1005.37 402.31,-996.31 397.85,-1001.71" style=""/>
+</g>
+<!-- LearningToken.batchMintInstructorScoreToken&#45;&gt;LearningToken._mint -->
+<g id="edge50" class="edge" data-name="LearningToken.batchMintInstructorScoreToken-&gt;LearningToken._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M279.52,-923.71C289.87,-928 299.57,-933.64 307.93,-941 347.17,-975.55 316.39,-1008.56 343.93,-1053 358.88,-1077.12 382.12,-1099.3 400.86,-1114.95" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="398.4,-1117.47 408.38,-1121.04 402.81,-1112.03 398.4,-1117.47" style=""/>
+</g>
+<!-- LearningToken.batchMintInstructorScoreToken&#45;&gt;Counters.Counter.current -->
+<g id="edge51" class="edge" data-name="LearningToken.batchMintInstructorScoreToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M270.01,-902.22C284.5,-897.2 297.83,-889.57 307.93,-878 362.14,-815.9 293.42,-202.14 343.93,-137 353.18,-125.08 367.6,-118.29 382.08,-114.93" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="382.42,-118.42 391.7,-113.31 381.26,-111.51 382.42,-118.42" style=""/>
+</g>
+<!-- LearningToken.batchMintInstructorScoreToken&#45;&gt;Counters.Counter.current -->
+<g id="edge52" class="edge" data-name="LearningToken.batchMintInstructorScoreToken-&gt;Counters.Counter.current">
+
+<path fill="none" stroke="white" stroke-width="2" d="M293.15,-908.91C298.57,-905.29 303.55,-901.01 307.93,-896 362.14,-833.9 293.42,-220.14 343.93,-155 353.72,-142.37 369.33,-135.5 384.66,-131.26" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="385.46,-134.67 394.38,-128.95 383.84,-127.86 385.46,-134.67" style=""/>
+</g>
+<!-- LearningToken.batchMintInstructorScoreToken&#45;&gt;Counters.Counter.increment -->
+<g id="edge53" class="edge" data-name="LearningToken.batchMintInstructorScoreToken-&gt;Counters.Counter.increment">
+
+<path fill="none" stroke="white" stroke-width="2" d="M283.65,-905.38C292.78,-900.79 301.09,-894.79 307.93,-887 356.32,-831.9 306.77,-291.22 343.93,-228 352.97,-212.62 368.19,-200.89 383.4,-192.28" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="384.98,-195.41 392.25,-187.7 381.76,-189.19 384.98,-195.41" style=""/>
+</g>
+<!-- LearningToken.isLearnerWithinCourse -->
+<g id="node32" class="node" pointer-events="visible" data-name="LearningToken.isLearnerWithinCourse">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="272.07,-740.54 272.07,-755.46 207.57,-766 116.36,-766 51.86,-755.46 51.86,-740.54 116.36,-730 207.57,-730 272.07,-740.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="276.07,-737.15 276.07,-758.85 207.9,-770 116.04,-770 47.86,-758.85 47.86,-737.15 116.04,-726 207.9,-726 276.07,-737.15" style=""/>
+<text text-anchor="middle" x="161.97" y="-743.8" font-family="Times,serif" font-size="14.00" style="">isLearnerWithinCourse</text>
+</g>
+<!-- LearningToken.address -->
+<g id="node34" class="node" pointer-events="visible" data-name="LearningToken.address">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="432.19" cy="-748" rx="40" ry="18" style=""/>
+<text text-anchor="middle" x="432.19" y="-743.8" font-family="Times,serif" font-size="14.00" style="">address</text>
+</g>
+<!-- LearningToken.isLearnerWithinCourse&#45;&gt;LearningToken.address -->
+<g id="edge54" class="edge" data-name="LearningToken.isLearnerWithinCourse-&gt;LearningToken.address">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M277.49,-748C312.56,-748 349.46,-748 378.3,-748" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="377.93,-751.5 387.93,-748 377.93,-744.5 377.93,-751.5" style=""/>
+</g>
+<!-- key -->
+<g id="node38" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="226.97,-2019 96.97,-2019 96.97,-1931 226.97,-1931 226.97,-2019" style=""/>
+<text text-anchor="start" x="146.6" y="-2000.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="142.71" y="-1980.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="120.17" y="-1960.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="106.57" y="-1940.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node39" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="none" stroke-width="3" points="459.19,-2019 405.19,-2019 405.19,-1931 459.19,-1931 459.19,-2019" style=""/>
+<text text-anchor="start" x="422.19" y="-2000.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="422.19" y="-1980.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="none" points="420.19,-1955 420.19,-1975 445.19,-1975 445.19,-1955 420.19,-1955" style=""/>
+<text text-anchor="start" x="422.19" y="-1960.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="422.19,-1937 422.19,-1953 443.19,-1953 443.19,-1937 422.19,-1937" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge55" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M219.97,-2005C304.01,-2005 328.23,-2005 406.2,-2005" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="406.16,-2008.5 416.16,-2005 406.16,-2001.5 406.16,-2008.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge56" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M219.97,-1985C304.01,-1985 328.23,-1985 406.2,-1985" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="406.16,-1988.5 416.16,-1985 406.16,-1981.5 406.16,-1988.5" style=""/>
+</g>
+</g>
+</svg>
