@@ -19,25 +19,72 @@ export class AdminService {
         private readonly learnerRepository: Repository<Learner>
     ) {}
 
-    async findAll(page = 1, limit = 10, type: string) {
+    async findAll(page: number, limit: number, type: string) {
         if (type == 'Institution') {
             const offset = (page - 1) * limit
-            return await this.institutionRepository.find({
-                skip: offset,
-                take: limit
-            })
+            const [items, totalCount] =
+                await this.institutionRepository.findAndCount({
+                    skip: offset,
+                    take: limit
+                })
+
+            const totalPages = Math.ceil(totalCount / limit)
+
+            const paginationMetadata = {
+                page,
+                limit,
+                totalCount,
+                totalPages
+            }
+
+            return {
+                data: items, // This contains the paginated data
+                pagination: paginationMetadata // This contains the pagination metadata
+            }
         } else if (type == 'Instructor') {
             const offset = (page - 1) * limit
-            return await this.instructorRepository.find({
-                skip: offset,
-                take: limit
-            })
+
+            const [items, totalCount] =
+                await this.instructorRepository.findAndCount({
+                    skip: offset,
+                    take: limit
+                })
+
+            const totalPages = Math.ceil(totalCount / limit)
+
+            const paginationMetadata = {
+                page,
+                limit,
+                totalCount,
+                totalPages
+            }
+
+            return {
+                data: items, // This contains the paginated data
+                pagination: paginationMetadata // This contains the pagination metadata
+            }
         } else if (type == 'Learner') {
             const offset = (page - 1) * limit
-            return await this.learnerRepository.find({
-                skip: offset,
-                take: limit
-            })
+
+            const [items, totalCount] =
+                await this.learnerRepository.findAndCount({
+                    skip: offset,
+                    take: limit
+                })
+
+            const totalPages = Math.ceil(totalCount / limit)
+
+            const paginationMetadata = {
+                page,
+                limit,
+                totalCount,
+                totalPages
+            }
+
+            return {
+                data: items, // This contains the paginated data
+                pagination: paginationMetadata // This contains the pagination metadata
+            }
         }
     }
 
