@@ -34,6 +34,9 @@ export class Admin extends BaseEntity {
     @Column({ type: 'varchar', length: 30, nullable: true })
     avatarUrl: string
 
+    @Column({ type: 'varchar', length: 50, nullable: true, unique: true })
+    publicAddress: string
+
     // @Column({
     //     type: 'int'
     // })

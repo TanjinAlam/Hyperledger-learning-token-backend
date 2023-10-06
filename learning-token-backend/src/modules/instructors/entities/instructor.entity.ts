@@ -37,6 +37,9 @@ export class Instructor extends BaseEntity {
     @Column({ type: 'boolean', default: false })
     status: boolean
 
+    @Column({ type: 'varchar', length: 50, nullable: true, unique: true })
+    publicAddress: string
+
     @CreateDateColumn()
     createdAt: Date
 

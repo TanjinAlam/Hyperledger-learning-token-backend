@@ -33,6 +33,10 @@ export class RegisterRequestDto {
 
     @IsOptional()
     public type: string
+
+    @IsString()
+    @IsNotEmpty()
+    publicAddress: string
 }
 
 // Validate Request DTO
@@ -56,6 +60,10 @@ export class RegisterInstitutionDTO {
 
     @IsOptional()
     public type: string
+
+    @IsString()
+    @IsNotEmpty()
+    publicAddress: string
 }
 
 export class InstitutionLoginRequestDto {
@@ -83,6 +91,10 @@ export class RegisterLearnernDTO {
 
     @IsOptional()
     public type: string
+
+    @IsString()
+    @IsNotEmpty()
+    publicAddress: string
 }
 
 export class LearnerLoginRequestDto {
@@ -110,6 +122,10 @@ export class RegisterInstructorDTO {
 
     @IsOptional()
     public type: string
+
+    @IsString()
+    @IsNotEmpty()
+    publicAddress: string
 }
 
 export class InstructorLoginRequestDto {
