@@ -26,12 +26,19 @@ export class AuthService {
     /**
      * REGISTRATION OF A USER
      */
-    public async register({ name, email, password, type }: RegisterRequestDto) {
+    public async register({
+        name,
+        email,
+        password,
+        publicAddress,
+        type
+    }: RegisterRequestDto) {
         console.log(type)
         if (type == 'Admin') {
             const user = new Admin()
             user.name = name
             user.email = email
+            user.publicAddress = publicAddress
             user.password = this.jwtService.encodePassword(password)
             const registeredUser = await this.userRepository.save(user)
             return {
@@ -47,6 +54,7 @@ export class AuthService {
             const user = new Institution()
             user.name = name
             user.email = email
+            user.publicAddress = publicAddress
             user.password = this.jwtService.encodePassword(password)
             console.log('user', user)
             const registeredUser = await this.institutionRepository.save(user)
@@ -63,6 +71,7 @@ export class AuthService {
             const user = new Learner()
             user.name = name
             user.email = email
+            user.publicAddress = publicAddress
             user.password = this.jwtService.encodePassword(password)
             console.log('user', user)
             const registeredUser = await this.learnerRepository.save(user)
@@ -79,6 +88,7 @@ export class AuthService {
             const user = new Instructor()
             user.name = name
             user.email = email
+            user.publicAddress = publicAddress
             user.password = this.jwtService.encodePassword(password)
             console.log('user', user)
             const registeredUser = await this.insturctorRepository.save(user)
