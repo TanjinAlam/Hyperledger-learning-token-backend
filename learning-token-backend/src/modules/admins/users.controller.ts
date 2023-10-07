@@ -98,7 +98,7 @@ export class AdminController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Patch('institution/:id')
+    @Patch('instructor/:id')
     async update_instructor(@Param('id') id: number) {
         return {
             statusCode: HttpStatus.OK,
@@ -108,7 +108,7 @@ export class AdminController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Patch('institution/:id')
+    @Patch('learner/:id')
     async update_learner(@Param('id') id: number) {
         return {
             statusCode: HttpStatus.OK,
