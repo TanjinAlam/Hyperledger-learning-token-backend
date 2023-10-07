@@ -116,11 +116,11 @@ export class AdminService {
             )
             if (instructorDetails.status == false) {
                 instructorDetails.status = true
-                this.institutionRepository.save(instructorDetails)
+                this.instructorRepository.save(instructorDetails)
                 return instructorDetails
             } else {
                 instructorDetails.status = false
-                this.institutionRepository.save(instructorDetails)
+                this.instructorRepository.save(instructorDetails)
                 return instructorDetails
             }
         } else if (type == 'Learner') {
@@ -129,11 +129,11 @@ export class AdminService {
             })
             if (learnerDetails.status == false) {
                 learnerDetails.status = true
-                this.institutionRepository.save(learnerDetails)
+                this.learnerRepository.save(learnerDetails)
                 return learnerDetails
             } else {
                 learnerDetails.status = false
-                this.institutionRepository.save(learnerDetails)
+                this.learnerRepository.save(learnerDetails)
                 return learnerDetails
             }
         }
