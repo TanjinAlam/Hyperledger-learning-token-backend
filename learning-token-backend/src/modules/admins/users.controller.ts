@@ -89,14 +89,31 @@ export class AdminController {
 
     @UseGuards(JwtAuthGuard)
     @Patch('institution/:id')
-    async update(
-        @Param('id') id: number
-        // @Body() updateBillDto: UpdateBillDto
-    ) {
+    async update_institution(@Param('id') id: number) {
         return {
             statusCode: HttpStatus.OK,
-            message: 'Bill updated successfully',
+            message: 'Institution updated successfully',
             result: await this.adminService.update(id, 'Institution')
+        }
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Patch('institution/:id')
+    async update_instructor(@Param('id') id: number) {
+        return {
+            statusCode: HttpStatus.OK,
+            message: 'Instructor updated successfully',
+            result: await this.adminService.update(id, 'Instructor')
+        }
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @Patch('institution/:id')
+    async update_learner(@Param('id') id: number) {
+        return {
+            statusCode: HttpStatus.OK,
+            message: 'Learner updated successfully',
+            result: await this.adminService.update(id, 'Learner')
         }
     }
 }

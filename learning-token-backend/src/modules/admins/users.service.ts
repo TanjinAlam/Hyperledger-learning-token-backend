@@ -25,7 +25,10 @@ export class AdminService {
             const [items, totalCount] =
                 await this.institutionRepository.findAndCount({
                     skip: offset,
-                    take: limit
+                    take: limit,
+                    order: {
+                        id: 'ASC'
+                    }
                 })
 
             const totalPages = Math.ceil(totalCount / limit)
@@ -47,7 +50,10 @@ export class AdminService {
             const [items, totalCount] =
                 await this.instructorRepository.findAndCount({
                     skip: offset,
-                    take: limit
+                    take: limit,
+                    order: {
+                        id: 'ASC'
+                    }
                 })
 
             const totalPages = Math.ceil(totalCount / limit)
@@ -69,7 +75,10 @@ export class AdminService {
             const [items, totalCount] =
                 await this.learnerRepository.findAndCount({
                     skip: offset,
-                    take: limit
+                    take: limit,
+                    order: {
+                        id: 'ASC'
+                    }
                 })
 
             const totalPages = Math.ceil(totalCount / limit)
