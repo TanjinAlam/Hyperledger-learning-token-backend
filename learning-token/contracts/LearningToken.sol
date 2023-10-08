@@ -30,12 +30,15 @@ contract LearningToken is ERC1155, Ownable{
     Counters.Counter public instructorId;
     Counters.Counter public courseTokenCounter;
 
+
+
     //Institution Struct 
     struct Institutions {
         uint256 _institutionId;
         string institutionName;
         mapping(address => InstitutionInstructors) institutionInstructors;
         uint256 createdAt;
+        bool status;
     }
 
     //Institutional Instructor Struct 
@@ -91,6 +94,25 @@ contract LearningToken is ERC1155, Ownable{
         uint256 _courseLearnerCount;
     }
 
+     struct Course {
+        string courseName;
+        uint256 courseId;
+    }
+
+    struct InstitutionMapping {
+        string institutionName;
+        uint256 _institutionId;
+    }
+
+    struct InstructorMapping {
+        string instructorName;
+        uint256 _instructorId;
+    }
+
+    mapping(address => Course[]) public coursesByAddress;
+    mapping(address => InstitutionMapping) public institutionByAddress;
+    mapping(address => InstructorMapping) public instructorMapping;
+
     mapping(uint256 => TokenMetadatas) public tokenMetadatas;
     mapping(uint256 => Courses) public courses;
     mapping(address => Instructors) public instructors;
@@ -100,6 +122,10 @@ contract LearningToken is ERC1155, Ownable{
     mapping(uint256=> mapping(address => bool)) public instructorPermission;
     mapping(uint256=> mapping(address => bool)) public institutionPermission;
     mapping(uint256=> mapping(address => bool)) public institutionRolePermission;
+
+    mapping(address => uint256) public addressToInstitutionId;
+    mapping(address => uint256) public addressToLearnerId;
+    mapping(address => uint256) public addressToInstructorId;
 
     mapping(uint256 => bool) private _isTokenTransferable;
 
@@ -116,18 +142,7 @@ contract LearningToken is ERC1155, Ownable{
         return (learners[learnerAddress]._learnerId);
     }
 
-    function getLearnerCourseDetails(uint256 _courseId, address _courseLearnersAddress)
-        public
-        view
-        returns (uint256, string memory, bool)
-    {
-        CourseLearners storage _courseLearner = courses[_courseId].courseLearners[_courseLearnersAddress];
-        return (
-            _courseLearner._learnerId,
-            _courseLearner.learnerName,
-            _courseLearner.isActive
-        );
-    }
+
 
     //register learner || learner can be or cant be part of a close circuit 
     function registerLearner(string memory _learnerName,uint256 createdAt) external {
@@ -140,6 +155,10 @@ contract LearningToken is ERC1155, Ownable{
     function registerInstructor(string memory _instructorName, uint256 createdAt) external  {
         instructors[msg.sender] = Instructors(instructorId.current() ,_instructorName, createdAt);
         emit InstructorRegistered(instructorId.current(), _instructorName, createdAt);
+
+        InstructorMapping memory instituionMap = InstructorMapping(_instructorName, instructorId.current());
+        instructorMapping[msg.sender] = instituionMap;
+
         instructorId.increment();
 
     }
@@ -156,7 +175,11 @@ contract LearningToken is ERC1155, Ownable{
         institutions[_institutionAddress].institutionInstructors[_institutionAddress]._instructorName = "Default Instructor"; 
         institutions[_institutionAddress].institutionInstructors[_institutionAddress].isActive = false; 
         institutions[_institutionAddress].institutionInstructors[_institutionAddress].createdAt = createdAt; 
+        institutions[_institutionAddress].status = true;
 
+
+        InstitutionMapping memory instituionMap = InstitutionMapping(_institutionName, instiutionId.current());
+        institutionByAddress[msg.sender] = instituionMap;
 
         emit InstitutionRegistered(instiutionId.current(), _institutionName, createdAt);
 
@@ -212,6 +235,9 @@ contract LearningToken is ERC1155, Ownable{
         _course.courseName = _courseName;
         _course.createdAt = _createdAt;
         _course._instructorAddress = msg.sender;
+
+        Course memory newCourse = Course(_courseName, courseTokenCounter.current());
+        coursesByAddress[msg.sender].push(newCourse);
 
         _course.courseHelpingTokneId = courseTokenCounter.current();
         courseTokenCounter.increment();
@@ -587,4 +613,54 @@ contract LearningToken is ERC1155, Ownable{
     }
     _; // This indicates where the modified function's body will be inserted.
     }
+
+
+    // ------------------ Utility Function ------------------ 
+    function getLearnerCourseDetails(uint256 _courseId, address _courseLearnersAddress)
+        public
+        view
+        returns (uint256, string memory, bool)
+    {
+        CourseLearners storage _courseLearner = courses[_courseId].courseLearners[_courseLearnersAddress];
+        return (
+            _courseLearner._learnerId,
+            _courseLearner.learnerName,
+            _courseLearner.isActive
+        );
+    }
+
+    function isAdmin()
+        public
+        view
+        returns (bool)
+    {
+        if(msg.sender == super.owner()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function isInstitution()
+        public
+        view
+        returns (bool)
+    {
+        return institutions[msg.sender].status;
+    }
+
+    // Function to get the courses associated with the caller's address
+    function getCoursesBySender() public view returns (Course[] memory) {
+        return coursesByAddress[msg.sender];
+    }
+
+    // Function to get the courses associated with the caller's address
+    function getInstitutionBySender(address institutionAddress) public view returns (InstitutionMapping memory) {
+        return institutionByAddress[institutionAddress];
+    }
+
+    // Function to get the courses associated with the caller's address
+    function getInstructorIdBySender() public view returns (InstructorMapping memory) {
+        return instructorMapping[msg.sender];
+    }
+
 }
