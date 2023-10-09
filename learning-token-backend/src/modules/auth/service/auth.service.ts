@@ -128,7 +128,7 @@ export class AuthService {
                 return
             }
 
-            const token: string = this.jwtService.generateToken(user)
+            const token: string = this.jwtService.generateToken(user, 'Admin')
 
             return {
                 id: user.id,
@@ -140,7 +140,7 @@ export class AuthService {
                 updatedAt: user.updatedAt
             }
         } else if (type == 'Institution') {
-            const user: Admin = await this.institutionRepository.findOne({
+            const user: Institution = await this.institutionRepository.findOne({
                 where: { email }
             })
 
@@ -159,7 +159,10 @@ export class AuthService {
                 return
             }
 
-            const token: string = this.jwtService.generateToken(user)
+            const token: string = this.jwtService.generateToken(
+                user,
+                'Institution'
+            )
 
             return {
                 id: user.id,
@@ -190,7 +193,7 @@ export class AuthService {
                 return
             }
 
-            const token: string = this.jwtService.generateToken(user)
+            const token: string = this.jwtService.generateToken(user, 'Learner')
 
             return {
                 id: user.id,
@@ -202,7 +205,7 @@ export class AuthService {
                 updatedAt: user.updatedAt
             }
         } else if (type == 'Instructor') {
-            const user: Institution = await this.insturctorRepository.findOne({
+            const user: Instructor = await this.insturctorRepository.findOne({
                 where: { email }
             })
 
@@ -221,8 +224,10 @@ export class AuthService {
                 return
             }
 
-            const token: string = this.jwtService.generateToken(user)
-
+            const token: string = this.jwtService.generateToken(
+                user,
+                'Instructor'
+            )
             return {
                 id: user.id,
                 name: user.name,
@@ -239,7 +244,7 @@ export class AuthService {
      * VALIDATING A USER
      */
     public async validate({ token }: ValidateRequestDto) {
-        const decoded: Admin = await this.jwtService.verify(token)
+        const decoded: any = await this.jwtService.verify(token)
 
         if (!decoded) {
             throw new ForbiddenException('Invalid Access Token')
@@ -266,6 +271,6 @@ export class AuthService {
      * REFRESHING TOKEN FOR AN EXISTING USER
      */
     public refreshToken(loggedInUser: any) {
-        return this.jwtService.generateToken(loggedInUser)
+        return this.jwtService.generateToken(loggedInUser, 'type')
     }
 }

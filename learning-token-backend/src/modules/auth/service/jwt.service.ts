@@ -3,11 +3,20 @@ import { JwtService as Jwt } from '@nestjs/jwt'
 import { InjectRepository } from '@nestjs/typeorm'
 import * as bcrypt from 'bcryptjs'
 import { Admin } from 'src/modules/admins/entities/user.entity'
+import { Institution } from 'src/modules/institutions/entities/institution.entity'
+import { Instructor } from 'src/modules/instructors/entities/instructor.entity'
+import { Learner } from 'src/modules/learners/entities/learner.entity'
 import { Repository } from 'typeorm'
 @Injectable()
 export class JwtService {
     @InjectRepository(Admin)
     private readonly userRepository: Repository<Admin>
+    @InjectRepository(Learner)
+    private readonly learnerRepository: Repository<Learner>
+    @InjectRepository(Institution)
+    private readonly institutionRepository: Repository<Institution>
+    @InjectRepository(Instructor)
+    private readonly instructorRepository: Repository<Instructor>
 
     private readonly jwt: Jwt
 
@@ -22,13 +31,40 @@ export class JwtService {
 
     // Get User by User ID we get from decode()
     public async validateUser(decoded: any) {
-        const user: Admin = await this.userRepository.findOne({
-            where: { id: decoded.id }
-            // relations: [
-            //     'userOrganizations.organization',
-            //     'userOrganizations.role'
-            // ]
-        })
+        let user: any
+        if (decoded.type == 'Admin') {
+            user = await this.userRepository.findOne({
+                where: { id: decoded.id }
+                // relations: [
+                //     'userOrganizations.organization',
+                //     'userOrganizations.role'
+                // ]
+            })
+        } else if (decoded.type == 'Institution') {
+            user = await this.institutionRepository.findOne({
+                where: { id: decoded.id }
+                // relations: [
+                //     'userOrganizations.organization',
+                //     'userOrganizations.role'
+                // ]
+            })
+        } else if (decoded.type == 'Instructor') {
+            user = await this.instructorRepository.findOne({
+                where: { id: decoded.id }
+                // relations: [
+                //     'userOrganizations.organization',
+                //     'userOrganizations.role'
+                // ]
+            })
+        } else if (decoded.type == 'Learner') {
+            user = await this.learnerRepository.findOne({
+                where: { id: decoded.id }
+                // relations: [
+                //     'userOrganizations.organization',
+                //     'userOrganizations.role'
+                // ]
+            })
+        }
 
         if (!user) {
             // IF USER NOT FOUND
@@ -45,8 +81,12 @@ export class JwtService {
     }
 
     // Generate JWT Token
-    public generateToken(auth: Admin): string {
-        return this.jwt.sign({ id: auth.id, email: auth.email })
+    public generateToken(auth: any, type: string): string {
+        return this.jwt.sign({
+            id: auth.id,
+            email: auth.email,
+            type: type
+        })
     }
 
     // Validate User's password
