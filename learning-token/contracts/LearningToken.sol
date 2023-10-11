@@ -218,6 +218,7 @@ contract LearningToken is ERC1155, Ownable{
 
     //check learnrs are registered or not
     //checking function caller is a institution instructor 
+    //check learner is registered or not
     function createCourse(address _institutionAddress, string memory _courseName, uint256 _createdAt, address[] memory learnerAddress) external checkInstructorCourseAccess(_institutionAddress){
         Institutions storage _institution = institutions[_institutionAddress];
 

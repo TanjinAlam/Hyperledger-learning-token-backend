@@ -136,6 +136,7 @@ export class AuthService {
                 email: user.email,
                 publicAddress: user.publicAddress,
                 token: token,
+                type: 'admin',
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt
             }
@@ -170,6 +171,7 @@ export class AuthService {
                 email: user.email,
                 publicAddress: user.publicAddress,
                 token: token,
+                type: 'institution',
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt
             }
@@ -201,6 +203,7 @@ export class AuthService {
                 email: user.email,
                 publicAddress: user.publicAddress,
                 token: token,
+                type: 'learner',
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt
             }
@@ -234,6 +237,7 @@ export class AuthService {
                 email: user.email,
                 publicAddress: user.publicAddress,
                 token: token,
+                type: 'instructor',
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt
             }

@@ -228,10 +228,10 @@ async function main() {
   //   transfer token to learner to make transaction
   const amountInWei = ethers.utils.parseEther("200");
 
-  const tx = await superAdminWallet.sendTransaction({
-    to: LEARNER1_PUB_KEY,
-    value: amountInWei,
-  });
+  //   const tx = await superAdminWallet.sendTransaction({
+  //     to: LEARNER1_PUB_KEY,
+  //     value: amountInWei,
+  //   });
 
   //   console.log(`Transaction hash: ${tx.hash}`);
   //   console.log(
