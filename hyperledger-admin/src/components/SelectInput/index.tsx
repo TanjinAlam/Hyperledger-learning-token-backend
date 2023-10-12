@@ -122,9 +122,9 @@ const SelectInput: FC<Props> = ({
         menuPortalTarget={document.body}
       />
       {meta && meta.touched && meta.error ? (
-        <div className="text-sm text-red-500 mt-1">{meta.error}</div>
+        <div className="text-xs text-red-500 mt-1">{meta.error}</div>
       ) : null}
-      {error ? <div className="text-sm text-red-500 mt-1">{error}</div> : null}
+      {error ? <div className="text-xs text-red-500 mt-1">{error}</div> : null}
     </div>
   );
 };

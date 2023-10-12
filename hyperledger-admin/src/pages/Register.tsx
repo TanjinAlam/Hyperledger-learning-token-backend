@@ -24,6 +24,7 @@ import {
   useLoginLearnerMutation,
   useRegisterLearnerMutation,
 } from "../store/features/learner/learnerApi";
+import { initWeb3 } from "../utils";
 const initialValues = {
   name: "",
   email: "",
@@ -62,7 +63,7 @@ const Login = () => {
   const [loginLearner] = useLoginLearnerMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleSubmit = (values: any) => {
+  const handleSubmit = async (values: any) => {
     try {
       if (values.type === "admin") {
         registerAdmin({
@@ -89,9 +90,6 @@ const Login = () => {
             }
           });
       } else if (values.type === "institution") {
-        // const contract = getContract();
-        // console.log(contract);
-
         registerInstitution({
           name: values.name,
           email: values.email,
@@ -116,53 +114,64 @@ const Login = () => {
             }
           });
       } else if (values.type === "instructor") {
-        registerInstructor({
-          name: values.name,
-          email: values.email,
-          password: values.password,
-          publicAddress: values.publicAddress,
-        })
-          .unwrap()
-          .then((result: any) => {
-            if (result && result.status === 201) {
-              loginInstructor({
-                email: values.email,
-                password: values.password,
-              })
-                .unwrap()
-                .then((res: any) => {
-                  if (res && res.status === 201) {
-                    dispatch(userLoggedIn(res.result));
-                    toast.success("Successfully Signed In");
-                    navigate("/");
-                  }
-                });
-            }
-          });
+        //web3 call
+        const contract = await initWeb3();
+        const tx = await contract!.registerInstructor(values.name, Date.now());
+        //
+        if (tx) {
+          registerInstructor({
+            name: values.name,
+            email: values.email,
+            password: values.password,
+            publicAddress: values.publicAddress,
+          })
+            .unwrap()
+            .then(async (result: any) => {
+              if (result && result.status === 201) {
+                loginInstructor({
+                  email: values.email,
+                  password: values.password,
+                })
+                  .unwrap()
+                  .then((res: any) => {
+                    if (res && res.status === 201) {
+                      dispatch(userLoggedIn(res.result));
+                      toast.success("Successfully Signed In");
+                      navigate("/");
+                    }
+                  });
+              }
+            });
+        }
       } else {
-        registerLearner({
-          name: values.name,
-          email: values.email,
-          password: values.password,
-          publicAddress: values.publicAddress,
-        })
-          .unwrap()
-          .then((result: any) => {
-            if (result && result.status === 201) {
-              loginLearner({
-                email: values.email,
-                password: values.password,
-              })
-                .unwrap()
-                .then((res: any) => {
-                  if (res && res.status === 201) {
-                    dispatch(userLoggedIn(res.result));
-                    toast.success("Successfully Signed In");
-                    navigate("/");
-                  }
-                });
-            }
-          });
+        //web3 call
+        const contract = await initWeb3();
+        const tx = await contract!.registerLearner(values.name, Date.now());
+        if (tx) {
+          registerLearner({
+            name: values.name,
+            email: values.email,
+            password: values.password,
+            publicAddress: values.publicAddress,
+          })
+            .unwrap()
+            .then(async (result: any) => {
+              if (result && result.status === 201) {
+                loginLearner({
+                  email: values.email,
+                  password: values.password,
+                })
+                  .unwrap()
+                  .then((res: any) => {
+                    if (res && res.status === 201) {
+                      dispatch(userLoggedIn(res.result));
+                      toast.success("Successfully Signed In");
+                      navigate("/");
+                    }
+                  });
+              }
+            });
+        }
       }
     } catch (e) {
       console.log(e);

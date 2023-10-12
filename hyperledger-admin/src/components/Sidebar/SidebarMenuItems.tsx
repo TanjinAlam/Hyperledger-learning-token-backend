@@ -6,6 +6,7 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
+import ProtectedSidebar from "./ProtectedSidebar";
 
 type Props = {
   className?: string;
@@ -18,7 +19,7 @@ const SidebarMenuItem: FC<Props> = ({ className, menuItem }) => {
   const { pathname } = useLocation();
 
   const classes =
-    "mb-1 flex px-5 py-[12px] rounded-[10px] items-center duration-600 hover:text-blue-800 focus:text-blue-800 hover:bg-blue-100 focus:bg-blue-100 hover:no-underline focus:no-underline hover:fill-white leading-none ";
+    "mb-1 flex px-5 py-[12px] rounded-[10px] items-center duration-600 hover:bg-[#013A44] hover:text-white focus:text-white focus:bg-[#013A44] hover:no-underline focus:no-underline hover:fill-white leading-none ";
 
   useEffect(() => {
     if (
@@ -63,13 +64,12 @@ const SidebarMenuItem: FC<Props> = ({ className, menuItem }) => {
           to={menuItem.to || "#"}
           className={({ isActive }: any) =>
             `${classes} ${
-              isActive ? "text-blue-800 bg-blue-100" : "text-gray-600"
+              isActive ? "bg-[#013A44] text-white" : "text-gray-600"
             }`
           }
         >
           {menuItem.icon && (
             <span className="text-xl mr-3 w-[20px]">
-              {" "}
               <menuItem.icon />
             </span>
           )}
@@ -81,7 +81,13 @@ const SidebarMenuItem: FC<Props> = ({ className, menuItem }) => {
         <ul className={`ml-8 ${dropdownOpen ? "mm-show" : "mm-collapse"}`}>
           {menuItem.subMenu.map((item: any, index: any) => {
             return (
-              <SidebarMenuItem key={index} menuItem={item} className="mb-1" />
+              <ProtectedSidebar
+                item={item}
+                permissions={item.requiredPermissions}
+                key={index}
+              >
+                <SidebarMenuItem key={index} menuItem={item} className="mb-1" />
+              </ProtectedSidebar>
             );
           })}
         </ul>

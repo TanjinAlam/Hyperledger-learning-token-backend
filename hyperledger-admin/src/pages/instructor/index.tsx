@@ -1,47 +1,62 @@
-import { Table, Toggle } from "rsuite";
-import { data } from "../../config/data";
+import { Loader, Table, Toggle } from "rsuite";
+import {
+  useGetInstructorQuery,
+  useUpdateInstructorStatusMutation,
+} from "../../store/features/admin/adminApi";
+import { initWeb3 } from "../../utils";
 const { Column, HeaderCell, Cell } = Table;
 const Instructor = () => {
+  const { data, isLoading } = useGetInstructorQuery();
+  const [updateInstructorStatus] = useUpdateInstructorStatusMutation();
+  const toggleStatus = async (rowData: any) => {
+    const contract = await initWeb3();
+    const tx = await contract!.addInstructorToInstitution(
+      rowData.publicAddress,
+      Date.now()
+    );
+    if (tx) {
+      await updateInstructorStatus(rowData);
+    }
+  };
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
   return (
     <div className="py-3">
-      <Table data={data} autoHeight rowClassName={"cursor-pointer"}>
-        <Column width={70} align="center" fixed>
+      <Table
+        data={data?.result?.data}
+        autoHeight
+        rowClassName={"cursor-pointer"}
+      >
+        <Column flexGrow={1} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
           <Cell dataKey="id" />
         </Column>
 
-        <Column width={130}>
-          <HeaderCell>First Name</HeaderCell>
-          <Cell dataKey="firstName" />
+        <Column flexGrow={1}>
+          <HeaderCell>Name</HeaderCell>
+          <Cell dataKey="name" className="capitalize" />
         </Column>
 
-        <Column width={130}>
-          <HeaderCell>Last Name</HeaderCell>
-          <Cell dataKey="lastName" />
+        <Column flexGrow={1}>
+          <HeaderCell>Public Address</HeaderCell>
+          <Cell dataKey="publicAddress" />
         </Column>
 
-        <Column width={100}>
-          <HeaderCell>Gender</HeaderCell>
-          <Cell dataKey="gender" />
-        </Column>
-
-        <Column width={100}>
-          <HeaderCell>Age</HeaderCell>
-          <Cell dataKey="age" />
-        </Column>
-
-        <Column width={200}>
-          <HeaderCell>City</HeaderCell>
-          <Cell dataKey="city" />
-        </Column>
-
-        <Column width={200}>
+        <Column flexGrow={1}>
           <HeaderCell>Status</HeaderCell>
           <Cell>
-            {(rowData) => {
+            {(rowData: any) => {
               return (
                 <>
-                  <Toggle checked={rowData.status} />
+                  <Toggle
+                    checked={rowData.status}
+                    onClick={() => toggleStatus(rowData)}
+                  />
                 </>
               );
             }}

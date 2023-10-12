@@ -11,14 +11,14 @@ npx hardhat node
 Follow below commands for deploying the contract on hardhat network:
 
 ```
-npx hardhat run scripts/studentAttentance.ts 
+npx hardhat run scripts/studentAttentance.ts
 ```
 
 ```shell
 npx hardhat help
 npx hardhat node
 npx hardhat test
-sol2uml class ./contracts/LearningToken.sol 
+sol2uml class ./contracts/LearningToken.sol
 REPORT_GAS=true npx hardhat test
-npx hardhat run scripts/deploy.ts
+npx npx hardhat run scripts/DeployLearningToken.ts --network localhost
 ```

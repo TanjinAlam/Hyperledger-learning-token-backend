@@ -1,7 +1,7 @@
 import { apiSlice } from "../api/apiSlice";
 
 export const adminApi = apiSlice
-  .enhanceEndpoints({ addTagTypes: ["AdminAuth", "Institution"] })
+  .enhanceEndpoints({ addTagTypes: ["AdminAuth", "Institution", "Instructor"] })
   .injectEndpoints({
     endpoints: (builder) => ({
       loginAdmin: builder.mutation<any, any>({
@@ -38,6 +38,24 @@ export const adminApi = apiSlice
         }),
         invalidatesTags: ["Institution"],
       }),
+      getInstructor: builder.query<
+        any,
+        { page?: number; limit?: number } | void
+      >({
+        query: (queryParams) =>
+          `/admin/instructor-list?page=${queryParams?.page || 1}&limit=${
+            queryParams?.limit || 10
+          }`,
+        providesTags: ["Instructor"],
+      }),
+      updateInstructorStatus: builder.mutation<any, any>({
+        query: (instructor) => ({
+          url: `/admin/instructor/${instructor.id}`,
+          method: "PATCH",
+          body: instructor,
+        }),
+        invalidatesTags: ["Instructor"],
+      }),
     }),
   });
 
@@ -46,4 +64,6 @@ export const {
   useRegisterAdminMutation,
   useGetInstitutionQuery,
   useUpdateInstitutionStatusMutation,
+  useGetInstructorQuery,
+  useUpdateInstructorStatusMutation,
 } = adminApi;

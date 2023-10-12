@@ -36,7 +36,7 @@ const TextInput: FC<Props> = ({
   ...rest
 }) => {
   const sizeClass = {
-    small: "text-xs px-3 h-[32px]",
+    small: "text-xs px-3 h-[32px] rounded",
     medium: "text-base px-4 h-[42px]",
     large: "text-lg px-6 h-[56px]",
     xlarge: "text-xl px-8 h-[72px]",

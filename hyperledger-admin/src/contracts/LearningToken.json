@@ -619,6 +619,63 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "addressToInstitutionId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "addressToInstructorId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "addressToLearnerId",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "account",
         "type": "address"
       },
@@ -874,6 +931,35 @@
     "inputs": [
       {
         "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "coursesByAddress",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "courseName",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "courseId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
         "name": "_institutionAddress",
         "type": "address"
       },
@@ -912,6 +998,62 @@
         "internalType": "uint256",
         "name": "_programLearnerIdCounts",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCoursesBySender",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "courseName",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "courseId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct LearningToken.Course[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "institutionAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getInstitutionBySender",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "institutionName",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_institutionId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct LearningToken.InstitutionMapping",
+        "name": "",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",
@@ -962,6 +1104,31 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "getInstructorIdBySender",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "string",
+            "name": "instructorName",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_instructorId",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct LearningToken.InstructorMapping",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -990,6 +1157,30 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "institutionByAddress",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "institutionName",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_institutionId",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -1067,6 +1258,11 @@
         "internalType": "uint256",
         "name": "createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "status",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -1092,6 +1288,30 @@
       {
         "internalType": "uint256",
         "name": "_value",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "instructorMapping",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "instructorName",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_instructorId",
         "type": "uint256"
       }
     ],
@@ -1152,6 +1372,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "isAdmin",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -1165,6 +1398,19 @@
       }
     ],
     "name": "isApprovedForAll",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "isInstitution",
     "outputs": [
       {
         "internalType": "bool",

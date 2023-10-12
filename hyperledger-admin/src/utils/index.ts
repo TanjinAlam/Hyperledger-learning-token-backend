@@ -1,23 +1,25 @@
-import Web3 from "web3";
-
+import { ethers } from "ethers";
+import abi from "../contracts/LearningToken.json";
+const SMART_CONTRACT = import.meta.env.VITE_SMART_CONTRACT;
 export const initWeb3 = async () => {
   if (window.ethereum) {
-    // Modern dapp browsers
-    const web3 = new Web3(window.ethereum);
-    try {
-      // Request account access if needed
-      await window.ethereum.enable();
-      return web3;
-    } catch (error) {
-      throw error;
-    }
-  } else if (window.web3) {
-    // Legacy dapp browsers
-    const web3 = new Web3(window.web3.currentProvider);
-    return web3;
-  } else {
-    throw new Error(
-      "Non-Ethereum browser detected. You should consider trying MetaMask!"
-    );
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    const signer = await provider.getSigner();
+    const contract = new ethers.Contract(SMART_CONTRACT!, abi, signer);
+    return contract;
+  }
+};
+
+export const initWeb3Method = async () => {
+  if (window.ethereum) {
+    const provider = new ethers.BrowserProvider(window.ethereum);
+    // const accounts = await window.ethereum.request({
+    //   method: "eth_requestAccounts",
+    // });
+
+    const signer = await provider.getSigner();
+
+    const contract = new ethers.Contract(SMART_CONTRACT!, abi, signer);
+    return contract;
   }
 };
