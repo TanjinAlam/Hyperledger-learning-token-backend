@@ -6,4 +6,7 @@
   body {
     @apply font-poppins;
   }
+  a{
+    text-decoration: none !important;
+  }
 }

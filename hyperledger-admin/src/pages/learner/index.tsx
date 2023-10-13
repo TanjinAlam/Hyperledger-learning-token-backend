@@ -1,52 +1,41 @@
 import { Table, Toggle } from "rsuite";
-import { data } from "../../config/data";
+
+import { useGetLearnerListQuery } from "../../store/features/admin/adminApi";
 const { Column, HeaderCell, Cell } = Table;
 const Learner = () => {
+  const {data, isLoading}  =  useGetLearnerListQuery()
+
+  if (isLoading) {
+    return <>Loading...</>
+  }
+
+  console.log(data);
+  
   return (
     <div className="py-3">
-      <Table data={data} autoHeight rowClassName={"cursor-pointer"}>
-        <Column width={70} align="center" fixed>
+      <Table data={data.result.data} autoHeight rowClassName={"cursor-pointer"}>
+        <Column flexGrow={1} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
           <Cell dataKey="id" />
         </Column>
 
-        <Column width={130}>
-          <HeaderCell>First Name</HeaderCell>
-          <Cell dataKey="firstName" />
+        <Column flexGrow={1}>
+          <HeaderCell>Name</HeaderCell>
+          <Cell dataKey="name" />
         </Column>
 
-        <Column width={130}>
-          <HeaderCell>Last Name</HeaderCell>
-          <Cell dataKey="lastName" />
+        <Column flexGrow={1}>
+          <HeaderCell>Email</HeaderCell>
+          <Cell dataKey="email" />
+        </Column>
+      
+      
+        <Column flexGrow={1}>
+          <HeaderCell>Public Address</HeaderCell>
+          <Cell dataKey="publicAddress" />
         </Column>
 
-        <Column width={100}>
-          <HeaderCell>Gender</HeaderCell>
-          <Cell dataKey="gender" />
-        </Column>
-
-        <Column width={100}>
-          <HeaderCell>Age</HeaderCell>
-          <Cell dataKey="age" />
-        </Column>
-
-        <Column width={200}>
-          <HeaderCell>City</HeaderCell>
-          <Cell dataKey="city" />
-        </Column>
-
-        <Column width={200}>
-          <HeaderCell>Status</HeaderCell>
-          <Cell>
-            {(rowData) => {
-              return (
-                <>
-                  <Toggle checked={rowData.status} />
-                </>
-              );
-            }}
-          </Cell>
-        </Column>
+       
       </Table>
     </div>
   );
