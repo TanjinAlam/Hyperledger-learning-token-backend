@@ -13,7 +13,7 @@ const mainMenuItems = [
       {
         name: "List",
         to: "/instructor",
-        requiredPermissions: ["institution"],
+        requiredPermissions: ["institution", "admin"],
       },
     ],
     icon: BsBoxSeam,
@@ -37,7 +37,7 @@ const mainMenuItems = [
       {
         name: "List",
         to: "/learner",
-        requiredPermissions: ["institution", "instructor"],
+        requiredPermissions: ["institution", "instructor", "admin"],
       },
     ],
     icon: BsBoxSeam,
@@ -49,22 +49,22 @@ const mainMenuItems = [
       {
         name: "List",
         to: "/course",
-        requiredPermissions: ["instructor", "learner"],
+        requiredPermissions: ["instructor", "learner", "admin"],
       },
       {
         name: "Add",
         to: "/course/add",
-        requiredPermissions: ["instructor"],
+        requiredPermissions: ["instructor", "admin"],
       },
       {
         name: "Set Token",
         to: "/course/set-token",
-        requiredPermissions: ["instructor"],
+        requiredPermissions: ["instructor", "admin"],
       },
       {
         name: "Distribute Token",
         to: "/course/attendance",
-        requiredPermissions: ["instructor"],
+        requiredPermissions: ["instructor", "admin"],
       },
     ],
     icon: BsBoxSeam,

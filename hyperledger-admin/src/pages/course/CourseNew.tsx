@@ -90,6 +90,7 @@ const CourseNew = () => {
               type="file"
               name="learnerAddress"
               onChange={(event) => handleFileChange(event, formik)}
+              className="my-3"
             />
             <Button
               size="small"
