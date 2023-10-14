@@ -5,6 +5,7 @@ import { number, object, string } from "yup";
 import Button from "../../components/Button";
 import SelectInput from "../../components/SelectInput";
 import { initWeb3 } from "../../utils";
+import toast from "react-hot-toast";
 const initialValues = {
   token_type: "attendance_token",
   attendance: null,
@@ -35,6 +36,9 @@ const Attendance = () => {
         values.attendance.courseId,
         Date.now()
       );
+      if (tx) {
+        toast.success("Token minted");
+      }
     }
     if (values.token_type === "helping_token") {
       const tx = await contract!.mintHelpingToken(
@@ -43,16 +47,23 @@ const Attendance = () => {
         values.attendance.courseId,
         Date.now()
       );
+      if (tx) {
+        toast.success("Token minted");
+      }
     }
     if (values.token_type === "score_token") {
       const tx = await contract!.mintScoreToken(
         values.attendance.learnerId,
         values.attendance.amount,
         values.attendance.courseId,
+        Date.now(),
         values.attendance.fieldOfKnowledge,
-        values.attendance.skillName,
-        Date.now()
+        values.attendance.skillName
       );
+
+      if (tx) {
+        toast.success("Token minted");
+      }
     }
     if (values.token_type === "instructorScore_token") {
       const tx = await contract!.mintInstructorScoreToken(
@@ -61,6 +72,10 @@ const Attendance = () => {
         values.attendance.courseId,
         Date.now()
       );
+
+      if (tx) {
+        toast.success("Token minted");
+      }
     }
   };
 
@@ -69,59 +84,61 @@ const Attendance = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: "array" });
-        const sheetName = workbook.SheetNames[0];
-        const sheet = workbook.Sheets[sheetName];
-        const jsonData = XLSX.utils.sheet_to_json(sheet);
+        if (e.target && e.target.result instanceof ArrayBuffer) {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: "array" });
+          const sheetName = workbook.SheetNames[0];
+          const sheet = workbook.Sheets[sheetName];
+          const jsonData = XLSX.utils.sheet_to_json(sheet);
 
-        let learnerAddress;
-        switch (formik.values.token_type) {
-          case "attendance_token":
-            learnerAddress = jsonData.map((learner: any) => {
-              return {
-                courseId: learner.courseId,
-                amount: learner.amount,
-                learnerId: learner.learnerId,
-              };
-            });
-            formik.setFieldValue("attendance", learnerAddress[0]);
-            break;
-          case "helping_token":
-            learnerAddress = jsonData.map((learner: any) => {
-              return {
-                courseId: learner.courseId,
-                amount: learner.amount,
-                learnerId: learner.learnerId,
-              };
-            });
-            formik.setFieldValue("attendance", learnerAddress[0]);
-            break;
-          case "score_token":
-            learnerAddress = jsonData.map((learner: any) => {
-              return {
-                courseId: learner.courseId,
-                amount: learner.amount,
-                learnerId: learner.learnerId,
-                fieldOfKnowledge: learner.fieldOfKnowledge,
-                skillName: learner.skillName,
-              };
-            });
-            formik.setFieldValue("attendance", learnerAddress[0]);
-            break;
-          case "instructorScore_token":
-            learnerAddress = jsonData.map((learner: any) => {
-              return {
-                courseId: learner.courseId,
-                amount: learner.amount,
-                learnerId: learner.learnerId,
-              };
-            });
-            formik.setFieldValue("attendance", learnerAddress[0]);
-            break;
+          let learnerAddress;
+          switch (formik.values.token_type) {
+            case "attendance_token":
+              learnerAddress = jsonData.map((learner: any) => {
+                return {
+                  courseId: learner.courseId,
+                  amount: learner.amount,
+                  learnerId: learner.learnerId,
+                };
+              });
+              formik.setFieldValue("attendance", learnerAddress[0]);
+              break;
+            case "helping_token":
+              learnerAddress = jsonData.map((learner: any) => {
+                return {
+                  courseId: learner.courseId,
+                  amount: learner.amount,
+                  learnerId: learner.learnerId,
+                };
+              });
+              formik.setFieldValue("attendance", learnerAddress[0]);
+              break;
+            case "score_token":
+              learnerAddress = jsonData.map((learner: any) => {
+                return {
+                  courseId: learner.courseId,
+                  amount: learner.amount,
+                  learnerId: learner.learnerId,
+                  fieldOfKnowledge: learner.fieldOfKnowledge,
+                  skillName: learner.skillName,
+                };
+              });
+              formik.setFieldValue("attendance", learnerAddress[0]);
+              break;
+            case "instructorScore_token":
+              learnerAddress = jsonData.map((learner: any) => {
+                return {
+                  courseId: learner.courseId,
+                  amount: learner.amount,
+                  learnerId: learner.learnerId,
+                };
+              });
+              formik.setFieldValue("attendance", learnerAddress[0]);
+              break;
 
-          default:
-            break;
+            default:
+              break;
+          }
         }
       };
       reader.readAsArrayBuffer(file);
@@ -153,7 +170,7 @@ const Attendance = () => {
               options={tokenType}
             />
             <input
-             className="my-3"
+              className="my-3"
               type="file"
               name="attendance"
               onChange={(event) => handleFileChange(event, formik)}

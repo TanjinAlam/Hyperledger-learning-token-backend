@@ -7,6 +7,7 @@ import SelectInput from "../../components/SelectInput";
 import TextInput from "../../components/TextInput";
 import { useGetInstitutionQuery } from "../../store/features/admin/adminApi";
 import { initWeb3Method } from "../../utils";
+import toast from "react-hot-toast";
 const initialValues = {
   courseId: "",
   institutionId: "",
@@ -24,17 +25,17 @@ const validationSchema = object().shape({
   skillName: string().required("This field is required."),
   institutionAddress: string().required("This field is required."),
 });
-const contract = await initWeb3Method();
 
 const SetToken = () => {
   const [courseIdOptions, setCourseIdOptions] = useState([]);
   const [instructorIdOptions, setInstructorIdOptions] = useState<
-    { value: number; label: string }[]
+  { value: number; label: string }[]
   >([]);
-
+  
   const formikRef = useRef<FormikProps<any>>(null);
   const { data: institutionList } = useGetInstitutionQuery();
   const handleSubmit = async (values: any) => {
+    const contract = await initWeb3Method();
     const insId = await setinstitutionId(values.institutionId);
     const tx = await contract!.setTokenMetadata(
       values.courseId,
@@ -45,6 +46,9 @@ const SetToken = () => {
       values.institutionAddress,
       Date.now()
     );
+    if (tx) {
+      toast.success("Token Created");
+    }
   };
 
   useEffect(() => {
@@ -54,6 +58,7 @@ const SetToken = () => {
   }, []);
 
   const getCourse = async () => {
+    const contract = await initWeb3Method();
     const tx = await contract!.getCoursesBySender();
     let temp: any = [];
     for (let key in tx) {
@@ -78,7 +83,8 @@ const SetToken = () => {
   };
 
   const getInstructors = async () => {
-    const provider = new ethers.BrowserProvider(window.ethereum);
+    const contract = await initWeb3Method();
+    const provider = new ethers.BrowserProvider((window as any).ethereum);
     const signer = await provider.getSigner();
     const address = await signer.getAddress();
     const tx = await contract!.instructors(address);
@@ -86,11 +92,13 @@ const SetToken = () => {
   };
 
   const setinstitutionId = async (address: string) => {
+    const contract = await initWeb3Method();
     const tx = await contract!.institutions(address);
     return Number(tx[0]);
   };
 
   const meta = async () => {
+    const contract = await initWeb3Method();
     const tx = await contract!.tokenMetadatas(0);
     console.log(tx);
   };

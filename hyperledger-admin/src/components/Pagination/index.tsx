@@ -4,7 +4,7 @@ import { PaginationGroupProps } from "rsuite/esm/Pagination/PaginationGroup";
 
 interface Props extends PaginationGroupProps {}
 
-const Pagination = forwardRef(({ ...props }: Props, ref) => {
+const Pagination = forwardRef(({ ...props }: Props) => {
   if (props.total <= 1) return <></>;
 
   return (

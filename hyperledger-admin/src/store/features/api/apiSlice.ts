@@ -18,5 +18,6 @@ export const apiSlice = createApi({
     return result;
   },
   tagTypes: [],
+   // @ts-ignore
   endpoints: (builder) => ({}),
 });

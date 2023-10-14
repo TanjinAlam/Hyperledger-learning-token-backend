@@ -55,6 +55,7 @@ const Login = () => {
             }
           })
           .catch((e: any) => {
+            console.log(e);
             toast.error("Something went wrong");
           });
       } else if (values.type === "institution") {
@@ -71,6 +72,7 @@ const Login = () => {
             }
           })
           .catch((e: any) => {
+            console.log(e);
             toast.error("Something went wrong");
           });
       } else if (values.type === "instructor") {
@@ -87,6 +89,7 @@ const Login = () => {
             }
           })
           .catch((e: any) => {
+            console.log(e);
             toast.error("Something went wrong");
           });
       } else {
@@ -103,6 +106,7 @@ const Login = () => {
             }
           })
           .catch((e: any) => {
+            console.log(e);
             toast.error("Something went wrong");
           });
       }

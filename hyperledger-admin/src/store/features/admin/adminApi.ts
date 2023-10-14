@@ -73,8 +73,11 @@ export const {
   useLoginAdminMutation,
   useRegisterAdminMutation,
   useGetInstitutionQuery,
+  useLazyGetInstitutionQuery,
   useUpdateInstitutionStatusMutation,
   useGetInstructorQuery,
+  useLazyGetInstructorQuery,
+  useLazyGetLearnerListQuery,
   useUpdateInstructorStatusMutation,
   useGetLearnerListQuery
 } = adminApi;
