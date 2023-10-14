@@ -7,6 +7,7 @@ import SelectInput from "../../components/SelectInput";
 import TextInput from "../../components/TextInput";
 import { useGetInstitutionQuery } from "../../store/features/admin/adminApi";
 import { initWeb3 } from "../../utils";
+import toast from "react-hot-toast";
 
 const initialValues = {
   courseName: "",
@@ -33,6 +34,9 @@ const CourseNew = () => {
       Date.now(),
       values.learnerAddress
     );
+    if (tx) {
+      toast.success("Course Created");
+    }
   };
 
   const handleFileChange = (e: any, formik: any) => {
@@ -40,15 +44,17 @@ const CourseNew = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        const data = new Uint8Array(e.target.result);
-        const workbook = XLSX.read(data, { type: "array" });
-        const sheetName = workbook.SheetNames[0];
-        const sheet = workbook.Sheets[sheetName];
-        const jsonData = XLSX.utils.sheet_to_json(sheet);
-        const learnerAddress = jsonData.map(
-          (learner: any) => learner.learner_wallet
-        );
-        formik.setFieldValue("learnerAddress", learnerAddress);
+        if (e.target && e.target.result instanceof ArrayBuffer) {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: "array" });
+          const sheetName = workbook.SheetNames[0];
+          const sheet = workbook.Sheets[sheetName];
+          const jsonData = XLSX.utils.sheet_to_json(sheet);
+          const learnerAddress = jsonData.map(
+            (learner: any) => learner.learner_wallet
+          );
+          formik.setFieldValue("learnerAddress", learnerAddress);
+        }
       };
       reader.readAsArrayBuffer(file);
     }

@@ -42,7 +42,7 @@ const TextInput: FC<Props> = ({
     xlarge: "text-xl px-8 h-[72px]",
   }[size];
 
-  const [field, meta, helpers] = useField(name || "");
+  const [field, meta] = useField(name || "");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     field.onChange({ target: { name, value: e.target.value } });

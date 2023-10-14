@@ -1,7 +1,7 @@
 import { useField } from "formik";
 import { CSSProperties, FC, InputHTMLAttributes, ReactNode } from "react";
 
-import Select, { ActionMeta, SingleValue, components } from "react-select";
+import Select, { SingleValue, components } from "react-select";
 type Option = {
   label: string;
   value: string | number;
@@ -55,13 +55,12 @@ const SelectInput: FC<Props> = ({
     xlarge: "text-xl px-8 h-[72px]",
   }[size];
 
-  const [field, meta, helpers] = name
+  const [field, meta] = name
     ? useField(name || "")
     : [null, null, null];
 
   const handleOnChange = (
-    option: SingleValue<Option>,
-    actionMeta: ActionMeta<Option>
+    option: SingleValue<Option>
   ) => {
     field && field.onChange({ target: { name, value: option?.value } });
     onChange && onChange(option);

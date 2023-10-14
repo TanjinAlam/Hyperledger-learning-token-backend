@@ -1,13 +1,26 @@
 import { Loader, Table, Toggle } from "rsuite";
 import {
-  useGetInstructorQuery,
+  useLazyGetInstructorQuery,
   useUpdateInstructorStatusMutation,
 } from "../../store/features/admin/adminApi";
 import { initWeb3 } from "../../utils";
+import usePagination from "../../hooks/usePagination";
+import { useEffect } from "react";
+import Pagination from "../../components/Pagination";
 const { Column, HeaderCell, Cell } = Table;
 const Instructor = () => {
-  const { data, isLoading } = useGetInstructorQuery();
+  const [getInstructor, { data, isLoading }] = useLazyGetInstructorQuery();
   const [updateInstructorStatus] = useUpdateInstructorStatusMutation();
+
+  const pagination = usePagination();
+
+  useEffect(() => {
+    getInstructor({
+      page: pagination.page,
+      limit: pagination.limit,
+    });
+  }, [pagination.page, pagination.limit]);
+
   const toggleStatus = async (rowData: any) => {
     const contract = await initWeb3();
     const tx = await contract!.addInstructorToInstitution(
@@ -63,6 +76,14 @@ const Instructor = () => {
           </Cell>
         </Column>
       </Table>
+
+      <Pagination
+        total={data?.result?.pagination.totalCount || 0}
+        activePage={pagination.page || 1}
+        limit={pagination.limit || 10}
+        onChangePage={pagination.handleChangePage}
+        onChangeLimit={pagination.handleChangeLimit}
+      />
     </div>
   );
 };

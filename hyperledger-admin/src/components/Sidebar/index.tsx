@@ -71,7 +71,7 @@ const Sidebar = () => {
                 {menu.subMenu.map((item: any, index: number) => {
                   const show = item.requiredPermissions.includes(auth.user.type)
                   return (
-                   show && <div className="flex items-center justify-end" key={index}>
+                   show && <div className="flex items-center justify-end my-2" key={index}>
                       <NavLink
                         key={index}
                         to={item.to}

@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Loader, Table, Toggle } from "rsuite";
 import {
-  useGetInstitutionQuery,
+  useLazyGetInstitutionQuery,
   useUpdateInstitutionStatusMutation,
 } from "../../store/features/admin/adminApi";
 import { initWeb3 } from "../../utils";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../components/Pagination";
 const { Column, HeaderCell, Cell } = Table;
 
 const Institution: React.FC = () => {
-  const { data, isLoading } = useGetInstitutionQuery();
+  const [getInstitution, { data, isLoading }] = useLazyGetInstitutionQuery();
   const [updateInstitutionStatus] = useUpdateInstitutionStatusMutation();
+  const pagination = usePagination();
+
+  useEffect(() => {
+    getInstitution({
+      page: pagination.page,
+      limit: pagination.limit,
+    });
+  }, [pagination.page, pagination.limit]);
 
   const toggleStatus = async (rowData: any) => {
     const contract = await initWeb3();
@@ -32,7 +42,7 @@ const Institution: React.FC = () => {
   }
   return (
     <div className="py-3">
-      <Table data={data.result.data} autoHeight rowClassName={"cursor-pointer"}>
+      <Table data={data?.result?.data} autoHeight rowClassName={"cursor-pointer"}>
         <Column flexGrow={1} align="center" fixed>
           <HeaderCell>Id</HeaderCell>
           <Cell dataKey="id" />
@@ -64,6 +74,14 @@ const Institution: React.FC = () => {
           </Cell>
         </Column>
       </Table>
+
+      <Pagination
+        total={data?.result?.pagination.totalCount || 0}
+        activePage={pagination.page || 1}
+        limit={pagination.limit || 10}
+        onChangePage={pagination.handleChangePage}
+        onChangeLimit={pagination.handleChangeLimit}
+      />
     </div>
   );
 };

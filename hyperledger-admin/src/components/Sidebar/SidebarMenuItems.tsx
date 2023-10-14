@@ -4,7 +4,7 @@ import {
   NavLink,
   matchPath,
   useLocation,
-  useParams,
+  
 } from "react-router-dom";
 import ProtectedSidebar from "./ProtectedSidebar";
 
@@ -15,7 +15,7 @@ type Props = {
 const SidebarMenuItem: FC<Props> = ({ className, menuItem }) => {
   const menuItemRef = useRef<HTMLLIElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  let { "*": slug } = useParams();
+ 
   const { pathname } = useLocation();
 
   const classes =

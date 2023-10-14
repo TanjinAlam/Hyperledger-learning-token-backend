@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Dashboard } from "../pages";
-import ExcelRead from "../pages/ExcelRead";
+
 import Login from "../pages/Login";
-import MetaConnect from "../pages/MetaConnect";
+
 import Register from "../pages/Register";
 import Course from "../pages/course";
 import Attendance from "../pages/course/Attendance";
@@ -17,7 +17,6 @@ const AllRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/connect" element={<MetaConnect />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<MasterLayout />}>
@@ -29,7 +28,6 @@ const AllRoutes = () => {
           <Route path="course/add" element={<CourseNew />} />
           <Route path="course/set-token" element={<SetToken />} />
           <Route path="course/attendance" element={<Attendance />} />
-          <Route path="excel" element={<ExcelRead />} />
         </Route>
       </Routes>
     </BrowserRouter>
