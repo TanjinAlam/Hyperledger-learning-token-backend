@@ -15,14 +15,14 @@ const { RPC_URL_BESU, SUPER_ADMIN_PRI_KEY }: any = process.env;
 const config: HardhatUserConfig = {
   // solidity: "0.8.17",
   networks: {
-    // localhost: {
-    //   accounts: [SUPER_ADMIN_PRI_KEY],
-    //   url: "http://localhost:8545",
-    //   chainId: 1337,
-    //   gasPrice: 0,
-    //   blockGasLimit: 8000000000,
-    //   timeout: 1800000,
-    // },
+    localhost: {
+      accounts: [SUPER_ADMIN_PRI_KEY],
+      url: "http://localhost:8545",
+      chainId: 1337,
+      gasPrice: 0,
+      blockGasLimit: 8000000000,
+      timeout: 1800000,
+    },
     // besu: {
     //   url: "",
     //   accounts: [PRIV_KEY_1],

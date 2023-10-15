@@ -29,9 +29,9 @@ const validationSchema = object().shape({
 const SetToken = () => {
   const [courseIdOptions, setCourseIdOptions] = useState([]);
   const [instructorIdOptions, setInstructorIdOptions] = useState<
-  { value: number; label: string }[]
+    { value: number; label: string }[]
   >([]);
-  
+
   const formikRef = useRef<FormikProps<any>>(null);
   const { data: institutionList } = useGetInstitutionQuery();
   const handleSubmit = async (values: any) => {
@@ -47,7 +47,7 @@ const SetToken = () => {
       Date.now()
     );
     if (tx) {
-      toast.success("Token Created");
+      toast.success("Token Metadata Updated");
     }
   };
 

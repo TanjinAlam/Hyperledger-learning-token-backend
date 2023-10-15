@@ -20,5 +20,5 @@ npx hardhat node
 npx hardhat test
 sol2uml class ./contracts/LearningToken.sol
 REPORT_GAS=true npx hardhat test
-npx npx hardhat run scripts/DeployLearningToken.ts --network localhost
+npx hardhat run scripts/DeployLearningToken.ts --network localhost
 ```

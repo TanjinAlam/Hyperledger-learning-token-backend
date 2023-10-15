@@ -115,7 +115,7 @@ const Login = () => {
   return (
     <div className="min-h-screen min-w-[100vw] flex items-center justify-center">
       <div className="rounded border shadow p-5 w-[25vw]">
-        <div className="font-bold text-xl text-center my-3">Hyperledger</div>
+        <div className="font-bold text-xl text-center my-3">Learning-Token</div>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
