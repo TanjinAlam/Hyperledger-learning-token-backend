@@ -64,6 +64,14 @@ export class RegisterInstitutionDTO {
     @IsString()
     @IsNotEmpty()
     publicAddress: string
+
+    @IsString()
+    @IsNotEmpty()
+    latitude: string
+
+    @IsString()
+    @IsNotEmpty()
+    longitude: string
 }
 
 export class InstitutionLoginRequestDto {
@@ -95,6 +103,14 @@ export class RegisterLearnernDTO {
     @IsString()
     @IsNotEmpty()
     publicAddress: string
+
+    @IsString()
+    @IsNotEmpty()
+    latitude: string
+
+    @IsString()
+    @IsNotEmpty()
+    longitude: string
 }
 
 export class LearnerLoginRequestDto {

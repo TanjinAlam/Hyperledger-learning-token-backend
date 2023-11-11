@@ -17,9 +17,12 @@ const {
   SEPOLIA_PRIV_KEY,
   SEPOLIA_RPC_URL,
   SEPOLIA_API_KEY,
+  POLYGON_RPC_URL,
+  POLYGON_API_KEY,
+  POLYGON_PRIV_KEY
+
 }: any = process.env;
 const config: HardhatUserConfig = {
-  // solidity: "0.8.17",
   networks: {
     // localhost: {
     //   url: "http://localhost:8545", // Replace with your local Hardhat node URL
@@ -40,6 +43,13 @@ const config: HardhatUserConfig = {
     //   // gasPrice: 80000000, // adjust as necessary
     //   // gas: 124500 // adjust as necessary
     // },
+    mumbai: {
+      url: POLYGON_RPC_URL,
+      chainId: 80001,
+      accounts: [POLYGON_PRIV_KEY],
+      // gasPrice: 80000000, // adjust as necessary
+      // gas: 124500 // adjust as necessary
+    },
   },
   solidity: {
     version: "0.8.17",
@@ -52,7 +62,7 @@ const config: HardhatUserConfig = {
   },
 
   etherscan: {
-    apiKey: SEPOLIA_API_KEY,
+    apiKey: POLYGON_API_KEY,
     //   constructorArguments: [owners, numConfirmationsRequired],
   },
 };

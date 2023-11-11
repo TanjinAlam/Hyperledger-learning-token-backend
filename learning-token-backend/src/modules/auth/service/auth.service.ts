@@ -31,8 +31,10 @@ export class AuthService {
         email,
         password,
         publicAddress,
-        type
-    }: RegisterRequestDto) {
+        type,
+        latitude,
+        longitude
+    }: any) {
         console.log(type)
         if (type == 'Admin') {
             const user = new Admin()
@@ -50,13 +52,13 @@ export class AuthService {
                 updatedAt: registeredUser.updatedAt
             }
         } else if (type == 'Institution') {
-            console.log('HERE')
             const user = new Institution()
             user.name = name
             user.email = email
             user.publicAddress = publicAddress
             user.password = this.jwtService.encodePassword(password)
-            console.log('user', user)
+            user.latitude = latitude
+            user.longitude = longitude
             const registeredUser = await this.institutionRepository.save(user)
             return {
                 id: registeredUser.id,
@@ -67,13 +69,13 @@ export class AuthService {
                 updatedAt: registeredUser.updatedAt
             }
         } else if (type == 'Learner') {
-            console.log('HERE')
             const user = new Learner()
             user.name = name
             user.email = email
             user.publicAddress = publicAddress
             user.password = this.jwtService.encodePassword(password)
-            console.log('user', user)
+            user.latitude = latitude
+            user.longitude = longitude
             const registeredUser = await this.learnerRepository.save(user)
             return {
                 id: registeredUser.id,
@@ -84,13 +86,11 @@ export class AuthService {
                 updatedAt: registeredUser.updatedAt
             }
         } else if (type == 'Instructor') {
-            console.log('HERE')
             const user = new Instructor()
             user.name = name
             user.email = email
             user.publicAddress = publicAddress
             user.password = this.jwtService.encodePassword(password)
-            console.log('user', user)
             const registeredUser = await this.insturctorRepository.save(user)
             return {
                 id: registeredUser.id,

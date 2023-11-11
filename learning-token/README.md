@@ -24,7 +24,7 @@ npx hardhat run scripts/DeployLocalHardhat.ts --network localhost
 
 ```shell
 npx hardhat compile
-npx hardhat run scripts/DeployLearningToken.ts --network sepolia
-npx hardhat verify --network sepolia <DEPLOYED_CONTRACT_ADDRESS>
+npx hardhat run scripts/DeployLive.ts --network mumbai
+npx hardhat verify --network mumbai <DEPLOYED_CONTRACT_ADDRESS>
 ```
 

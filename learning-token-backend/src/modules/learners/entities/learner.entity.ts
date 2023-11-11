@@ -40,6 +40,12 @@ export class Learner extends BaseEntity {
     @Column({ type: 'varchar', length: 50, nullable: true, unique: true })
     publicAddress: string
 
+    @Column({ type: 'varchar', length: 50, nullable: true })
+    latitude: string
+
+    @Column({ type: 'varchar', length: 50, nullable: true })
+    longitude: string
+
     @CreateDateColumn()
     createdAt: Date
 
