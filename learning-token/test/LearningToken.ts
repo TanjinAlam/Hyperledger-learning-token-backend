@@ -13,23 +13,36 @@ describe("LearningTokenContract", function () {
     instructor1Address: any,
     instructor2Wallet: any,
     instructor2Address: any,
+    instructor3Wallet: any,
+    instructor3Address: any,
     learner1Wallet: any,
     learner1Address: any,
     learner2Wallet: any,
     learner2Address: any,
+    learner3Wallet: any,
+    learner3Address: any,
     randomUserWallet: any,
     randomUserAddress: any,
     learnerAddress: any;
+  const institutionLatitude = "23.8882748"
+  const institutionLongituide = "903880846"
+  const learnerLatittude = "23.8669432"
+  const learnerLongitude = "90.4070788" 
+  const learner2Latittude = "23.6345742"
+  const learner2Longitude = "-102.5939836" 
   const institutionName = "MIT";
   const instructorName = "Alfenso";
   const learner1Name = "Piash";
   const learner2Name = "Tanjin";
+  const learner3Name = "Pinu";
   const courseName = "CS50";
   const totalSupply = 100;
   const courseId = 0;
   const inistitution1Id = 0;
   const instructor1Id = 0;
   const learner1Id = 0;
+  const learner2Id = 1;
+  const learner3Id = 2;
   const course1Id = 0;
   const tokenId = 0;
   const fieldOfKnowledge = "Programming";
@@ -58,7 +71,11 @@ describe("LearningTokenContract", function () {
     randomUserAddress = accounts[5].address;
     instructor2Wallet = accounts[6];
     instructor2Address = accounts[6].address;
-    learnerAddress = [learner1Address];
+    instructor3Wallet = accounts[7];
+    instructor3Address = accounts[7].address;
+    learner3Wallet = accounts[4];
+    learner3Address = accounts[4].address;
+    learnerAddress = [learner1Address, learner2Address, learner3Address];
 
     const LearningToken = await ethers.getContractFactory("LearningToken");
     learningTokenInstance = await LearningToken.deploy();
@@ -73,7 +90,9 @@ describe("LearningTokenContract", function () {
     await learningTokenInstance.registerInstitution(
       institutionName,
       institutionAddress,
-      currentTimestamp
+      currentTimestamp,
+      institutionLatitude,
+      institutionLongituide
     );
     const event = await learningTokenInstance.queryFilter(
       "InstitutionRegistered"
@@ -92,7 +111,9 @@ describe("LearningTokenContract", function () {
         RandomUserWallet.registerInstitution(
           institutionName,
           institutionAddress,
-          currentTimestamp
+          currentTimestamp,
+          institutionLatitude,
+          institutionLongituide
         )
       ).to.be.revertedWith("Ownable: caller is not the owner");
     } catch (error: any) {}
@@ -131,7 +152,7 @@ describe("LearningTokenContract", function () {
       expect(event[0].args.institutionName).to.be.equal(institutionName);
       expect(event[0].args.registeredTime).to.be.equal(currentTimestamp);
     } catch (error: any) {
-      console.log("ERROR", error);
+      // console.log("ERROR", error);
     }
   });
 
@@ -169,13 +190,14 @@ describe("LearningTokenContract", function () {
     }
   });
 
-  it("Should register a learner as individual entity", async function () {
+  it("Should register a learner one as individual entity", async function () {
     try {
       const Learner1Wallet = await learningTokenInstance.connect(
         learner1Wallet
       );
       const currentTimestamp = Math.floor(Date.now() / 1000);
-      await Learner1Wallet.registerLearner(learner1Name, currentTimestamp);
+      await Learner1Wallet.registerLearner(learner1Name, currentTimestamp, learnerLatittude, learnerLongitude);
+      await Learner1Wallet.wait;
       const event = await Learner1Wallet.queryFilter("LearnerRegistered");
       expect(event[0].args.learnerId).to.be.equal(0);
       expect(event[0].args.learnerName).to.be.equal(learner1Name);
@@ -184,6 +206,40 @@ describe("LearningTokenContract", function () {
       console.log("ERROR", error);
     }
   });
+
+  it("Should register a learner two as individual entity", async function () {
+    try {
+      const Learner2Wallet = await learningTokenInstance.connect(
+        learner2Wallet
+      );
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      await Learner2Wallet.registerLearner(learner1Name, currentTimestamp, learner2Latittude, learner2Longitude);
+      await Learner2Wallet.wait;
+      const event = await Learner2Wallet.queryFilter("LearnerRegistered");
+      expect(event[1].args.learnerId).to.be.equal(1);
+      expect(event[1].args.learnerName).to.be.equal(learner1Name);
+      expect(event[1].args.registeredTime).to.be.equal(currentTimestamp);
+    } catch (error: any) {
+      console.log("Learner2Wallet", error);
+    }
+  });
+
+  it("Should register a learner three as individual entity", async function () {
+    try {
+      const Learner3Wallet = await learningTokenInstance.connect(
+        learner3Wallet
+      );
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      await Learner3Wallet.registerLearner(learner3Name, currentTimestamp, learnerLatittude, learnerLongitude);
+      const event = await Learner3Wallet.queryFilter("LearnerRegistered");
+      expect(event[2].args.learnerId).to.be.equal(2);
+      expect(event[2].args.learnerName).to.be.equal(learner3Name);
+      expect(event[2].args.registeredTime).to.be.equal(currentTimestamp);
+    } catch (error: any) {
+      console.log("ERROR", error);
+    }
+  });
+
   it("Should create a course by registered instructor under registered institution", async function () {
     try {
       const InstructorWallet = await learningTokenInstance.connect(
@@ -206,14 +262,13 @@ describe("LearningTokenContract", function () {
       console.log("ERROR", error);
     }
   });
-  //   //   //   create a failed transaction of above
   it("Should not add already registered learner to existing course by a valid instructor", async function () {
     try {
       const Learner2Wallet = await learningTokenInstance.connect(
         learner2Wallet
       );
       const currentTimestamp = Math.floor(Date.now() / 1000);
-      await Learner2Wallet.registerLearner(learner2Name, currentTimestamp);
+      await Learner2Wallet.registerLearner(learner2Name, currentTimestamp, learner2Latittude, learner2Longitude);
       const InstructorWallet = await learningTokenInstance.connect(
         instructor1Wallet
       );
@@ -230,75 +285,14 @@ describe("LearningTokenContract", function () {
         )
       ).to.be.revertedWith("learner already in the course");
     } catch (error: any) {
-      console.log("ERROR", error);
+      // console.log("ERROR", error);
     }
   });
 
-  //   //define metadata
-  //   it("Should set token metadata from the assigned instructor", async function () {
-  //     try {
-  //       const InstructorWallet = await studentAttendance.connect(
-  //         instructor1Wallet
-  //       );
-  //       const currentTimestamp = Math.floor(Date.now() / 1000);
-  //       await InstructorWallet.setTokenMetadata(
-  //         courseId,
-  //         inistitution1Id,
-  //         instructor1Id,
-  //         fieldOfKnowledge,
-  //         skillName,
-  //         institutionAddress,
-  //         currentTimestamp
-  //       );
-  //       const event = await InstructorWallet.queryFilter("TokenMetadataCreated");
-  //       expect(event[0].args.courseId).to.be.equal(course1Id);
-  //       expect(event[0].args.courseTokenId).to.be.equal(course1Id);
-  //       expect(event[0].args.institutionId).to.be.equal(inistitution1Id);
-  //       expect(event[0].args.instructorId).to.be.equal(instructor1Id);
-  //       expect(event[0].args.skillName).to.be.equal(skillName);
-  //       expect(event[0].args._fieldOfKnowledge).to.be.equal(fieldOfKnowledge);
-  //       expect(event[0].args.registeredTime).to.be.equal(currentTimestamp);
-  //     } catch (error: any) {
-  //       console.log("ERROR", error);
-  //     }
-  //   });
-
-  //   //transfer token to course learner
-  //   it("Should transfer skillToken to course learner", async function () {
-  //     try {
-  //       //   const courseId = intToBytesData(course1Id);
-  //       const currentTimestamp = Math.floor(Date.now() / 1000);
-  //       const InstructorWallet = await learningTokenInstance.connect(
-  //         instructor1Wallet
-  //       );
-  //       //   console.log(
-  //       //     "HERE====",
-  //       //     await studentAttendance.getProgramLearnerDetails(0, learner1Address)
-  //       //   );
-  //       await InstructorWallet.mintSkillToken(
-  //         0,
-  //         amount,
-  //         courseId,
-  //         amount,
-  //         currentTimestamp,
-  //         fieldOfKnowledge,
-  //         skillName
-  //       );
-  //       const event = await InstructorWallet.queryFilter("SkillTokenMinted");
-  //       expect(event[0].args.holderAddress).to.be.equal(learner1Address);
-  //       expect(event[0].args.tokenId).to.be.equal(tokenId);
-  //       expect(event[0].args.courseId).to.be.equal(courseId);
-  //       expect(event[0].args.amount).to.be.equal(amount);
-  //       expect(event[0].args.fieldOfKnowledge).to.be.equal(fieldOfKnowledge);
-  //       expect(event[0].args.skillName).to.be.equal(skillName);
-  //     } catch (error: any) {
-  //       console.log("ERROR", error);
-  //     }
-  //   });
-
+  //   define metadata
   //   transfer token to course learner
-
-  // start from here
+  //   transfer token to course learner
+  // ---------------------------  Learning Token Mint TestCase --------------------------
 
   it("Should mint score token to course learner", async function () {
     try {
@@ -318,6 +312,7 @@ describe("LearningTokenContract", function () {
       );
       const event = await InstructorWallet.queryFilter("ScoreTokenMinted");
       expect(event[0].args.holderAddress).to.be.equal(learner1Address);
+      //its one because create course also incrment tokenId
       expect(event[0].args.tokenId).to.be.equal(1);
       expect(event[0].args.courseId).to.be.equal(0);
       expect(event[0].args.amount).to.be.equal(amount);
@@ -338,7 +333,7 @@ describe("LearningTokenContract", function () {
   //       console.log("learnerBalance", learnerBalance);
   //       expect(learnerBalance).to.equal(1);
   //     } catch (error: any) {
-  //       console.log("ERROR", error);
+  //      // console.log("ERROR", error);
   //     }
   //   });
 
@@ -390,7 +385,9 @@ describe("LearningTokenContract", function () {
         0,
         amount,
         courseId,
-        currentTimestamp
+        currentTimestamp,
+        fieldOfKnowledge,
+        skillName
       );
       const event = await InstructorWallet.queryFilter("HelpingTokenMinted");
       expect(event[0].args.holderAddress).to.be.equal(learner1Address);
@@ -441,7 +438,7 @@ describe("LearningTokenContract", function () {
     }
   });
 
-  //transfer token to course learner
+  //   transfer token to course learner
   it("Should not transfer attendance token to anyone", async function () {
     try {
       //   const courseId = intToBytesData(course1Id);
@@ -470,7 +467,7 @@ describe("LearningTokenContract", function () {
         )
       ).to.be.revertedWith("safe transfers are disabled in this contract");
     } catch (error: any) {
-      //   console.log("ERROR", error);
+      //  // console.log("ERROR", error);
     }
   });
 
@@ -489,7 +486,9 @@ describe("LearningTokenContract", function () {
         0, //learnerId
         amount,
         courseId,
-        currentTimestamp
+        currentTimestamp,
+        fieldOfKnowledge,
+        skillName
       );
       const event = await InstructorWallet.queryFilter("AttendanceTokenMinted");
       expect(event[0].args.holderAddress).to.be.equal(learner1Address);
@@ -513,7 +512,8 @@ describe("LearningTokenContract", function () {
         0,
         amount,
         courseId,
-        currentTimestamp
+        currentTimestamp,
+        fieldOfKnowledge
       );
       const event = await InstructorWallet.queryFilter("HelpingTokenMinted");
       expect(event[0].args.holderAddress).to.be.equal(learner1Address);
@@ -548,6 +548,113 @@ describe("LearningTokenContract", function () {
       expect(event[0].args.amount).to.be.equal(amount);
       //   expect(event[0].args.courseId).to.be.equal(courseId);
       // Event assertions can verify that the arguments are the expected ones
+    } catch (error: any) {
+      console.log("ERROR", error);
+    }
+  });
+
+  // ---------------------------  Learning Token Batch Mint TestCase --------------------------
+  it("Should batch mint attendance token to course learners", async function () {
+    try {
+      //   const courseId = intToBytesData(course1Id);
+      const InstructorWallet = await learningTokenInstance.connect(
+        instructor1Wallet
+      );
+      //   console.log(
+      //     "HERE====",
+      //     await studentAttendance.getProgramLearnerDetails(0, learner1Address)
+      //   );
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      await InstructorWallet.batchMintAttendanceToken(
+        [learner1Id, learner2Id],
+        [1, 1],
+        courseId,
+        currentTimestamp,
+        fieldOfKnowledge,
+        courseName
+      );
+      const event = await InstructorWallet.queryFilter("AttendanceTokenMinted");
+      expect(event[0].args.holderAddress).to.be.equal(learner1Address);
+      expect(event[0].args.tokenId).to.be.equal(2);
+      expect(event[0].args.courseId).to.be.equal(courseId);
+      expect(event[0].args.amount).to.be.equal(amount);
+    } catch (error: any) {
+      console.log("ERROR", error);
+    }
+  });
+
+  it("Should batch mint score token to course learners", async function () {
+    try {
+      //   const courseId = intToBytesData(course1Id);
+      const InstructorWallet = await learningTokenInstance.connect(
+        instructor1Wallet
+      );
+
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      await InstructorWallet.batchMintScoreToken(
+        [learner1Id, learner2Id],
+        [1, 1],
+        courseId,
+        currentTimestamp,
+        fieldOfKnowledge,
+        skillName
+      );
+      const event = await InstructorWallet.queryFilter("ScoreTokenMinted");
+      expect(event[0].args.holderAddress).to.be.equal(learner1Address);
+      expect(event[0].args.tokenId).to.be.equal(1);
+      expect(event[0].args.courseId).to.be.equal(courseId);
+      expect(event[0].args.amount).to.be.equal(amount);
+    } catch (error: any) {
+      console.log("ERROR", error);
+    }
+  });
+
+  it("Should batch mint helping token to course learners", async function () {
+    try {
+      //   const courseId = intToBytesData(course1Id);
+      const InstructorWallet = await learningTokenInstance.connect(
+        instructor1Wallet
+      );
+
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      await InstructorWallet.batchMintHelpingToken(
+        [learner1Id, learner2Id],
+        [1, 1],
+        courseId,
+        currentTimestamp,
+        fieldOfKnowledge,
+        skillName
+      );
+      const event = await InstructorWallet.queryFilter("HelpingTokenMinted");
+      expect(event[0].args.holderAddress).to.be.equal(learner1Address);
+      expect(event[0].args.tokenId).to.be.equal(0);
+      expect(event[0].args.courseId).to.be.equal(courseId);
+      expect(event[0].args.amount).to.be.equal(amount);
+    } catch (error: any) {
+      console.log("ERROR", error);
+    }
+  });
+
+  it("Should batch mint instructor score token to course learners", async function () {
+    try {
+      //   const courseId = intToBytesData(course1Id);
+      const InstructorWallet = await learningTokenInstance.connect(
+        instructor1Wallet
+      );
+
+      const currentTimestamp = Math.floor(Date.now() / 1000);
+      await InstructorWallet.mintInstructorScoreToken(
+        [learner1Id, learner2Id],
+        [1, 1],
+        courseId,
+        currentTimestamp,
+        fieldOfKnowledge
+      );
+      const event = await InstructorWallet.queryFilter("HelpingTokenMinted");
+      expect(event[0].args.holderAddress).to.be.equal(learner1Address);
+      expect(event[0].args.tokenId).to.be.equal(0);
+      expect(event[0].args.courseId).to.be.equal(courseId);
+      expect(event[0].args.amount).to.be.equal(amount);
     } catch (error: any) {
       console.log("ERROR", error);
     }

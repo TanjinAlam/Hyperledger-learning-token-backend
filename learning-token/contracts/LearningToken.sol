@@ -7,8 +7,9 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 // import "@openzeppelin/contracts/access/AccessControl.sol";
 // import "hardhat/console.sol";
 
+
 contract LearningToken is ERC1155, Ownable{
-    //define all the event here
+    //define all the event here∏
     event Approval(address indexed owner, address indexed spender,uint256 tokenId,  uint256 value);
     event InstitutionRegistered(uint256 indexed institutionId, string institutionName, uint registeredTime);
     event InstructorRegistered(uint256 indexed instructorId, string instructorName, uint256 registeredTime);
@@ -22,6 +23,7 @@ contract LearningToken is ERC1155, Ownable{
     event ScoreTokenMinted(address indexed holderAddress,uint256 indexed tokenId ,uint256 indexed courseId, uint256 amount, string fieldOfKnowledge, string skillName);
     event HelpingTokenMinted(address indexed holderAddress,uint256 indexed tokenId ,uint256 indexed courseId, uint256 amount);
     event InstructorScoringTokenTransfered(address indexed from, address indexed to, uint256 indexed tokenId, uint256 amount, uint256 courseId);
+    event InstructorScoreTokenMinted(address indexed holderAddress,uint256 indexed tokenId ,uint256 indexed courseId, uint256 amount);
 
     using Counters for Counters.Counter;
     Counters.Counter public courseId;
@@ -32,16 +34,16 @@ contract LearningToken is ERC1155, Ownable{
 
 
 
-    //Institution Struct 
     struct Institutions {
         uint256 _institutionId;
         string institutionName;
         mapping(address => InstitutionInstructors) institutionInstructors;
         uint256 createdAt;
         bool status;
+        string lat;
+        string long;
     }
 
-    //Institutional Instructor Struct 
     struct InstitutionInstructors {
         uint256 _institutionId;
         uint256 _instructorId;
@@ -50,18 +52,18 @@ contract LearningToken is ERC1155, Ownable{
         uint256 createdAt;
     }
 
-    //Instructor Struct 
     struct Instructors {
         uint256 _instructorId;
         string instructorName;
         uint256 createdAt;
     }
 
-    //Learner Struct || How to check validity of learner
     struct Learners {
         uint256 _learnerId;
         string learnerName;
         uint256 createdAt;
+        string lat;
+        string long;
     }
 
     struct CourseLearners {
@@ -145,8 +147,8 @@ contract LearningToken is ERC1155, Ownable{
 
 
     //register learner || learner can be or cant be part of a close circuit 
-    function registerLearner(string memory _learnerName,uint256 createdAt) external {
-        learners[msg.sender] = Learners(learnerId.current() ,_learnerName, createdAt);
+    function registerLearner(string memory _learnerName,uint256 createdAt, string memory latitude, string memory longittude) external {
+        learners[msg.sender] = Learners(learnerId.current() ,_learnerName, createdAt,latitude, longittude);
         emit LearnerRegistered(learnerId.current(), _learnerName, createdAt);
         learnerId.increment();
     }
@@ -164,10 +166,12 @@ contract LearningToken is ERC1155, Ownable{
     }
 
     //register institution || can be called by onlyowner of contract
-    function registerInstitution(string memory _institutionName,address _institutionAddress, uint256 createdAt) external onlyOwner {
+    function registerInstitution(string memory _institutionName,address _institutionAddress, uint256 createdAt, string memory latitude, string memory longittude) external onlyOwner {
         institutions[_institutionAddress]._institutionId = instiutionId.current();
         institutions[_institutionAddress].institutionName = _institutionName;
         institutions[_institutionAddress].createdAt = createdAt;
+        institutions[_institutionAddress].lat = latitude;
+        institutions[_institutionAddress].long = longittude;
 
         // Initialize the mapping for institutionInstructors
         institutions[_institutionAddress].institutionInstructors[_institutionAddress]._institutionId = institutions[_institutionAddress]._institutionId;
@@ -341,7 +345,9 @@ contract LearningToken is ERC1155, Ownable{
         uint256 _learnerId,
         uint256 amount,
         uint256 _courseId,
-        uint256 _createdAt
+        uint256 _createdAt,
+        string memory _fieldOfKnowledge,
+        string memory _skill
     ) public checkTokenTransferIsAllowed(_courseId) {
         Courses storage _course = courses[_courseId];
         uint256[] memory _tempLearnerId = new uint256[](1);
@@ -358,8 +364,8 @@ contract LearningToken is ERC1155, Ownable{
             _instructorId: _course._instructorId,
             createdAt: _createdAt,
             courseId: _courseId,
-            fieldOfKnowledge: "",
-            skill: ""
+            fieldOfKnowledge: _fieldOfKnowledge,
+            skill: _skill
         });
         
         _course.tokenMetadataArray.push(newTokenMetadata);
@@ -369,24 +375,26 @@ contract LearningToken is ERC1155, Ownable{
 
     function batchMintAttendanceToken(
         uint256[] memory _learnerIds,
-        uint256 amount,
+        uint256[] memory amount,
         uint256 _courseId,
-        uint256 _createdAt
+        uint256 _createdAt,
+        string memory _fieldOfKnowledge,
+        string memory _skill
     ) public isLearnerWithinCourse(_learnerIds, _courseId) checkTokenTransferIsAllowed(_courseId) {
         address[] memory _learnersAddress = getLearnersAddress(_learnerIds, _courseId);
         //check all learners are within the course or not with active status
             for(uint256 i = 0; i< _learnersAddress.length; i++ ){
-                _mint(_learnersAddress[i], courseTokenCounter.current(), amount , "0x");
+                _mint(_learnersAddress[i], courseTokenCounter.current(), amount[i] , "0x");
                     TokenMetadatas memory newTokenMetadata = TokenMetadatas({
                     _institutionId: courses[_courseId]._institutionId,
                     _instructorId: courses[_courseId]._instructorId,
                     createdAt: _createdAt,
                     courseId: _courseId,
-                    fieldOfKnowledge: "",
-                    skill: ""
+                    fieldOfKnowledge: _fieldOfKnowledge,
+                    skill: _skill
                 });
                 courses[_courseId].tokenMetadataArray.push(newTokenMetadata);
-                emit AttendanceTokenMinted(_learnersAddress[i], courseTokenCounter.current(), _courseId, amount);
+                emit AttendanceTokenMinted(_learnersAddress[i], courseTokenCounter.current(), _courseId, amount[i]);
                 courseTokenCounter.increment();
             }
     }
@@ -447,7 +455,7 @@ contract LearningToken is ERC1155, Ownable{
 
     function batchMintScoreToken(
         uint256[] memory _learnerIds,
-        uint256 amount,
+        uint256[] memory amount,
         uint256 _courseId,
         uint256 _createdAt,
         string memory _fieldOfKnowledge,
@@ -456,7 +464,7 @@ contract LearningToken is ERC1155, Ownable{
         address[] memory _learnersAddress = getLearnersAddress(_learnerIds, _courseId);
         Courses storage _course = courses[_courseId];
         for(uint256 i = 0; i< _learnersAddress.length; i++ ){
-            _mint(_learnersAddress[i], courseTokenCounter.current(), amount , "0x");
+            _mint(_learnersAddress[i], courseTokenCounter.current(), amount[i] , "0x");
                 TokenMetadatas memory newTokenMetadata = TokenMetadatas({
                 _institutionId: _course._institutionId,
                 _instructorId: _course._instructorId,
@@ -466,7 +474,7 @@ contract LearningToken is ERC1155, Ownable{
                 skill: _skillName
             });
             _course.tokenMetadataArray.push(newTokenMetadata);
-            emit ScoreTokenMinted(_learnersAddress[i], courseTokenCounter.current(), _courseId, amount, _fieldOfKnowledge, _skillName);
+            emit ScoreTokenMinted(_learnersAddress[i], courseTokenCounter.current(), _courseId, amount[i], _fieldOfKnowledge, _skillName);
             courseTokenCounter.increment();
         }
     }
@@ -492,7 +500,9 @@ contract LearningToken is ERC1155, Ownable{
         uint256 _learnerId,
         uint256 amount,
         uint256 _courseId,
-        uint256 _createdAt
+        uint256 _createdAt,
+        string memory _fieldOfKnowledge,
+        string memory _skill
     ) public checkTokenTransferIsAllowed(_courseId) {
         Courses storage _course = courses[_courseId];
         uint256[] memory _tempLearnerId = new uint256[](1);
@@ -504,35 +514,39 @@ contract LearningToken is ERC1155, Ownable{
             _instructorId: _course._instructorId,
             createdAt: _createdAt,
             courseId: _courseId,
-            fieldOfKnowledge: "",
-            skill: ""
+            fieldOfKnowledge: _fieldOfKnowledge,
+            skill: _skill
         });
         
         _course.tokenMetadataArray.push(newTokenMetadata);
         emit HelpingTokenMinted(_learnersAddress[0], _course.courseHelpingTokneId, _courseId, amount);
+        // _course.courseHelpingTokneId += _course.courseHelpingTokneId;
     }
 
 
     function batchMintHelpingToken(
         uint256[] memory _learnerIds,
-        uint256 amount,
+        uint256[] memory amount,
         uint256 _courseId,
-        uint256 _createdAt
+        uint256 _createdAt,
+        string memory _fieldOfKnowledge,
+        string memory _skill
     ) public checkTokenTransferIsAllowed(_courseId) {
         address[] memory _learnersAddress = getLearnersAddress(_learnerIds, _courseId);
         Courses storage _course = courses[_courseId];
         for(uint256 i = 0; i< _learnersAddress.length; i++ ){
-            _mint(_learnersAddress[i], _course.courseHelpingTokneId, amount , "0x");
+            _mint(_learnersAddress[i], _course.courseHelpingTokneId, amount[i] , "0x");
                 TokenMetadatas memory newTokenMetadata = TokenMetadatas({
                 _institutionId: _course._institutionId,
                 _instructorId: _course._instructorId,
                 createdAt: _createdAt,
                 courseId: _courseId,
-                fieldOfKnowledge: "",
-                skill: ""
+                fieldOfKnowledge: _fieldOfKnowledge,
+                skill: _skill
             });
             _course.tokenMetadataArray.push(newTokenMetadata);
-            emit HelpingTokenMinted(_learnersAddress[i], _course.courseHelpingTokneId, _courseId, amount);
+            emit HelpingTokenMinted(_learnersAddress[i], _course.courseHelpingTokneId, _courseId, amount[i]);
+            // courseTokenCounter.increment();
         }
     }
 
@@ -559,7 +573,8 @@ contract LearningToken is ERC1155, Ownable{
         uint256 _learnerId,
         uint256 amount,
         uint256 _courseId,
-        uint256 _createdAt
+        uint256 _createdAt,
+        string memory _fieldOfKnowledge
     ) public checkTokenTransferIsAllowed(_courseId) {
         Courses storage _course = courses[_courseId];
         uint256[] memory _tempLearnerId = new uint256[](1);
@@ -571,36 +586,36 @@ contract LearningToken is ERC1155, Ownable{
             _instructorId: _course._instructorId,
             createdAt: _createdAt,
             courseId: _courseId,
-            fieldOfKnowledge: "",
+            fieldOfKnowledge: _fieldOfKnowledge,
             skill: ""
         });
-        
         _course.tokenMetadataArray.push(newTokenMetadata);
-        emit HelpingTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId, amount);
+        emit InstructorScoreTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId,amount);
         courseTokenCounter.increment();
     }
 
 
     function batchMintInstructorScoreToken(
         uint256[] memory _learnerIds,
-        uint256 amount,
+        uint256[] memory amount,
         uint256 _courseId,
-        uint256 _createdAt
+        uint256 _createdAt,
+        string memory _fieldOfKnowledge
     ) public checkTokenTransferIsAllowed(_courseId) {
         address[] memory _learnersAddress = getLearnersAddress(_learnerIds, _courseId);
         Courses storage _course = courses[_courseId];
-        for(uint256 i = 0; i< _learnersAddress.length; i++ ){
-            _mint(_learnersAddress[i], courseTokenCounter.current(), amount , "0x");
+        for(uint256 i = 0; i < _learnersAddress.length; i++ ){
+            _mint(_learnersAddress[i], courseTokenCounter.current(), amount[i] , "0x");
                 TokenMetadatas memory newTokenMetadata = TokenMetadatas({
                 _institutionId: _course._institutionId,
                 _instructorId: _course._instructorId,
                 createdAt: _createdAt,
                 courseId: _courseId,
-                fieldOfKnowledge: "",
+                fieldOfKnowledge: _fieldOfKnowledge,
                 skill: ""
             });
             _course.tokenMetadataArray.push(newTokenMetadata);
-            emit HelpingTokenMinted(_learnersAddress[i], courseTokenCounter.current(), _courseId, amount);
+            emit InstructorScoreTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId, amount[i]);
             courseTokenCounter.increment();
         }
     }
@@ -654,12 +669,12 @@ contract LearningToken is ERC1155, Ownable{
         return coursesByAddress[msg.sender];
     }
 
-    // Function to get the courses associated with the caller's address
+    // Function to get the institution associated with the caller's address
     function getInstitutionBySender(address institutionAddress) public view returns (InstitutionMapping memory) {
         return institutionByAddress[institutionAddress];
     }
 
-    // Function to get the courses associated with the caller's address
+    // Function to get the instructorId associated with the caller's address
     function getInstructorIdBySender() public view returns (InstructorMapping memory) {
         return instructorMapping[msg.sender];
     }

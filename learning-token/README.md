@@ -1,11 +1,10 @@
-# Sample Hardhat Project
+# Learning Token
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Run the command on a terminal to start hardhat network
+Run the command on a terminal to start hardhat network && run the testcases
 
 ```
 npx hardhat node
+npx hardhat test test/LearningToken.ts --network localhost
 ```
 
 Follow below commands for deploying the contract on hardhat network:
