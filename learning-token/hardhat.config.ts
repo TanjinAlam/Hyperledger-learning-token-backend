@@ -11,7 +11,13 @@ import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import dotenv from "dotenv";
 dotenv.config();
-const { RPC_URL_BESU, SUPER_ADMIN_PRI_KEY }: any = process.env;
+const {
+  RPC_URL_BESU,
+  SUPER_ADMIN_PRI_KEY,
+  SEPOLIA_PRIV_KEY,
+  SEPOLIA_RPC_URL,
+  SEPOLIA_API_KEY,
+}: any = process.env;
 const config: HardhatUserConfig = {
   // solidity: "0.8.17",
   networks: {
@@ -27,16 +33,10 @@ const config: HardhatUserConfig = {
     //   blockGasLimit: 8000000000,
     //   timeout: 1800000,
     // },
-    // besu: {
-    //   url: "",
-    //   accounts: [PRIV_KEY_1],
-    //   // gasPrice: 80000000, // adjust as necessary
-    //   // gas: 124500 // adjust as necessary
-    // },
-    // mumbai: {
-    //   url: POLYGON_RPC_URL,
-    //   chainId: 80001,
-    //   accounts: [PRIV_KEY_3],
+    // sepolia: {
+    //   url: SEPOLIA_RPC_URL,
+    //   chainId: 11155111,
+    //   accounts: [SEPOLIA_PRIV_KEY],
     //   // gasPrice: 80000000, // adjust as necessary
     //   // gas: 124500 // adjust as necessary
     // },
@@ -51,10 +51,10 @@ const config: HardhatUserConfig = {
     },
   },
 
-  //   etherscan: {
-  //     apiKey: POLYGONSCAN_API_KEY,
-  //     constructorArguments: [owners, numConfirmationsRequired],
-  //   },
+  etherscan: {
+    apiKey: SEPOLIA_API_KEY,
+    //   constructorArguments: [owners, numConfirmationsRequired],
+  },
 };
 
 export default config;

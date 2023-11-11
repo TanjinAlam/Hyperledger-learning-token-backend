@@ -19,5 +19,12 @@ npx hardhat node
 npx hardhat test
 sol2uml class ./contracts/LearningToken.sol
 REPORT_GAS=true npx hardhat test
-npx hardhat run scripts/DeployLearningToken.ts --network localhost
+npx hardhat run scripts/DeployLocalHardhat.ts --network localhost
 ```
+
+```shell
+npx hardhat compile
+npx hardhat run scripts/DeployLearningToken.ts --network sepolia
+npx hardhat verify --network sepolia <DEPLOYED_CONTRACT_ADDRESS>
+```
+

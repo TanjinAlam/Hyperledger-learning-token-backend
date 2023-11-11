@@ -24,12 +24,12 @@ describe("LearningTokenContract", function () {
     randomUserWallet: any,
     randomUserAddress: any,
     learnerAddress: any;
-  const institutionLatitude = "23.8882748"
-  const institutionLongituide = "903880846"
-  const learnerLatittude = "23.8669432"
-  const learnerLongitude = "90.4070788" 
-  const learner2Latittude = "23.6345742"
-  const learner2Longitude = "-102.5939836" 
+  const institutionLatitude = "23.8882748";
+  const institutionLongituide = "903880846";
+  const learnerLatittude = "23.8669432";
+  const learnerLongitude = "90.4070788";
+  const learner2Latittude = "23.6345742";
+  const learner2Longitude = "-102.5939836";
   const institutionName = "MIT";
   const instructorName = "Alfenso";
   const learner1Name = "Piash";
@@ -196,7 +196,12 @@ describe("LearningTokenContract", function () {
         learner1Wallet
       );
       const currentTimestamp = Math.floor(Date.now() / 1000);
-      await Learner1Wallet.registerLearner(learner1Name, currentTimestamp, learnerLatittude, learnerLongitude);
+      await Learner1Wallet.registerLearner(
+        learner1Name,
+        currentTimestamp,
+        learnerLatittude,
+        learnerLongitude
+      );
       await Learner1Wallet.wait;
       const event = await Learner1Wallet.queryFilter("LearnerRegistered");
       expect(event[0].args.learnerId).to.be.equal(0);
@@ -213,7 +218,12 @@ describe("LearningTokenContract", function () {
         learner2Wallet
       );
       const currentTimestamp = Math.floor(Date.now() / 1000);
-      await Learner2Wallet.registerLearner(learner1Name, currentTimestamp, learner2Latittude, learner2Longitude);
+      await Learner2Wallet.registerLearner(
+        learner1Name,
+        currentTimestamp,
+        learner2Latittude,
+        learner2Longitude
+      );
       await Learner2Wallet.wait;
       const event = await Learner2Wallet.queryFilter("LearnerRegistered");
       expect(event[1].args.learnerId).to.be.equal(1);
@@ -230,7 +240,12 @@ describe("LearningTokenContract", function () {
         learner3Wallet
       );
       const currentTimestamp = Math.floor(Date.now() / 1000);
-      await Learner3Wallet.registerLearner(learner3Name, currentTimestamp, learnerLatittude, learnerLongitude);
+      await Learner3Wallet.registerLearner(
+        learner3Name,
+        currentTimestamp,
+        learnerLatittude,
+        learnerLongitude
+      );
       const event = await Learner3Wallet.queryFilter("LearnerRegistered");
       expect(event[2].args.learnerId).to.be.equal(2);
       expect(event[2].args.learnerName).to.be.equal(learner3Name);
@@ -268,7 +283,12 @@ describe("LearningTokenContract", function () {
         learner2Wallet
       );
       const currentTimestamp = Math.floor(Date.now() / 1000);
-      await Learner2Wallet.registerLearner(learner2Name, currentTimestamp, learner2Latittude, learner2Longitude);
+      await Learner2Wallet.registerLearner(
+        learner2Name,
+        currentTimestamp,
+        learner2Latittude,
+        learner2Longitude
+      );
       const InstructorWallet = await learningTokenInstance.connect(
         instructor1Wallet
       );

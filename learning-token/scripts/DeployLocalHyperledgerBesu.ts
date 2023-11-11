@@ -1,164 +1,5 @@
-// import { ethers } from "hardhat";
 
-// // async function main() {
-// //   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-// //   const unlockTime = currentTimestampInSeconds + 60;
-
-// //   const lockedAmount = ethers.utils.parseEther("0.001");
-
-// //   const Lock = await ethers.getContractFactory("Lock");
-// //   const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
-
-// //   await lock.deployed();
-
-// //   console.log(
-// //     `Lock with ${ethers.utils.formatEther(lockedAmount)}ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
-// //   );
-// // }
-
-// async function main() {
-//   let learningTokenInstance: any,
-//     events: any,
-//     superadminWallet: any,
-//     superadminAddress: any,
-//     institutionWallet: any,
-//     institutionAddress: any,
-//     instructor1Wallet: any,
-//     instructor1Address: any,
-//     instructor2Wallet: any,
-//     instructor2Address: any,
-//     learner1Wallet: any,
-//     learner1Address: any,
-//     learner2Wallet: any,
-//     learner2Address: any,
-//     randomUserWallet: any,
-//     randomUserAddress: any,
-//     learnerAddress: any;
-//   const institutionName = "MIT";
-//   const instructorName = "Alfenso";
-//   const learner1Name = "Piash";
-//   const learner2Name = "Tanjin";
-//   const courseName = "CS50";
-//   const totalSupply = 100;
-//   const courseId = 0;
-//   const inistitution1Id = 0;
-//   const instructor1Id = 0;
-//   const learner1Id = 0;
-//   const course1Id = 0;
-//   const tokenId = 0;
-//   const fieldOfKnowledge = "Programming";
-//   const skillName = "Solidity";
-//   const amount = 1;
-//   const accounts = await ethers.getSigners();
-//   superadminAddress = accounts[0].address;
-//   institutionWallet = accounts[1];
-//   institutionAddress = accounts[1].address;
-//   instructor1Wallet = accounts[2];
-//   instructor1Address = accounts[2].address;
-//   learner1Wallet = accounts[3];
-//   learner1Address = accounts[3].address;
-//   learner2Wallet = accounts[4];
-//   learner2Address = accounts[4].address;
-//   randomUserWallet = accounts[5];
-//   randomUserAddress = accounts[5].address;
-//   instructor2Wallet = accounts[6];
-//   instructor2Address = accounts[6].address;
-//   learnerAddress = [learner1Address];
-//   const currentTimestamp = Math.floor(Date.now() / 1000);
-
-//   const LearningToken = await ethers.getContractFactory("LearningToken");
-//   const learningToken = await LearningToken.deploy();
-
-//   await learningToken.deployed();
-
-//   console.log(
-//     `StudentAttendance Contract deployed to ${learningToken.address}`
-//   );
-
-//   console.log(
-//     `StudentAttendance Contract deployed to ${await learningToken.owner()}`
-//   );
-
-//   const InstructorWallet = learningToken.connect(instructor1Wallet);
-
-//   await InstructorWallet.registerInstructor(
-//     instructorName,
-//     instructor1Address,
-//     currentTimestamp
-//   );
-
-//   await learningToken.registerInstitution(
-//     institutionName,
-//     institutionAddress,
-//     currentTimestamp
-//   );
-//   //call from institution
-
-//   const InstitutionWallet = learningToken.connect(institutionWallet);
-
-//   await InstitutionWallet.addInstructorToInstitution(
-//     instructor1Address,
-//     currentTimestamp
-//   );
-
-//   const txResponse = await InstructorWallet.createCourse(
-//     institutionAddress,
-//     courseName,
-//     currentTimestamp,
-//     learnerAddress,
-//     {
-//       gasLimit: 500000, // Set an appropriate gas limit for your transaction
-//     }
-//   );
-
-//   // Wait for the transaction to be mined and get the transaction receipt
-//   const txReceipt = await txResponse.wait();
-
-//   if (txReceipt.status === 1) {
-//     console.log("Transaction was successful.");
-//   } else if (txReceipt.status === 0) {
-//     console.error("Transaction reverted.");
-//   } else {
-//     console.error("Transaction status is unknown.");
-//   }
-
-//   //   await InstructorWallet.createCourse(
-//   //     institutionAddress,
-//   //     courseName,
-//   //     currentTimestamp,
-//   //     learnerAddress
-//   //   );
-
-//   console.log(
-//     `StudentAttendance Contract deployed to ${await learningToken.getInstructorDetails(
-//       institutionAddress,
-//       instructor1Address
-//     )}`
-//   );
-
-//   //   await learningToken.registerLearner(
-//   //     learner1Address,
-//   //     learner1Name,
-//   //     currentTimestamp
-//   //   );
-
-//   //   await InstructorWallet.mintAttendanceToken(
-//   //     0,
-//   //     amount,
-//   //     courseId,
-//   //     currentTimestamp
-//   //   );
-// }
-
-// // We recommend this pattern to be able to use async/await everywhere
-// // and properly handle errors.
-// main().catch((error) => {
-//   console.error(error);
-//   process.exitCode = 1;
-// });
-
-/// ------------------------ Deploy to local testnet ----------------------
-
+/// ------------------------ Deploy to local hyperledger besu ----------------------
 import { ethers } from "hardhat";
 import dotenv from "dotenv";
 // async function main() {
@@ -222,6 +63,12 @@ async function main() {
   const fieldOfKnowledge = "Programming";
   const skillName = "Solidity";
   const amount = 1;
+  const institutionLatitude = "23.8882748";
+  const institutionLongituide = "903880846";
+  const learnerLatittude = "23.8669432";
+  const learnerLongitude = "90.4070788";
+  const learner2Latittude = "23.6345742";
+  const learner2Longitude = "-102.5939836";
 
   const currentTimestamp = Math.floor(Date.now() / 1000);
 
@@ -255,7 +102,9 @@ async function main() {
   await learningToken.registerInstitution(
     institutionName,
     INSTITUTION_PUB_KEY,
-    currentTimestamp
+    currentTimestamp,
+    institutionLatitude,
+    institutionLongituide
   );
   //call from institution
   const InstitutionWallet = learningToken.connect(institutionWallet);
@@ -300,7 +149,9 @@ async function main() {
   }
   const registerLearnerResponse = await learningToken.registerLearner(
     learner1Name,
-    currentTimestamp
+    currentTimestamp,
+    learnerLatittude,
+    learnerLongitude
   );
   const registerLearnerRecipt = await registerLearnerResponse.wait();
 
@@ -318,6 +169,8 @@ async function main() {
       1, //amount
       courseId,
       currentTimestamp,
+      fieldOfKnowledge,
+      skillName,
       {
         gasPrice: 2100,
         gasLimit: 5000000, // Set an appropriate gas limit for your transaction
@@ -368,6 +221,8 @@ async function main() {
     5, //amount
     courseId,
     currentTimestamp,
+    fieldOfKnowledge,
+    skillName,
     {
       gasPrice: 2100,
       gasLimit: 5000000, // Set an appropriate gas limit for your transaction
@@ -394,8 +249,9 @@ async function main() {
       10, //amount
       courseId,
       currentTimestamp,
+      fieldOfKnowledge,
       {
-        gasPrice: 2100,
+        gasPrice: 1121211,
         gasLimit: 5000000, // Set an appropriate gas limit for your transaction
       }
     );
