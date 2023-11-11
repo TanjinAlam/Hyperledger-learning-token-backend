@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { initWeb3Method } from "../utils";
-import { number, object, string } from "yup";
+import { number, object } from "yup";
 import { Form, Formik, FormikProps } from "formik";
 import { useRef, useState } from "react";
 import TextInput from "../components/TextInput";
