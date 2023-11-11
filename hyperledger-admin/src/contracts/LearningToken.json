@@ -283,6 +283,37 @@
       {
         "indexed": true,
         "internalType": "address",
+        "name": "holderAddress",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "courseId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "InstructorScoreTokenMinted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
         "name": "from",
         "type": "address"
       },
@@ -728,9 +759,9 @@
         "type": "uint256[]"
       },
       {
-        "internalType": "uint256",
+        "internalType": "uint256[]",
         "name": "amount",
-        "type": "uint256"
+        "type": "uint256[]"
       },
       {
         "internalType": "uint256",
@@ -741,6 +772,16 @@
         "internalType": "uint256",
         "name": "_createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_fieldOfKnowledge",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_skill",
+        "type": "string"
       }
     ],
     "name": "batchMintAttendanceToken",
@@ -756,9 +797,9 @@
         "type": "uint256[]"
       },
       {
-        "internalType": "uint256",
+        "internalType": "uint256[]",
         "name": "amount",
-        "type": "uint256"
+        "type": "uint256[]"
       },
       {
         "internalType": "uint256",
@@ -769,6 +810,16 @@
         "internalType": "uint256",
         "name": "_createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_fieldOfKnowledge",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_skill",
+        "type": "string"
       }
     ],
     "name": "batchMintHelpingToken",
@@ -784,9 +835,9 @@
         "type": "uint256[]"
       },
       {
-        "internalType": "uint256",
+        "internalType": "uint256[]",
         "name": "amount",
-        "type": "uint256"
+        "type": "uint256[]"
       },
       {
         "internalType": "uint256",
@@ -797,6 +848,11 @@
         "internalType": "uint256",
         "name": "_createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_fieldOfKnowledge",
+        "type": "string"
       }
     ],
     "name": "batchMintInstructorScoreToken",
@@ -812,9 +868,9 @@
         "type": "uint256[]"
       },
       {
-        "internalType": "uint256",
+        "internalType": "uint256[]",
         "name": "amount",
-        "type": "uint256"
+        "type": "uint256[]"
       },
       {
         "internalType": "uint256",
@@ -1263,6 +1319,16 @@
         "internalType": "bool",
         "name": "status",
         "type": "bool"
+      },
+      {
+        "internalType": "string",
+        "name": "lat",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "long",
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -1458,6 +1524,16 @@
         "internalType": "uint256",
         "name": "createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "lat",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "long",
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -1484,6 +1560,16 @@
         "internalType": "uint256",
         "name": "_createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_fieldOfKnowledge",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_skill",
+        "type": "string"
       }
     ],
     "name": "mintAttendanceToken",
@@ -1512,6 +1598,16 @@
         "internalType": "uint256",
         "name": "_createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_fieldOfKnowledge",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_skill",
+        "type": "string"
       }
     ],
     "name": "mintHelpingToken",
@@ -1540,6 +1636,11 @@
         "internalType": "uint256",
         "name": "_createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_fieldOfKnowledge",
+        "type": "string"
       }
     ],
     "name": "mintInstructorScoreToken",
@@ -1614,6 +1715,16 @@
         "internalType": "uint256",
         "name": "createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "latitude",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "longittude",
+        "type": "string"
       }
     ],
     "name": "registerInstitution",
@@ -1650,6 +1761,16 @@
         "internalType": "uint256",
         "name": "createdAt",
         "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "latitude",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "longittude",
+        "type": "string"
       }
     ],
     "name": "registerLearner",

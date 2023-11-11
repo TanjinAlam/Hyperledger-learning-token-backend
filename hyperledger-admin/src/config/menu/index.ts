@@ -49,7 +49,7 @@ const mainMenuItems = [
       {
         name: "List",
         to: "/course",
-        requiredPermissions: ["instructor", "learner", "admin"],
+        requiredPermissions: ["instructor", "admin"],
       },
       {
         name: "Add",
@@ -62,7 +62,7 @@ const mainMenuItems = [
         requiredPermissions: ["instructor", "admin"],
       },
       {
-        name: "Distribute Token",
+        name: "Distribute Single Token",
         to: "/course/attendance",
         requiredPermissions: ["instructor", "admin"],
       },
