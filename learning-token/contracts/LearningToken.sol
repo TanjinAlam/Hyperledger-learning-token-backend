@@ -147,8 +147,8 @@ contract LearningToken is ERC1155, Ownable{
 
 
     //register learner || learner can be or cant be part of a close circuit 
-    function registerLearner(string memory _learnerName,uint256 createdAt, string memory latitude, string memory longittude) external {
-        learners[msg.sender] = Learners(learnerId.current() ,_learnerName, createdAt,latitude, longittude);
+    function registerLearner(string memory _learnerName,uint256 createdAt, string memory latitude, string memory longitude) external {
+        learners[msg.sender] = Learners(learnerId.current() ,_learnerName, createdAt,latitude, longitude);
         emit LearnerRegistered(learnerId.current(), _learnerName, createdAt);
         learnerId.increment();
     }
@@ -166,12 +166,12 @@ contract LearningToken is ERC1155, Ownable{
     }
 
     //register institution || can be called by onlyowner of contract
-    function registerInstitution(string memory _institutionName,address _institutionAddress, uint256 createdAt, string memory latitude, string memory longittude) external onlyOwner {
+    function registerInstitution(string memory _institutionName,address _institutionAddress, uint256 createdAt, string memory latitude, string memory longitude) external onlyOwner {
         institutions[_institutionAddress]._institutionId = instiutionId.current();
         institutions[_institutionAddress].institutionName = _institutionName;
         institutions[_institutionAddress].createdAt = createdAt;
         institutions[_institutionAddress].lat = latitude;
-        institutions[_institutionAddress].long = longittude;
+        institutions[_institutionAddress].long = longitude;
 
         // Initialize the mapping for institutionInstructors
         institutions[_institutionAddress].institutionInstructors[_institutionAddress]._institutionId = institutions[_institutionAddress]._institutionId;
@@ -223,6 +223,7 @@ contract LearningToken is ERC1155, Ownable{
     //check learnrs are registered or not
     //checking function caller is a institution instructor 
     //check learner is registered or not
+    
     function createCourse(address _institutionAddress, string memory _courseName, uint256 _createdAt, address[] memory learnerAddress) external checkInstructorCourseAccess(_institutionAddress){
         Institutions storage _institution = institutions[_institutionAddress];
 

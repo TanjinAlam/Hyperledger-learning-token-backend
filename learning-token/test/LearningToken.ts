@@ -25,10 +25,10 @@ describe("LearningTokenContract", function () {
     randomUserAddress: any,
     learnerAddress: any;
   const institutionLatitude = "23.8882748";
-  const institutionLongituide = "903880846";
+  const institutionLongitude = "903880846";
   const learnerLatittude = "23.8669432";
   const learnerLongitude = "90.4070788";
-  const learner2Latittude = "23.6345742";
+  const learner2Latitude = "23.6345742";
   const learner2Longitude = "-102.5939836";
   const institutionName = "MIT";
   const instructorName = "Alfenso";
@@ -92,7 +92,7 @@ describe("LearningTokenContract", function () {
       institutionAddress,
       currentTimestamp,
       institutionLatitude,
-      institutionLongituide
+      institutionLongitude
     );
     const event = await learningTokenInstance.queryFilter(
       "InstitutionRegistered"
@@ -113,7 +113,7 @@ describe("LearningTokenContract", function () {
           institutionAddress,
           currentTimestamp,
           institutionLatitude,
-          institutionLongituide
+          institutionLongitude
         )
       ).to.be.revertedWith("Ownable: caller is not the owner");
     } catch (error: any) {}
@@ -221,7 +221,7 @@ describe("LearningTokenContract", function () {
       await Learner2Wallet.registerLearner(
         learner1Name,
         currentTimestamp,
-        learner2Latittude,
+        learner2Latitude,
         learner2Longitude
       );
       await Learner2Wallet.wait;
@@ -286,7 +286,7 @@ describe("LearningTokenContract", function () {
       await Learner2Wallet.registerLearner(
         learner2Name,
         currentTimestamp,
-        learner2Latittude,
+        learner2Latitude,
         learner2Longitude
       );
       const InstructorWallet = await learningTokenInstance.connect(

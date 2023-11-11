@@ -64,8 +64,8 @@ async function main() {
   const skillName = "Solidity";
   const amount = 1;
   const institutionLatitude = "23.8882748";
-  const institutionLongituide = "903880846";
-  const learnerLatittude = "23.8669432";
+  const institutionLongitude = "903880846";
+  const learnerLatitude = "23.8669432";
   const learnerLongitude = "90.4070788";
   const learner2Latittude = "23.6345742";
   const learner2Longitude = "-102.5939836";
@@ -104,7 +104,7 @@ async function main() {
     INSTITUTION_PUB_KEY,
     currentTimestamp,
     institutionLatitude,
-    institutionLongituide
+    institutionLongitude
   );
   //call from institution
   const InstitutionWallet = learningToken.connect(institutionWallet);
@@ -150,7 +150,7 @@ async function main() {
   const registerLearnerResponse = await learningToken.registerLearner(
     learner1Name,
     currentTimestamp,
-    learnerLatittude,
+    learnerLatitude,
     learnerLongitude
   );
   const registerLearnerRecipt = await registerLearnerResponse.wait();
