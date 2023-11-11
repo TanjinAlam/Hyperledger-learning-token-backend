@@ -26,7 +26,9 @@ const Institution: React.FC = () => {
     const tx = await contract!.registerInstitution(
       rowData.name,
       rowData.publicAddress,
-      Date.now()
+      Date.now(),
+      rowData.latitude,
+      rowData.longitude
     );
     if (tx) {
       await updateInstitutionStatus(rowData);
@@ -40,6 +42,8 @@ const Institution: React.FC = () => {
       </div>
     );
   }
+
+
   return (
     <div className="py-3">
       <Table data={data?.result?.data} autoHeight rowClassName={"cursor-pointer"}>
@@ -67,6 +71,7 @@ const Institution: React.FC = () => {
                   <Toggle
                     checked={rowData.status}
                     onClick={() => toggleStatus(rowData)}
+                    disabled={rowData.status}
                   />
                 </>
               );

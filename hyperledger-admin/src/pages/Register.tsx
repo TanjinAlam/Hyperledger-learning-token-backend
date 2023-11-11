@@ -1,5 +1,5 @@
 import { Form, Formik, FormikProps } from "formik";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,6 +25,7 @@ import {
   useRegisterLearnerMutation,
 } from "../store/features/learner/learnerApi";
 import { initWeb3 } from "../utils";
+
 const initialValues = {
   name: "",
   email: "",
@@ -32,6 +33,8 @@ const initialValues = {
   confirm: "",
   publicAddress: "",
   type: "learner",
+  latitude: "",
+  longitude: "",
 };
 
 const validationSchema = object().shape({
@@ -49,6 +52,14 @@ const validationSchema = object().shape({
   type: string()
     .required("Please select a type")
     .oneOf(["admin", "institution", "instructor", "learner"]),
+  latitude: string().when("type", {
+    is: "learner" || "institution",
+    then: (schema) => schema.required("Latitude is required"),
+  }),
+  longitude: string().when("type", {
+    is: "learner" || "institution",
+    then: (schema) => schema.required("Longitude is required"),
+  }),
 });
 
 const Login = () => {
@@ -95,6 +106,8 @@ const Login = () => {
           email: values.email,
           password: values.password,
           publicAddress: values.publicAddress,
+          latitude: values.latitude,
+          longitude: values.longitude,
         })
           .unwrap()
           .then((result: any) => {
@@ -117,7 +130,6 @@ const Login = () => {
         //web3 call
         const contract = await initWeb3();
         const tx = await contract!.registerInstructor(values.name, Date.now());
-        //
         if (tx) {
           registerInstructor({
             name: values.name,
@@ -146,13 +158,20 @@ const Login = () => {
       } else {
         //web3 call
         const contract = await initWeb3();
-        const tx = await contract!.registerLearner(values.name, Date.now());
+        const tx = await contract!.registerLearner(
+          values.name,
+          Date.now(),
+          values.latitude,
+          values.longitude
+        );
         if (tx) {
           registerLearner({
             name: values.name,
             email: values.email,
             password: values.password,
             publicAddress: values.publicAddress,
+            latitude: values.latitude,
+            longitude: values.longitude,
           })
             .unwrap()
             .then(async (result: any) => {
@@ -178,6 +197,20 @@ const Login = () => {
       toast.error("Something went wrong");
     }
   };
+
+  useEffect(() => {
+    //getting location from browser
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        const formik = formikRef.current;
+        formik?.setFieldValue("latitude", latitude.toString());
+        formik?.setFieldValue("longitude", longitude.toString());
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen min-w-[100vw] flex items-center justify-center">
       <div className="rounded border shadow p-5 w-[25vw]">
@@ -188,63 +221,88 @@ const Login = () => {
           innerRef={formikRef}
           onSubmit={handleSubmit}
         >
-          <Form className="flex flex-col items-center justify-between">
-            <TextInput
-              name="name"
-              type="text"
-              label="Name"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <TextInput
-              name="email"
-              type="email"
-              label="Email"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <TextInput
-              name="password"
-              type="password"
-              label="Password"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <TextInput
-              name="confirm"
-              type="password"
-              label="Confirm Password"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <TextInput
-              name="publicAddress"
-              type="text"
-              label="Public Address"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <SelectInput
-              containerStyle={"w-full"}
-              label="Type"
-              size="small"
-              name="type"
-              options={[
-                { value: "admin", label: "Admin" },
-                { value: "institution", label: "Institution" },
-                { value: "instructor", label: "Instructor" },
-                { value: "learner", label: "Learner" },
-              ]}
-            />
-            <Button
-              size="small"
-              className="w-full"
-              variant="primary"
-              type="submit"
-            >
-              Register
-            </Button>
-          </Form>
+          {({ values }) => {
+            return (
+              <Form className="flex flex-col items-center justify-between">
+                <TextInput
+                  name="name"
+                  type="text"
+                  label="Name"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <TextInput
+                  name="email"
+                  type="email"
+                  label="Email"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <TextInput
+                  name="password"
+                  type="password"
+                  label="Password"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <TextInput
+                  name="confirm"
+                  type="password"
+                  label="Confirm Password"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <TextInput
+                  name="publicAddress"
+                  type="text"
+                  label="Public Address"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <SelectInput
+                  containerStyle={"w-full"}
+                  label="Type"
+                  size="small"
+                  name="type"
+                  options={[
+                    { value: "admin", label: "Admin" },
+                    { value: "institution", label: "Institution" },
+                    { value: "instructor", label: "Instructor" },
+                    { value: "learner", label: "Learner" },
+                  ]}
+                />
+                {(values.type === "learner" ||
+                  values.type === "institution") && (
+                  <TextInput
+                    name="latitude"
+                    type="text"
+                    label="Latitude"
+                    containerStyle={`w-full`}
+                    size="small"
+                  />
+                )}
+                {(values.type === "learner" ||
+                  values.type === "institution") && (
+                  <TextInput
+                    name="longitude"
+                    type="text"
+                    label="Longitude"
+                    containerStyle={`w-full`}
+                    size="small"
+                  />
+                )}
+
+                <Button
+                  size="small"
+                  className="w-full"
+                  variant="primary"
+                  type="submit"
+                >
+                  Register
+                </Button>
+              </Form>
+            );
+          }}
         </Formik>
         <div className="text-xs my-3 text-center">
           <Link to={"/login"}>Already registered? Login</Link>

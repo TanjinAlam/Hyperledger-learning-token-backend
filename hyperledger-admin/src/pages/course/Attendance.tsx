@@ -1,7 +1,7 @@
 import { Form, Formik, FormikProps } from "formik";
 import { useRef } from "react";
 import * as XLSX from "xlsx";
-import { number, object, string } from "yup";
+import { array, number, object, string } from "yup";
 import Button from "../../components/Button";
 import SelectInput from "../../components/SelectInput";
 import { initWeb3 } from "../../utils";
@@ -13,42 +13,96 @@ const initialValues = {
 
 const validationSchema = object().shape({
   token_type: string().required("Please select an institution"),
-  attendance: object()
-    .shape({
-      courseId: number(),
-      amount: number(),
-      learnerId: number(),
-      fieldOfKnowledge: string(),
-      skillName: string(),
-    })
+  attendance: array()
+    .of(
+      object().shape({
+        courseId: number(),
+        amount: number(),
+        learnerId: number(),
+        fieldOfKnowledge: string(),
+        skillName: string(),
+      })
+    )
     .required("At least 1 attendance should be added"),
 });
 const Attendance = () => {
   const formikRef = useRef<FormikProps<any>>(null);
 
   const handleSubmit = async (values: any) => {
+
     const contract = await initWeb3();
 
     if (values.token_type === "attendance_token") {
+      const [_attendance] = values.attendance
       const tx = await contract!.mintAttendanceToken(
-        values.attendance.learnerId,
-        values.attendance.amount,
-        values.attendance.courseId,
-        Date.now()
+        _attendance.learnerId,
+        _attendance.amount,
+        _attendance.courseId,
+        Date.now(),
+        _attendance.fieldOfKnowledge,
+        _attendance.skillName
       );
       if (tx) {
-        toast.success("Token minted");
+        toast.success("Attendance Token minted");
+      }
+    }
+    if (values.token_type === "batch_attendance_token") {
+
+      const [_attendance] = values.attendance
+      const _learnerIds:number[] = []
+      const _amounts:number[] = []
+
+      values.attendance.map((item:any) => {
+        _learnerIds.push(item.learnerId)
+        _amounts.push(item.amount)
+      })
+      
+      const tx = await contract!.batchMintAttendanceToken(
+        _learnerIds,
+        _amounts,
+        _attendance.courseId,
+        Date.now(),
+        _attendance.fieldOfKnowledge,
+        _attendance.skillName
+      );
+      if (tx) {
+        toast.success("Batch Attendance Token minted");
       }
     }
     if (values.token_type === "helping_token") {
+      const [_attendance] = values.attendance
       const tx = await contract!.mintHelpingToken(
-        values.attendance.learnerId,
-        values.attendance.amount,
-        values.attendance.courseId,
-        Date.now()
+        _attendance.learnerId,
+        _attendance.amount,
+        _attendance.courseId,
+        Date.now(),
+        _attendance.fieldOfKnowledge,
+        _attendance.skillName
       );
       if (tx) {
-        toast.success("Token minted");
+        toast.success("Helping Token minted");
+      }
+    }
+    if (values.token_type === "batch_helping_token") {
+      const [_attendance] = values.attendance
+      const _learnerIds:number[] = []
+      const _amounts:number[] = []
+
+      values.attendance.map((item:any) => {
+        _learnerIds.push(item.learnerId)
+        _amounts.push(item.amount)
+      })
+
+      const tx = await contract!.batchMintHelpingToken(
+        _learnerIds,
+        _amounts,
+        _attendance.courseId,
+        Date.now(),
+        _attendance.fieldOfKnowledge,
+        _attendance.skillName
+      );
+      if (tx) {
+        toast.success("Batch Helping Token minted");
       }
     }
     if (values.token_type === "score_token") {
@@ -62,19 +116,64 @@ const Attendance = () => {
       );
 
       if (tx) {
-        toast.success("Token minted");
+        toast.success("Score Token minted");
       }
     }
-    if (values.token_type === "instructorScore_token") {
-      const tx = await contract!.mintInstructorScoreToken(
-        values.attendance.learnerId,
-        values.attendance.amount,
-        values.attendance.courseId,
-        Date.now()
+    if (values.token_type === "batch_score_token") {
+      const [_attendance] = values.attendance
+      const _learnerIds:number[] = []
+      const _amounts:number[] = []
+
+      values.attendance.map((item:any) => {
+        _learnerIds.push(item.learnerId)
+        _amounts.push(item.amount)
+      })
+      const tx = await contract!.batchMintScoreToken(
+        _learnerIds,
+        _amounts,
+        _attendance.courseId,
+        Date.now(),
+        _attendance.fieldOfKnowledge,
+        _attendance.skillName
       );
 
       if (tx) {
-        toast.success("Token minted");
+        toast.success("Batch Score Token minted");
+      }
+    }
+    if (values.token_type === "instructorScore_token") {
+      const [_attendance] = values.attendance
+      const tx = await contract!.mintInstructorScoreToken(
+        _attendance.learnerId,
+        _attendance.amount,
+        _attendance.courseId,
+        Date.now(),
+        _attendance.fieldOfKnowledge,
+      );
+
+      if (tx) {
+        toast.success("Instructor Token minted");
+      }
+    }
+    if (values.token_type === "batch_instructorScore_token") {
+      const [_attendance] = values.attendance
+      const _learnerIds:number[] = []
+      const _amounts:number[] = []
+
+      values.attendance.map((item:any) => {
+        _learnerIds.push(item.learnerId)
+        _amounts.push(item.amount)
+      })
+      const tx = await contract!.batchMintInstructorScoreToken(
+        _learnerIds,
+        _amounts,
+        _attendance.courseId,
+        Date.now(),
+        _attendance.fieldOfKnowledge,
+      );
+
+      if (tx) {
+        toast.success("Batch Instructor Token minted");
       }
     }
   };
@@ -87,7 +186,7 @@ const Attendance = () => {
         if (e.target && e.target.result instanceof ArrayBuffer) {
           const data = new Uint8Array(e.target.result);
           const workbook = XLSX.read(data, { type: "array" });
-          const sheetName = workbook.SheetNames[0];
+          const sheetName = workbook.SheetNames[2];
           const sheet = workbook.Sheets[sheetName];
           const jsonData = XLSX.utils.sheet_to_json(sheet);
 
@@ -99,9 +198,23 @@ const Attendance = () => {
                   courseId: learner.courseId,
                   amount: learner.amount,
                   learnerId: learner.learnerId,
+                  fieldOfKnowledge: learner.fieldOfKnowledge,
+                  skillName: learner.skillName,
                 };
               });
-              formik.setFieldValue("attendance", learnerAddress[0]);
+              formik.setFieldValue("attendance", learnerAddress);
+              break;
+            case "batch_attendance_token":
+              learnerAddress = jsonData.map((learner: any) => {
+                return {
+                  courseId: learner.courseId,
+                  amount: learner.amount,
+                  learnerId: learner.learnerId,
+                  fieldOfKnowledge: learner.fieldOfKnowledge,
+                  skillName: learner.skillName,
+                };
+              });
+              formik.setFieldValue("attendance", learnerAddress);
               break;
             case "helping_token":
               learnerAddress = jsonData.map((learner: any) => {
@@ -109,9 +222,23 @@ const Attendance = () => {
                   courseId: learner.courseId,
                   amount: learner.amount,
                   learnerId: learner.learnerId,
+                  fieldOfKnowledge: learner.fieldOfKnowledge,
+                  skillName: learner.skillName,
                 };
               });
-              formik.setFieldValue("attendance", learnerAddress[0]);
+              formik.setFieldValue("attendance", learnerAddress);
+              break;
+            case "batch_helping_token":
+              learnerAddress = jsonData.map((learner: any) => {
+                return {
+                  courseId: learner.courseId,
+                  amount: learner.amount,
+                  learnerId: learner.learnerId,
+                  fieldOfKnowledge: learner.fieldOfKnowledge,
+                  skillName: learner.skillName,
+                };
+              });
+              formik.setFieldValue("attendance", learnerAddress);
               break;
             case "score_token":
               learnerAddress = jsonData.map((learner: any) => {
@@ -123,7 +250,19 @@ const Attendance = () => {
                   skillName: learner.skillName,
                 };
               });
-              formik.setFieldValue("attendance", learnerAddress[0]);
+              formik.setFieldValue("attendance", learnerAddress);
+              break;
+            case "batch_score_token":
+              learnerAddress = jsonData.map((learner: any) => {
+                return {
+                  courseId: learner.courseId,
+                  amount: learner.amount,
+                  learnerId: learner.learnerId,
+                  fieldOfKnowledge: learner.fieldOfKnowledge,
+                  skillName: learner.skillName,
+                };
+              });
+              formik.setFieldValue("attendance", learnerAddress);
               break;
             case "instructorScore_token":
               learnerAddress = jsonData.map((learner: any) => {
@@ -131,9 +270,21 @@ const Attendance = () => {
                   courseId: learner.courseId,
                   amount: learner.amount,
                   learnerId: learner.learnerId,
+                  fieldOfKnowledge: learner.fieldOfKnowledge,
                 };
               });
-              formik.setFieldValue("attendance", learnerAddress[0]);
+              formik.setFieldValue("attendance", learnerAddress);
+              break;
+            case "batch_instructorScore_token":
+              learnerAddress = jsonData.map((learner: any) => {
+                return {
+                  courseId: learner.courseId,
+                  amount: learner.amount,
+                  learnerId: learner.learnerId,
+                  fieldOfKnowledge: learner.fieldOfKnowledge,
+                };
+              });
+              formik.setFieldValue("attendance", learnerAddress);
               break;
 
             default:
@@ -147,10 +298,16 @@ const Attendance = () => {
 
   const tokenType = [
     { value: "attendance_token", label: "Attendance Token" },
+    { value: "batch_attendance_token", label: "Batch Attendance Token" },
     { value: "helping_token", label: "Helping Token" },
+    { value: "batch_helping_token", label: "Batch Helping Token" },
     { value: "score_token", label: "Score Token" },
+    { value: "batch_score_token", label: "Batch Score Token" },
     { value: "instructorScore_token", label: "Instructor Score Token" },
+    { value: "batch_instructorScore_token", label: "Batch Instructor Score Token" },
   ];
+
+
 
   return (
     <div className="w-[800px] mx-auto my-8">

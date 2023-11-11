@@ -9,6 +9,7 @@ export interface AuthState {
     name: string | null;
     email: string | null;
     type: string | null;
+    publicAddress: string | null;
   };
   accessToken: string | null; // jwt token
 }
@@ -20,6 +21,7 @@ const user = JSON.parse(
   name: null,
   email: null,
   type: null,
+  publicAddress: null,
 };
 const accessToken =
   (localStorage.getItem(authEnum.AUTH_LOCAL_STORAGE_KEY) as string) || null;
@@ -39,6 +41,7 @@ const authSlice = createSlice({
       state.user.name = action.payload.name;
       state.user.email = action.payload.email;
       state.user.type = action.payload.type;
+      state.user.publicAddress = action.payload.publicAddress;
       localStorage.setItem(
         authEnum.AUTH_LOCAL_STORAGE_KEY,
         action.payload.token
@@ -55,6 +58,7 @@ const authSlice = createSlice({
           name: null,
           email: null,
           type: null,
+          publicAddress: null,
         },
         accessToken: null,
       };
