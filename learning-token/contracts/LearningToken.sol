@@ -75,6 +75,7 @@ contract LearningToken is ERC1155, Ownable{
     struct TokenMetadatas {
         uint256 _institutionId;
         uint256 _instructorId;
+        uint256 _tokenId;
         uint256 createdAt;
         uint256 courseId;
         string fieldOfKnowledge;
@@ -115,7 +116,10 @@ contract LearningToken is ERC1155, Ownable{
     mapping(address => InstitutionMapping) public institutionByAddress;
     mapping(address => InstructorMapping) public instructorMapping;
 
-    mapping(uint256 => TokenMetadatas) public tokenMetadatas;
+    // mapping(uint256 => TokenMetadatas) public tokenMetadatas;
+    //mapping for learner course token metada
+    mapping(address => TokenMetadatas[]) public learnerTokenMetaDataFactory;
+
     mapping(uint256 => Courses) public courses;
     mapping(address => Instructors) public instructors;
     mapping(address => Institutions) public institutions; //considering each institution has an single owner entity
@@ -144,11 +148,9 @@ contract LearningToken is ERC1155, Ownable{
         return (learners[learnerAddress]._learnerId);
     }
 
-
-
     //register learner || learner can be or cant be part of a close circuit 
-    function registerLearner(string memory _learnerName,uint256 createdAt, string memory latitude, string memory longitude) external {
-        learners[msg.sender] = Learners(learnerId.current() ,_learnerName, createdAt,latitude, longitude);
+    function registerLearner(string memory _learnerName,uint256 createdAt, string memory latitude, string memory longittude) external {
+        learners[msg.sender] = Learners(learnerId.current() ,_learnerName, createdAt,latitude, longittude);
         emit LearnerRegistered(learnerId.current(), _learnerName, createdAt);
         learnerId.increment();
     }
@@ -166,12 +168,12 @@ contract LearningToken is ERC1155, Ownable{
     }
 
     //register institution || can be called by onlyowner of contract
-    function registerInstitution(string memory _institutionName,address _institutionAddress, uint256 createdAt, string memory latitude, string memory longitude) external onlyOwner {
+    function registerInstitution(string memory _institutionName,address _institutionAddress, uint256 createdAt, string memory latitude, string memory longittude) external onlyOwner {
         institutions[_institutionAddress]._institutionId = instiutionId.current();
         institutions[_institutionAddress].institutionName = _institutionName;
         institutions[_institutionAddress].createdAt = createdAt;
         institutions[_institutionAddress].lat = latitude;
-        institutions[_institutionAddress].long = longitude;
+        institutions[_institutionAddress].long = longittude;
 
         // Initialize the mapping for institutionInstructors
         institutions[_institutionAddress].institutionInstructors[_institutionAddress]._institutionId = institutions[_institutionAddress]._institutionId;
@@ -223,7 +225,6 @@ contract LearningToken is ERC1155, Ownable{
     //check learnrs are registered or not
     //checking function caller is a institution instructor 
     //check learner is registered or not
-    
     function createCourse(address _institutionAddress, string memory _courseName, uint256 _createdAt, address[] memory learnerAddress) external checkInstructorCourseAccess(_institutionAddress){
         Institutions storage _institution = institutions[_institutionAddress];
 
@@ -258,18 +259,18 @@ contract LearningToken is ERC1155, Ownable{
         courseId.increment();
     }
 
-    function setTokenMetadata(uint256 _courseId, uint256 _institutionId, uint256 _instructorId, 
-    string memory _fieldOfKnowledge, string memory _skillName, address _institutionAddress,uint256 createdAt) external onlyInstructor (_courseId) checkInstructorCourseAccess(_institutionAddress) {
-        TokenMetadatas storage _tokenMetadata = tokenMetadatas[_courseId];
-        _tokenMetadata._institutionId = _institutionId;
-        _tokenMetadata._instructorId = _instructorId;
-        _tokenMetadata.createdAt = createdAt;
-        _tokenMetadata.courseId = _courseId;
-        _tokenMetadata.fieldOfKnowledge = _fieldOfKnowledge;
-        _tokenMetadata.skill = _skillName;
-        _isTokenTransferable[_courseId] = true;
-        emit TokenMetadataCreated(_courseId , _courseId, _institutionId, _instructorId, _skillName, _fieldOfKnowledge, createdAt);
-    }
+    // function setTokenMetadata(uint256 _courseId, uint256 _institutionId, uint256 _instructorId, 
+    // string memory _fieldOfKnowledge, string memory _skillName, address _institutionAddress,uint256 createdAt) external onlyInstructor (_courseId) checkInstructorCourseAccess(_institutionAddress) {
+    //     TokenMetadatas storage _tokenMetadata = tokenMetadatas[_courseId];
+    //     _tokenMetadata._institutionId = _institutionId;
+    //     _tokenMetadata._instructorId = _instructorId;
+    //     _tokenMetadata.createdAt = createdAt;
+    //     _tokenMetadata.courseId = _courseId;
+    //     _tokenMetadata.fieldOfKnowledge = _fieldOfKnowledge;
+    //     _tokenMetadata.skill = _skillName;
+    //     _isTokenTransferable[_courseId] = true;
+    //     emit TokenMetadataCreated(_courseId , _courseId, _institutionId, _instructorId, _skillName, _fieldOfKnowledge, createdAt);
+    // }
 
 
     //can be called by the program instructor
@@ -363,6 +364,7 @@ contract LearningToken is ERC1155, Ownable{
         TokenMetadatas memory newTokenMetadata = TokenMetadatas({
             _institutionId: _course._institutionId,
             _instructorId: _course._instructorId,
+            _tokenId: courseTokenCounter.current(),
             createdAt: _createdAt,
             courseId: _courseId,
             fieldOfKnowledge: _fieldOfKnowledge,
@@ -370,6 +372,7 @@ contract LearningToken is ERC1155, Ownable{
         });
         
         _course.tokenMetadataArray.push(newTokenMetadata);
+        learnerTokenMetaDataFactory[_learnersAddress[0]].push(newTokenMetadata);
         emit AttendanceTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId, amount);
         courseTokenCounter.increment();
     }
@@ -389,12 +392,14 @@ contract LearningToken is ERC1155, Ownable{
                     TokenMetadatas memory newTokenMetadata = TokenMetadatas({
                     _institutionId: courses[_courseId]._institutionId,
                     _instructorId: courses[_courseId]._instructorId,
+                    _tokenId: courseTokenCounter.current(),
                     createdAt: _createdAt,
                     courseId: _courseId,
                     fieldOfKnowledge: _fieldOfKnowledge,
                     skill: _skill
                 });
                 courses[_courseId].tokenMetadataArray.push(newTokenMetadata);
+                learnerTokenMetaDataFactory[_learnersAddress[i]].push(newTokenMetadata);
                 emit AttendanceTokenMinted(_learnersAddress[i], courseTokenCounter.current(), _courseId, amount[i]);
                 courseTokenCounter.increment();
             }
@@ -442,6 +447,7 @@ contract LearningToken is ERC1155, Ownable{
         TokenMetadatas memory newTokenMetadata = TokenMetadatas({
             _institutionId: _course._institutionId,
             _instructorId: _course._instructorId,
+            _tokenId: courseTokenCounter.current(),
             createdAt: _createdAt,
             courseId: _courseId,
             fieldOfKnowledge: _fieldOfKnowledge,
@@ -449,6 +455,7 @@ contract LearningToken is ERC1155, Ownable{
         });
         
         _course.tokenMetadataArray.push(newTokenMetadata);
+        learnerTokenMetaDataFactory[_learnersAddress[0]].push(newTokenMetadata);
         emit ScoreTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId, amount, _fieldOfKnowledge, _skillName);
         courseTokenCounter.increment();
     }
@@ -469,12 +476,14 @@ contract LearningToken is ERC1155, Ownable{
                 TokenMetadatas memory newTokenMetadata = TokenMetadatas({
                 _institutionId: _course._institutionId,
                 _instructorId: _course._instructorId,
+                _tokenId: courseTokenCounter.current(),
                 createdAt: _createdAt,
                 courseId: _courseId,
                 fieldOfKnowledge: _fieldOfKnowledge,
                 skill: _skillName
             });
             _course.tokenMetadataArray.push(newTokenMetadata);
+            learnerTokenMetaDataFactory[_learnersAddress[i]].push(newTokenMetadata);
             emit ScoreTokenMinted(_learnersAddress[i], courseTokenCounter.current(), _courseId, amount[i], _fieldOfKnowledge, _skillName);
             courseTokenCounter.increment();
         }
@@ -513,6 +522,7 @@ contract LearningToken is ERC1155, Ownable{
         TokenMetadatas memory newTokenMetadata = TokenMetadatas({
             _institutionId: _course._institutionId,
             _instructorId: _course._instructorId,
+            _tokenId: courseTokenCounter.current(),
             createdAt: _createdAt,
             courseId: _courseId,
             fieldOfKnowledge: _fieldOfKnowledge,
@@ -520,6 +530,7 @@ contract LearningToken is ERC1155, Ownable{
         });
         
         _course.tokenMetadataArray.push(newTokenMetadata);
+        learnerTokenMetaDataFactory[_learnersAddress[0]].push(newTokenMetadata);
         emit HelpingTokenMinted(_learnersAddress[0], _course.courseHelpingTokneId, _courseId, amount);
         // _course.courseHelpingTokneId += _course.courseHelpingTokneId;
     }
@@ -540,12 +551,14 @@ contract LearningToken is ERC1155, Ownable{
                 TokenMetadatas memory newTokenMetadata = TokenMetadatas({
                 _institutionId: _course._institutionId,
                 _instructorId: _course._instructorId,
+                _tokenId: courseTokenCounter.current(),
                 createdAt: _createdAt,
                 courseId: _courseId,
                 fieldOfKnowledge: _fieldOfKnowledge,
                 skill: _skill
             });
             _course.tokenMetadataArray.push(newTokenMetadata);
+            learnerTokenMetaDataFactory[_learnersAddress[i]].push(newTokenMetadata);
             emit HelpingTokenMinted(_learnersAddress[i], _course.courseHelpingTokneId, _courseId, amount[i]);
             // courseTokenCounter.increment();
         }
@@ -585,12 +598,14 @@ contract LearningToken is ERC1155, Ownable{
         TokenMetadatas memory newTokenMetadata = TokenMetadatas({
             _institutionId: _course._institutionId,
             _instructorId: _course._instructorId,
+            _tokenId: courseTokenCounter.current(),
             createdAt: _createdAt,
             courseId: _courseId,
             fieldOfKnowledge: _fieldOfKnowledge,
             skill: ""
         });
         _course.tokenMetadataArray.push(newTokenMetadata);
+        learnerTokenMetaDataFactory[_learnersAddress[0]].push(newTokenMetadata);
         emit InstructorScoreTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId,amount);
         courseTokenCounter.increment();
     }
@@ -610,12 +625,14 @@ contract LearningToken is ERC1155, Ownable{
                 TokenMetadatas memory newTokenMetadata = TokenMetadatas({
                 _institutionId: _course._institutionId,
                 _instructorId: _course._instructorId,
+                _tokenId: courseTokenCounter.current(),
                 createdAt: _createdAt,
                 courseId: _courseId,
                 fieldOfKnowledge: _fieldOfKnowledge,
                 skill: ""
             });
             _course.tokenMetadataArray.push(newTokenMetadata);
+            learnerTokenMetaDataFactory[_learnersAddress[i]].push(newTokenMetadata);
             emit InstructorScoreTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId, amount[i]);
             courseTokenCounter.increment();
         }
