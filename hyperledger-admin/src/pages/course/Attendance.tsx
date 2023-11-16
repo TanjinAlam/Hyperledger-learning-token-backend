@@ -29,11 +29,10 @@ const Attendance = () => {
   const formikRef = useRef<FormikProps<any>>(null);
 
   const handleSubmit = async (values: any) => {
-
     const contract = await initWeb3();
 
     if (values.token_type === "attendance_token") {
-      const [_attendance] = values.attendance
+      const [_attendance] = values.attendance;
       const tx = await contract!.mintAttendanceToken(
         _attendance.learnerId,
         _attendance.amount,
@@ -47,16 +46,15 @@ const Attendance = () => {
       }
     }
     if (values.token_type === "batch_attendance_token") {
+      const [_attendance] = values.attendance;
+      const _learnerIds: number[] = [];
+      const _amounts: number[] = [];
 
-      const [_attendance] = values.attendance
-      const _learnerIds:number[] = []
-      const _amounts:number[] = []
+      values.attendance.map((item: any) => {
+        _learnerIds.push(item.learnerId);
+        _amounts.push(item.amount);
+      });
 
-      values.attendance.map((item:any) => {
-        _learnerIds.push(item.learnerId)
-        _amounts.push(item.amount)
-      })
-      
       const tx = await contract!.batchMintAttendanceToken(
         _learnerIds,
         _amounts,
@@ -70,7 +68,7 @@ const Attendance = () => {
       }
     }
     if (values.token_type === "helping_token") {
-      const [_attendance] = values.attendance
+      const [_attendance] = values.attendance;
       const tx = await contract!.mintHelpingToken(
         _attendance.learnerId,
         _attendance.amount,
@@ -84,14 +82,14 @@ const Attendance = () => {
       }
     }
     if (values.token_type === "batch_helping_token") {
-      const [_attendance] = values.attendance
-      const _learnerIds:number[] = []
-      const _amounts:number[] = []
+      const [_attendance] = values.attendance;
+      const _learnerIds: number[] = [];
+      const _amounts: number[] = [];
 
-      values.attendance.map((item:any) => {
-        _learnerIds.push(item.learnerId)
-        _amounts.push(item.amount)
-      })
+      values.attendance.map((item: any) => {
+        _learnerIds.push(item.learnerId);
+        _amounts.push(item.amount);
+      });
 
       const tx = await contract!.batchMintHelpingToken(
         _learnerIds,
@@ -120,14 +118,14 @@ const Attendance = () => {
       }
     }
     if (values.token_type === "batch_score_token") {
-      const [_attendance] = values.attendance
-      const _learnerIds:number[] = []
-      const _amounts:number[] = []
+      const [_attendance] = values.attendance;
+      const _learnerIds: number[] = [];
+      const _amounts: number[] = [];
 
-      values.attendance.map((item:any) => {
-        _learnerIds.push(item.learnerId)
-        _amounts.push(item.amount)
-      })
+      values.attendance.map((item: any) => {
+        _learnerIds.push(item.learnerId);
+        _amounts.push(item.amount);
+      });
       const tx = await contract!.batchMintScoreToken(
         _learnerIds,
         _amounts,
@@ -142,13 +140,13 @@ const Attendance = () => {
       }
     }
     if (values.token_type === "instructorScore_token") {
-      const [_attendance] = values.attendance
+      const [_attendance] = values.attendance;
       const tx = await contract!.mintInstructorScoreToken(
         _attendance.learnerId,
         _attendance.amount,
         _attendance.courseId,
         Date.now(),
-        _attendance.fieldOfKnowledge,
+        _attendance.fieldOfKnowledge
       );
 
       if (tx) {
@@ -156,20 +154,20 @@ const Attendance = () => {
       }
     }
     if (values.token_type === "batch_instructorScore_token") {
-      const [_attendance] = values.attendance
-      const _learnerIds:number[] = []
-      const _amounts:number[] = []
+      const [_attendance] = values.attendance;
+      const _learnerIds: number[] = [];
+      const _amounts: number[] = [];
 
-      values.attendance.map((item:any) => {
-        _learnerIds.push(item.learnerId)
-        _amounts.push(item.amount)
-      })
+      values.attendance.map((item: any) => {
+        _learnerIds.push(item.learnerId);
+        _amounts.push(item.amount);
+      });
       const tx = await contract!.batchMintInstructorScoreToken(
         _learnerIds,
         _amounts,
         _attendance.courseId,
         Date.now(),
-        _attendance.fieldOfKnowledge,
+        _attendance.fieldOfKnowledge
       );
 
       if (tx) {
@@ -186,7 +184,7 @@ const Attendance = () => {
         if (e.target && e.target.result instanceof ArrayBuffer) {
           const data = new Uint8Array(e.target.result);
           const workbook = XLSX.read(data, { type: "array" });
-          const sheetName = workbook.SheetNames[2];
+          const sheetName = workbook.SheetNames[0];
           const sheet = workbook.Sheets[sheetName];
           const jsonData = XLSX.utils.sheet_to_json(sheet);
 
@@ -304,10 +302,11 @@ const Attendance = () => {
     { value: "score_token", label: "Score Token" },
     { value: "batch_score_token", label: "Batch Score Token" },
     { value: "instructorScore_token", label: "Instructor Score Token" },
-    { value: "batch_instructorScore_token", label: "Batch Instructor Score Token" },
+    {
+      value: "batch_instructorScore_token",
+      label: "Batch Instructor Score Token",
+    },
   ];
-
-
 
   return (
     <div className="w-[800px] mx-auto my-8">
@@ -318,7 +317,7 @@ const Attendance = () => {
         onSubmit={handleSubmit}
       >
         {(formik) => (
-          <Form className="flex flex-col items-center justify-between">
+          <Form className="flex flex-col justify-between">
             <SelectInput
               containerStyle={"w-full"}
               label="Token"
@@ -326,15 +325,23 @@ const Attendance = () => {
               name="token_type"
               options={tokenType}
             />
-            <input
-              className="my-3"
-              type="file"
-              name="attendance"
-              onChange={(event) => handleFileChange(event, formik)}
-            />
+            <div className="flex flex-col">
+              <label className="inline-block mb-1 text-xs text-gray-500 false">
+                Please upload documents accordingly
+              </label>
+              <div className="flex items-center justify-center border border-dashed py-3 rounded">
+                <input
+                  className="my-3"
+                  type="file"
+                  name="attendance"
+                  onChange={(event) => handleFileChange(event, formik)}
+                  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" 
+                />
+              </div>
+            </div>
             <Button
               size="small"
-              className="w-full"
+              className="w-full mt-3"
               variant="primary"
               type="submit"
             >

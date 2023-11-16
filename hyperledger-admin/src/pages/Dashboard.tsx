@@ -1,46 +1,99 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { initWeb3Method } from "../utils";
-import { number, object } from "yup";
-import { Form, Formik, FormikProps } from "formik";
-import { useRef, useState } from "react";
-import TextInput from "../components/TextInput";
-import Button from "../components/Button";
+// import { number, object } from "yup";
+// import { FormikProps } from "formik";
+import { useEffect, useState } from "react";
 
-const initialValues = {
-  tokenId: 0,
-};
+import Token from "../components/nft/Token";
 
-const validationSchema = object().shape({
-  tokenId: number().required("Please provide a valid token ID"),
-});
+// const initialValues = {
+//   tokenId: 0,
+// };
+
+// const validationSchema = object().shape({
+//   tokenId: number().required("Please provide a valid token ID"),
+// });
 
 function Dashboard() {
   const auth = useSelector((state: RootState) => state.auth);
-  const formikRef = useRef<FormikProps<any>>(null);
-  const [balance, setBalance] = useState<any>(null);
+  // const formikRef = useRef<FormikProps<any>>(null);
+  // const [balance, setBalance] = useState<any>(null);
+  // const [courseIdOptions, setCourseIdOptions] = useState([]);
 
-  const handleSubmit = async (values: any) => {
-    const contract = await initWeb3Method();
-    const tx = await contract!.balanceOf(
-      auth.user.publicAddress,
-      values.tokenId
-    );
-    if (tx) {
-      setBalance(Number(tx));
-    } else {
-      setBalance(null)
+  const [tokens, setTokens] = useState([])
+
+
+  const getLearnerTokenMetadata = async () => {
+    const contract = await initWeb3Method()
+    const tx = await contract!.getLearnerTokenMetadata(auth.user.publicAddress)
+  
+    let temp: any = [];
+    for (let key in tx) {
+      if (tx.hasOwnProperty(key)) {
+        if (Array.isArray(tx[key])) {          
+          let obj: any = {};
+          tx[key].forEach((item: any, index: number) => {
+            if (index === 0) {
+              obj["institutionId"] = Number(item);
+            }
+            if (index === 1) {
+              obj["instructorId"] = Number(item);
+            }
+            if (index === 2) {
+              obj["tokenId"] = Number(item);
+            }
+            if (index === 3) {
+              obj["createdAt"] = Number(item);
+            }
+            if (index === 4) {
+              obj["courseId"] = Number(item);
+            }
+            if (index === 5) {
+              obj["fieldOfKnowledge"] = (item);
+            }
+            if (index === 6) {
+              obj["skill"] = (item);
+            }
+          
+          });
+          temp.push(obj);
+        } 
+      }
     }
-  };
+
+    if (temp.length > 0) {
+      setTokens(temp)
+    }
+  } 
+
+  useEffect(() => {
+    if (auth.user.type === "learner") {
+      getLearnerTokenMetadata()
+    }
+  }, []);
+
+
+  
+
 
   if (auth.user.type === "learner") {
     return (
       <>
-        <div className="font-bold text-lg">
-          Hello <span className="capitalize">{auth.user.name}</span>
+        <div className="flex flex-col items-center">
+          <h3 className="font-bold">Your Tokens</h3>
+          <div className="grid grid-cols-4 gap-2">
+            {
+              tokens.length > 0 && tokens.map((token:any,index:number) => {
+                return <Token key={index} item={token}/>
+              })
+            }
+          </div>
+
         </div>
 
-        <div className="flex flex-col items-center justify-center w-full">
+
+        {/* <div className="flex flex-col items-center justify-center w-full">
           <h3>
             Check your token balance - <span>{balance ? balance : "__"}</span>
           </h3>
@@ -49,7 +102,7 @@ function Dashboard() {
             validationSchema={validationSchema}
             innerRef={formikRef}
             onSubmit={handleSubmit}
-          >
+            >
             <Form>
               <TextInput
                 name="tokenId"
@@ -63,12 +116,13 @@ function Dashboard() {
                 className="w-full"
                 variant="primary"
                 type="submit"
-              >
+                >
                 Check
               </Button>
             </Form>
           </Formik>
-        </div>
+        </div> */}
+    
       </>
     );
   }

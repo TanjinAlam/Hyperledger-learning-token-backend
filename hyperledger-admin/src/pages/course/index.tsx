@@ -8,6 +8,8 @@ const Course = () => {
   const getCourse = async () => {
     const contract = await initWeb3Method();
     const tx = await contract!.getCoursesBySender();
+    console.log(tx);
+    
     let temp: any = [];
     for (let key in tx) {
       if (tx.hasOwnProperty(key)) {
