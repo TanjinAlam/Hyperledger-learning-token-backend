@@ -640,37 +640,37 @@ contract LearningToken is ERC1155, Ownable{
 
 
     // ------------------ Utility Function ------------------ 
-    function getLearnerCourseDetails(uint256 _courseId, address _courseLearnersAddress)
-        public
-        view
-        returns (uint256, string memory, bool)
-    {
-        CourseLearners storage _courseLearner = courses[_courseId].courseLearners[_courseLearnersAddress];
-        return (
-            _courseLearner._learnerId,
-            _courseLearner.learnerName,
-            _courseLearner.isActive
-        );
-    }
+    // function getLearnerCourseDetails(uint256 _courseId, address _courseLearnersAddress)
+    //     public
+    //     view
+    //     returns (uint256, string memory, bool)
+    // {
+    //     CourseLearners storage _courseLearner = courses[_courseId].courseLearners[_courseLearnersAddress];
+    //     return (
+    //         _courseLearner._learnerId,
+    //         _courseLearner.learnerName,
+    //         _courseLearner.isActive
+    //     );
+    // }
 
-    function isAdmin()
-        public
-        view
-        returns (bool)
-    {
-        if(msg.sender == super.owner()){
-            return true;
-        } else {
-            return false;
-        }
-    }
-    function isInstitution()
-        public
-        view
-        returns (bool)
-    {
-        return institutions[msg.sender].status;
-    }
+    // function isAdmin()
+    //     public
+    //     view
+    //     returns (bool)
+    // {
+    //     if(msg.sender == super.owner()){
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+    // function isInstitution()
+    //     public
+    //     view
+    //     returns (bool)
+    // {
+    //     return institutions[msg.sender].status;
+    // }
 
     // Function to get the courses associated with the caller's address
     function getCoursesBySender() public view returns (Course[] memory) {
