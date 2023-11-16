@@ -93,7 +93,6 @@ contract LearningToken is ERC1155, Ownable{
         string courseName;
         uint256 totalSupply;
         uint256 courseHelpingTokneId;
-        uint256 _courseLearnerCount;
     }
 
      struct Course {
@@ -131,8 +130,6 @@ contract LearningToken is ERC1155, Ownable{
     mapping(address => uint256) public addressToInstitutionId;
     mapping(address => uint256) public addressToLearnerId;
     mapping(address => uint256) public addressToInstructorId;
-
-    mapping(uint256 => bool) private _isTokenTransferable;
 
     // mapping(address => mapping(uint256 => Instructors)) public instructors;
     //https://yourdomain.hyperledger-learning-token/api/item/{id}.json // or store the ipfs link of the metadata
@@ -228,12 +225,15 @@ contract LearningToken is ERC1155, Ownable{
         Institutions storage _institution = institutions[_institutionAddress];
 
         Courses storage _course = courses[courseId.current()];
+        Course memory newCourse = Course(_courseName, courseTokenCounter.current());
         for(uint256 i =0; i<learnerAddress.length; i++){
             Learners memory _learner = learners[learnerAddress[i]];
             _course.courseLearners[learnerAddress[i]] = CourseLearners(_learner._learnerId,_learner.learnerName, true);
-            _course.courseLearnerAddress[_course._courseLearnerCount] = learnerAddress[i];
-            _course._courseLearnerCount++;
+            // _course.courseLearnerAddress[_course._courseLearnerCount] = learnerAddress[i];
+            // _course._courseLearnerCount++;
             //event emit for learner registration;
+            // add learner course details
+            coursesByAddress[learnerAddress[i]].push(newCourse);
         }
         _course._instructorId = _institution.institutionInstructors[msg.sender]._instructorId;
         _course._institutionId = _institution.institutionInstructors[msg.sender]._institutionId;
@@ -242,14 +242,10 @@ contract LearningToken is ERC1155, Ownable{
         _course.createdAt = _createdAt;
         _course._instructorAddress = msg.sender;
 
-        Course memory newCourse = Course(_courseName, courseTokenCounter.current());
+        // add instructor course details
         coursesByAddress[msg.sender].push(newCourse);
-
         _course.courseHelpingTokneId = courseTokenCounter.current();
         courseTokenCounter.increment();
-
-
-
         // programs[courseId.current()] = Programs(_instructorId, _instructor._institutionId,temp, _programName ,_createdAt, _totalSupply, courseId.current(), 0);
         // _mint(msg.sender, courseId.current(), _totalSupply , data);
         // courseIds.push(courseId.current());
@@ -418,10 +414,6 @@ contract LearningToken is ERC1155, Ownable{
             institutions[institutionAddress].institutionInstructors[instructorAddress].isActive,
             institutions[institutionAddress].institutionInstructors[instructorAddress].createdAt
         );
-    }
-
-    function getCourseDetails (uint256 _courseId) public view returns (uint256 _programLearnerIdCounts) {
-        return  courses[_courseId]._courseLearnerCount;
     }
 
     
@@ -693,6 +685,11 @@ contract LearningToken is ERC1155, Ownable{
     // Function to get the instructorId associated with the caller's address
     function getInstructorIdBySender() public view returns (InstructorMapping memory) {
         return instructorMapping[msg.sender];
+    }
+
+    // Public getter function to retrieve TokenMetadatas for a given address
+    function getLearnerTokenMetadata(address learnerAddress) external view returns (TokenMetadatas[] memory) {
+        return learnerTokenMetaDataFactory[learnerAddress];
     }
 
 }
