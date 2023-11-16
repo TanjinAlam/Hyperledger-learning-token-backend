@@ -88,11 +88,11 @@ contract LearningToken is ERC1155, Ownable{
         address _institutionAddress;
         address _instructorAddress;
         mapping(address => CourseLearners) courseLearners;
-        mapping(uint256 => address) courseLearnerAddress;
         uint256 createdAt;
         string courseName;
         uint256 totalSupply;
         uint256 courseHelpingTokneId;
+        uint256 _courseLearnerCount;
     }
 
      struct Course {
@@ -111,6 +111,8 @@ contract LearningToken is ERC1155, Ownable{
     }
 
     mapping(address => Course[]) public coursesByAddress;
+    //mapping against learnerId -> Address
+    mapping(uint256 => address) public learnerIdToAddress;
     mapping(address => InstitutionMapping) public institutionByAddress;
     mapping(address => InstructorMapping) public instructorMapping;
 
@@ -148,6 +150,7 @@ contract LearningToken is ERC1155, Ownable{
     function registerLearner(string memory _learnerName,uint256 createdAt, string memory latitude, string memory longittude) external {
         learners[msg.sender] = Learners(learnerId.current() ,_learnerName, createdAt,latitude, longittude);
         emit LearnerRegistered(learnerId.current(), _learnerName, createdAt);
+        learnerIdToAddress[learnerId.current()] = msg.sender;
         learnerId.increment();
     }
 
@@ -217,11 +220,18 @@ contract LearningToken is ERC1155, Ownable{
         _;
     }
 
+    modifier checkLearnersIsRegistered(address[] memory learnerAddress){
+        for(uint256 i =0; i<learnerAddress.length; i++){
+            require(bytes(learners[learnerAddress[i]].learnerName).length > 0, "learner is not registered");
+        }
+        _;
+    }
+
 
     //check learnrs are registered or not
     //checking function caller is a institution instructor 
     //check learner is registered or not
-    function createCourse(address _institutionAddress, string memory _courseName, uint256 _createdAt, address[] memory learnerAddress) external checkInstructorCourseAccess(_institutionAddress){
+    function createCourse(address _institutionAddress, string memory _courseName, uint256 _createdAt, address[] memory learnerAddress) external checkLearnersIsRegistered(learnerAddress) checkInstructorCourseAccess(_institutionAddress){
         Institutions storage _institution = institutions[_institutionAddress];
 
         Courses storage _course = courses[courseId.current()];
@@ -230,6 +240,7 @@ contract LearningToken is ERC1155, Ownable{
             Learners memory _learner = learners[learnerAddress[i]];
             _course.courseLearners[learnerAddress[i]] = CourseLearners(_learner._learnerId,_learner.learnerName, true);
             // _course.courseLearnerAddress[_course._courseLearnerCount] = learnerAddress[i];
+            // _course.courseLearnerAddress.push(learnerAddress[i]);
             // _course._courseLearnerCount++;
             //event emit for learner registration;
             // add learner course details
@@ -329,7 +340,7 @@ contract LearningToken is ERC1155, Ownable{
     function getLearnersAddress(uint256[] memory learnersId, uint256 _courseId) internal view returns(address[] memory learnersAddress){
         address[] memory _learnerAddress = new address[](learnersId.length);
         for(uint256 i = 0; i<learnersId.length; i++){
-            _learnerAddress[i] = (courses[_courseId].courseLearnerAddress[learnersId[i]]);
+            _learnerAddress[i] = learnerIdToAddress[learnersId[i]];
         }
         return _learnerAddress;
     }
@@ -631,11 +642,9 @@ contract LearningToken is ERC1155, Ownable{
     modifier isLearnerWithinCourse(uint256[] memory learnersId, uint256 _courseId) {
     address[] memory _learnerAddress = new address[](learnersId.length);
     for (uint256 i = 0; i < learnersId.length; i++) {
-        if (courses[_courseId].courseLearnerAddress[learnersId[i]] == address(0) && courses[_courseId].courseLearners[courses[_courseId].courseLearnerAddress[learnersId[i]]].isActive) {
-            revert(string(abi.encodePacked("Learner status is not active or learner is not withing the course for", courses[_courseId].courseLearnerAddress[learnersId[i]])));
+            require(learnerIdToAddress[learnersId[i]] != address(0), "Address must not be the zero address");
         }
-    }
-    _; // This indicates where the modified function's body will be inserted.
+        _;
     }
 
 

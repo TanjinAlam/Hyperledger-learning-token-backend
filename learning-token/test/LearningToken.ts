@@ -26,7 +26,7 @@ describe("LearningTokenContract", function () {
     learnerAddress: any;
   const institutionLatitude = "23.8882748";
   const institutionLongitude = "903880846";
-  const learnerLatittude = "23.8669432";
+  const learnerLatitude = "23.8669432";
   const learnerLongitude = "90.4070788";
   const learner2Latitude = "23.6345742";
   const learner2Longitude = "-102.5939836";
@@ -199,7 +199,7 @@ describe("LearningTokenContract", function () {
       await Learner1Wallet.registerLearner(
         learner1Name,
         currentTimestamp,
-        learnerLatittude,
+        learnerLatitude,
         learnerLongitude
       );
       await Learner1Wallet.wait;
@@ -243,7 +243,7 @@ describe("LearningTokenContract", function () {
       await Learner3Wallet.registerLearner(
         learner3Name,
         currentTimestamp,
-        learnerLatittude,
+        learnerLatitude,
         learnerLongitude
       );
       const event = await Learner3Wallet.queryFilter("LearnerRegistered");
