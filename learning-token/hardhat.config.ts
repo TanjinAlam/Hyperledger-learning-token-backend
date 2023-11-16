@@ -43,13 +43,13 @@ const config: HardhatUserConfig = {
     //   // gasPrice: 80000000, // adjust as necessary
     //   // gas: 124500 // adjust as necessary
     // },
-    mumbai: {
-      url: POLYGON_RPC_URL,
-      chainId: 80001,
-      accounts: [POLYGON_PRIV_KEY],
-      // gasPrice: 80000000, // adjust as necessary
-      // gas: 124500 // adjust as necessary
-    },
+    // mumbai: {
+    //   url: POLYGON_RPC_URL,
+    //   chainId: 80001,
+    //   accounts: [POLYGON_PRIV_KEY],
+    //   // gasPrice: 80000000, // adjust as necessary
+    //   // gas: 124500 // adjust as necessary
+    // },
   },
   solidity: {
     version: "0.8.17",

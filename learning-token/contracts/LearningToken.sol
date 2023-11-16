@@ -89,7 +89,6 @@ contract LearningToken is ERC1155, Ownable{
         address _instructorAddress;
         mapping(address => CourseLearners) courseLearners;
         mapping(uint256 => address) courseLearnerAddress;
-        TokenMetadatas[] tokenMetadataArray;
         uint256 createdAt;
         string courseName;
         uint256 totalSupply;
@@ -371,7 +370,7 @@ contract LearningToken is ERC1155, Ownable{
             skill: _skill
         });
         
-        _course.tokenMetadataArray.push(newTokenMetadata);
+          
         learnerTokenMetaDataFactory[_learnersAddress[0]].push(newTokenMetadata);
         emit AttendanceTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId, amount);
         courseTokenCounter.increment();
@@ -398,7 +397,6 @@ contract LearningToken is ERC1155, Ownable{
                     fieldOfKnowledge: _fieldOfKnowledge,
                     skill: _skill
                 });
-                courses[_courseId].tokenMetadataArray.push(newTokenMetadata);
                 learnerTokenMetaDataFactory[_learnersAddress[i]].push(newTokenMetadata);
                 emit AttendanceTokenMinted(_learnersAddress[i], courseTokenCounter.current(), _courseId, amount[i]);
                 courseTokenCounter.increment();
@@ -454,7 +452,7 @@ contract LearningToken is ERC1155, Ownable{
             skill: _skillName
         });
         
-        _course.tokenMetadataArray.push(newTokenMetadata);
+          
         learnerTokenMetaDataFactory[_learnersAddress[0]].push(newTokenMetadata);
         emit ScoreTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId, amount, _fieldOfKnowledge, _skillName);
         courseTokenCounter.increment();
@@ -482,7 +480,7 @@ contract LearningToken is ERC1155, Ownable{
                 fieldOfKnowledge: _fieldOfKnowledge,
                 skill: _skillName
             });
-            _course.tokenMetadataArray.push(newTokenMetadata);
+              
             learnerTokenMetaDataFactory[_learnersAddress[i]].push(newTokenMetadata);
             emit ScoreTokenMinted(_learnersAddress[i], courseTokenCounter.current(), _courseId, amount[i], _fieldOfKnowledge, _skillName);
             courseTokenCounter.increment();
@@ -529,7 +527,7 @@ contract LearningToken is ERC1155, Ownable{
             skill: _skill
         });
         
-        _course.tokenMetadataArray.push(newTokenMetadata);
+          
         learnerTokenMetaDataFactory[_learnersAddress[0]].push(newTokenMetadata);
         emit HelpingTokenMinted(_learnersAddress[0], _course.courseHelpingTokneId, _courseId, amount);
         // _course.courseHelpingTokneId += _course.courseHelpingTokneId;
@@ -557,7 +555,7 @@ contract LearningToken is ERC1155, Ownable{
                 fieldOfKnowledge: _fieldOfKnowledge,
                 skill: _skill
             });
-            _course.tokenMetadataArray.push(newTokenMetadata);
+              
             learnerTokenMetaDataFactory[_learnersAddress[i]].push(newTokenMetadata);
             emit HelpingTokenMinted(_learnersAddress[i], _course.courseHelpingTokneId, _courseId, amount[i]);
             // courseTokenCounter.increment();
@@ -604,7 +602,7 @@ contract LearningToken is ERC1155, Ownable{
             fieldOfKnowledge: _fieldOfKnowledge,
             skill: ""
         });
-        _course.tokenMetadataArray.push(newTokenMetadata);
+          
         learnerTokenMetaDataFactory[_learnersAddress[0]].push(newTokenMetadata);
         emit InstructorScoreTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId,amount);
         courseTokenCounter.increment();
@@ -631,7 +629,7 @@ contract LearningToken is ERC1155, Ownable{
                 fieldOfKnowledge: _fieldOfKnowledge,
                 skill: ""
             });
-            _course.tokenMetadataArray.push(newTokenMetadata);
+              
             learnerTokenMetaDataFactory[_learnersAddress[i]].push(newTokenMetadata);
             emit InstructorScoreTokenMinted(_learnersAddress[0], courseTokenCounter.current(), _courseId, amount[i]);
             courseTokenCounter.increment();
