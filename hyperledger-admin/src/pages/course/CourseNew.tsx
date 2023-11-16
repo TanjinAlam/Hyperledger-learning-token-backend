@@ -69,7 +69,7 @@ const CourseNew = () => {
         onSubmit={handleSubmit}
       >
         {(formik) => (
-          <Form className="flex flex-col items-center justify-between">
+          <Form className="flex flex-col justify-between">
             <TextInput
               name="courseName"
               type="text"
@@ -92,15 +92,23 @@ const CourseNew = () => {
               }
               isLoading={isLoading}
             />
-            <input
-              type="file"
-              name="learnerAddress"
-              onChange={(event) => handleFileChange(event, formik)}
-              className="my-3"
-            />
+            <div className="flex flex-col">
+              <label className="inline-block mb-1 text-xs text-gray-500 false">
+                Please upload learner address documents
+              </label>
+              <div className="flex items-center justify-center border border-dashed py-3 rounded">
+                <input
+                  type="file"
+                  name="learnerAddress"
+                  onChange={(event) => handleFileChange(event, formik)}
+                  className="my-3"
+                  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" 
+                />
+              </div>
+            </div>
             <Button
               size="small"
-              className="w-full"
+              className="w-full mt-3"
               variant="primary"
               type="submit"
             >

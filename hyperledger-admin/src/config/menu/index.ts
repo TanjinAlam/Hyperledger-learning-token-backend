@@ -56,11 +56,11 @@ const mainMenuItems = [
         to: "/course/add",
         requiredPermissions: ["instructor", "admin"],
       },
-      {
-        name: "Set Token",
-        to: "/course/set-token",
-        requiredPermissions: ["instructor", "admin"],
-      },
+      // {
+      //   name: "Set Token",
+      //   to: "/course/set-token",
+      //   requiredPermissions: ["instructor", "admin"],
+      // },
       {
         name: "Distribute Single Token",
         to: "/course/attendance",

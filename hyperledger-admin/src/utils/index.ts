@@ -23,3 +23,10 @@ export const initWeb3Method = async () => {
     return contract;
   }
 };
+
+export const formatDate = (timestamp:number) => {
+
+  const date = new Date(timestamp);
+  
+  return date.getDate() + '/' +  date.getMonth() + '/' + date.getFullYear()
+}
