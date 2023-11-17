@@ -24,9 +24,12 @@ export const initWeb3Method = async () => {
   }
 };
 
-export const formatDate = (timestamp:number) => {
-
+export const formatDate = (timestamp: number) => {
   const date = new Date(timestamp);
-  
-  return date.getDate() + '/' +  date.getMonth() + '/' + date.getFullYear()
-}
+
+  return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+};
+
+export const getRandomFileName = () => {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(23).substring(2, 5);
+};

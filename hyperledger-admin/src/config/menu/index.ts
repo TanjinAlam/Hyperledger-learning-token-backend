@@ -49,12 +49,12 @@ const mainMenuItems = [
       {
         name: "List",
         to: "/course",
-        requiredPermissions: ["instructor", "admin"],
+        requiredPermissions: ["instructor"],
       },
       {
         name: "Add",
         to: "/course/add",
-        requiredPermissions: ["instructor", "admin"],
+        requiredPermissions: ["instructor"],
       },
       // {
       //   name: "Set Token",
@@ -62,9 +62,9 @@ const mainMenuItems = [
       //   requiredPermissions: ["instructor", "admin"],
       // },
       {
-        name: "Distribute Single Token",
+        name: "Distribute Token",
         to: "/course/attendance",
-        requiredPermissions: ["instructor", "admin"],
+        requiredPermissions: ["instructor"],
       },
     ],
     icon: BsBoxSeam,
