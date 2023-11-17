@@ -45,8 +45,9 @@ async function main() {
   const learnerLongitude = "90.4070788";
   const learner2Latitude = "23.6345742";
   const learner2Longitude = "-102.5939836";
-  const institutionName = "MIT";
-  const instructorName = "Alfenso";
+  const institutionName =
+    "International University Of Business Agriculture & Technology";
+  const instructorName = "Alfonso";
   const learner1Name = "Piash";
   const learner2Name = "Tanjin";
   const learner3Name = "Pinu";
@@ -60,10 +61,12 @@ async function main() {
   const learner3Id = 2;
   const course1Id = 0;
   const tokenId = 0;
-  const fieldOfKnowledge = "Programming";
+  const fieldOfKnowledge = "Blockcahin";
   const skillName = "Solidity";
   const amount = 1;
   const currentTimestamp = Math.floor(Date.now() / 1000);
+  const scoringGuideGradingPolicyBookURL =
+    "https://docs.google.com/spreadsheets/d/1yFMIq2VQi47tdId6r0uOrtXlkIGe8Z7ZiBpNU7OgZKI/edit#gid=0";
 
   const accounts = await ethers.getSigners();
   superadminAddress = accounts[0].address;
@@ -170,6 +173,7 @@ async function main() {
     courseName,
     currentTimestamp,
     learnerAddress,
+    scoringGuideGradingPolicyBookURL,
     {
       gasPrice: 618616602,
       gasLimit: 5000000, // Set an appropriate gas limit for your transaction

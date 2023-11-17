@@ -31,7 +31,7 @@ describe("LearningTokenContract", function () {
   const learner2Latitude = "23.6345742";
   const learner2Longitude = "-102.5939836";
   const institutionName = "MIT";
-  const instructorName = "Alfenso";
+  const instructorName = "Alfonso";
   const learner1Name = "Piash";
   const learner2Name = "Tanjin";
   const learner3Name = "Pinu";
@@ -48,6 +48,8 @@ describe("LearningTokenContract", function () {
   const fieldOfKnowledge = "Programming";
   const skillName = "Solidity";
   const amount = 1;
+  const scoringGuideGradingPolicyBookURL =
+    "https://docs.google.com/spreadsheets/d/1yFMIq2VQi47tdId6r0uOrtXlkIGe8Z7ZiBpNU7OgZKI/edit#gid=0";
   async function intToBytesData(value: any) {
     const encodedValue = ethers.utils.defaultAbiCoder.encode(
       ["uint256"],
@@ -265,7 +267,8 @@ describe("LearningTokenContract", function () {
         institutionAddress,
         courseName,
         currentTimestamp,
-        learnerAddress
+        learnerAddress,
+        scoringGuideGradingPolicyBookURL
       );
 
       const event = await InstructorWallet.queryFilter("CourseCreated");

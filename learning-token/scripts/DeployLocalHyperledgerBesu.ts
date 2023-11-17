@@ -1,4 +1,3 @@
-
 /// ------------------------ Deploy to local hyperledger besu ----------------------
 import { ethers } from "hardhat";
 import dotenv from "dotenv";
@@ -49,7 +48,7 @@ async function main() {
   const learnerWallet = new ethers.Wallet(LEARNER1_PRI_KEY, provider);
 
   const institutionName = "MIT";
-  const instructorName = "Alfenso";
+  const instructorName = "Alfonso";
   const learner1Name = "Piash";
   const learner2Name = "Tanjin";
   const courseName = "CS50";
@@ -69,6 +68,8 @@ async function main() {
   const learnerLongitude = "90.4070788";
   const learner2Latittude = "23.6345742";
   const learner2Longitude = "-102.5939836";
+  const scoringGuideGradingPolicyBookURL =
+    "https://docs.google.com/spreadsheets/d/1yFMIq2VQi47tdId6r0uOrtXlkIGe8Z7ZiBpNU7OgZKI/edit#gid=0";
 
   const currentTimestamp = Math.floor(Date.now() / 1000);
 
@@ -131,6 +132,7 @@ async function main() {
     courseName,
     currentTimestamp,
     [LEARNER1_PUB_KEY],
+    scoringGuideGradingPolicyBookURL,
     {
       gasPrice: 2100,
       gasLimit: 5000000, // Set an appropriate gas limit for your transaction

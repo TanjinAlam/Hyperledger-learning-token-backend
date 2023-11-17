@@ -72,6 +72,8 @@ contract LearningToken is ERC1155, Ownable{
         bool isActive;
     }
 
+    // token type
+    // mapping to get others instructor,instituion
     struct TokenMetadatas {
         uint256 _institutionId;
         uint256 _instructorId;
@@ -93,6 +95,7 @@ contract LearningToken is ERC1155, Ownable{
         uint256 totalSupply;
         uint256 courseHelpingTokneId;
         uint256 _courseLearnerCount;
+        string scoringGuideGradingPolicyBookURL;
     }
 
      struct Course {
@@ -231,7 +234,7 @@ contract LearningToken is ERC1155, Ownable{
     //check learnrs are registered or not
     //checking function caller is a institution instructor 
     //check learner is registered or not
-    function createCourse(address _institutionAddress, string memory _courseName, uint256 _createdAt, address[] memory learnerAddress) external checkLearnersIsRegistered(learnerAddress) checkInstructorCourseAccess(_institutionAddress){
+    function createCourse(address _institutionAddress, string memory _courseName, uint256 _createdAt, address[] memory learnerAddress, string memory _scoringGuideGradingPolicyBookURL) external checkLearnersIsRegistered(learnerAddress) checkInstructorCourseAccess(_institutionAddress){
         Institutions storage _institution = institutions[_institutionAddress];
 
         Courses storage _course = courses[courseId.current()];
@@ -251,6 +254,7 @@ contract LearningToken is ERC1155, Ownable{
         _course._institutionAddress = _institutionAddress;
         _course.courseName = _courseName;
         _course.createdAt = _createdAt;
+        _course.scoringGuideGradingPolicyBookURL= _scoringGuideGradingPolicyBookURL;
         _course._instructorAddress = msg.sender;
 
         // add instructor course details
