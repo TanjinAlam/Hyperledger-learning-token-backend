@@ -94,7 +94,6 @@ contract LearningToken is ERC1155, Ownable{
         string courseName;
         uint256 totalSupply;
         uint256 courseHelpingTokneId;
-        uint256 _courseLearnerCount;
         string scoringGuideGradingPolicyBookURL;
     }
 
@@ -113,7 +112,6 @@ contract LearningToken is ERC1155, Ownable{
         uint256 _instructorId;
     }
 
-    mapping(address => Course[]) public coursesByAddress;
     //mapping against learnerId -> Address
     mapping(uint256 => address) public learnerIdToAddress;
     mapping(address => InstitutionMapping) public institutionByAddress;
@@ -242,12 +240,6 @@ contract LearningToken is ERC1155, Ownable{
         for(uint256 i =0; i<learnerAddress.length; i++){
             Learners memory _learner = learners[learnerAddress[i]];
             _course.courseLearners[learnerAddress[i]] = CourseLearners(_learner._learnerId,_learner.learnerName, true);
-            // _course.courseLearnerAddress[_course._courseLearnerCount] = learnerAddress[i];
-            // _course.courseLearnerAddress.push(learnerAddress[i]);
-            // _course._courseLearnerCount++;
-            //event emit for learner registration;
-            // add learner course details
-            coursesByAddress[learnerAddress[i]].push(newCourse);
         }
         _course._instructorId = _institution.institutionInstructors[msg.sender]._instructorId;
         _course._institutionId = _institution.institutionInstructors[msg.sender]._institutionId;
@@ -258,30 +250,12 @@ contract LearningToken is ERC1155, Ownable{
         _course._instructorAddress = msg.sender;
 
         // add instructor course details
-        coursesByAddress[msg.sender].push(newCourse);
         _course.courseHelpingTokneId = courseTokenCounter.current();
         courseTokenCounter.increment();
-        // programs[courseId.current()] = Programs(_instructorId, _instructor._institutionId,temp, _programName ,_createdAt, _totalSupply, courseId.current(), 0);
-        // _mint(msg.sender, courseId.current(), _totalSupply , data);
-        // courseIds.push(courseId.current());
         instructorPermission[courseId.current()][msg.sender] = true;
         emit CourseCreated(courseId.current(), _institution.institutionInstructors[msg.sender]._instructorId,  _institution.institutionInstructors[msg.sender]._institutionId, _courseName);
         courseId.increment();
     }
-
-    // function setTokenMetadata(uint256 _courseId, uint256 _institutionId, uint256 _instructorId, 
-    // string memory _fieldOfKnowledge, string memory _skillName, address _institutionAddress,uint256 createdAt) external onlyInstructor (_courseId) checkInstructorCourseAccess(_institutionAddress) {
-    //     TokenMetadatas storage _tokenMetadata = tokenMetadatas[_courseId];
-    //     _tokenMetadata._institutionId = _institutionId;
-    //     _tokenMetadata._instructorId = _instructorId;
-    //     _tokenMetadata.createdAt = createdAt;
-    //     _tokenMetadata.courseId = _courseId;
-    //     _tokenMetadata.fieldOfKnowledge = _fieldOfKnowledge;
-    //     _tokenMetadata.skill = _skillName;
-    //     _isTokenTransferable[_courseId] = true;
-    //     emit TokenMetadataCreated(_courseId , _courseId, _institutionId, _instructorId, _skillName, _fieldOfKnowledge, createdAt);
-    // }
-
 
     //can be called by the program instructor
     function addLearnerToCourse(uint256 _courseId, address learnerAddress, address _institutionAddress) external onlyInstructor (_courseId) checkInstructorCourseAccess(_institutionAddress){
@@ -653,41 +627,36 @@ contract LearningToken is ERC1155, Ownable{
 
 
     // ------------------ Utility Function ------------------ 
-    // function getLearnerCourseDetails(uint256 _courseId, address _courseLearnersAddress)
-    //     public
-    //     view
-    //     returns (uint256, string memory, bool)
-    // {
-    //     CourseLearners storage _courseLearner = courses[_courseId].courseLearners[_courseLearnersAddress];
-    //     return (
-    //         _courseLearner._learnerId,
-    //         _courseLearner.learnerName,
-    //         _courseLearner.isActive
-    //     );
-    // }
+    function getLearnerCourseDetails(uint256 _courseId, address _courseLearnersAddress)
+        public
+        view
+        returns (uint256, string memory, bool)
+    {
+        CourseLearners storage _courseLearner = courses[_courseId].courseLearners[_courseLearnersAddress];
+        return (
+            _courseLearner._learnerId,
+            _courseLearner.learnerName,
+            _courseLearner.isActive
+        );
+    }
 
-    // function isAdmin()
-    //     public
-    //     view
-    //     returns (bool)
-    // {
-    //     if(msg.sender == super.owner()){
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-    // function isInstitution()
-    //     public
-    //     view
-    //     returns (bool)
-    // {
-    //     return institutions[msg.sender].status;
-    // }
-
-    // Function to get the courses associated with the caller's address
-    function getCoursesBySender() public view returns (Course[] memory) {
-        return coursesByAddress[msg.sender];
+    function isAdmin()
+        public
+        view
+        returns (bool)
+    {
+        if(msg.sender == super.owner()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    function isInstitution()
+        public
+        view
+        returns (bool)
+    {
+        return institutions[msg.sender].status;
     }
 
     // Function to get the institution associated with the caller's address
