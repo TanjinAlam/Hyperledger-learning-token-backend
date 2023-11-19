@@ -1,11 +1,5 @@
 import { FC, useEffect, useRef, useState } from "react";
-import {
-  Link,
-  NavLink,
-  matchPath,
-  useLocation,
-  
-} from "react-router-dom";
+import { Link, NavLink, matchPath, useLocation } from "react-router-dom";
 import ProtectedSidebar from "./ProtectedSidebar";
 
 type Props = {
@@ -15,7 +9,7 @@ type Props = {
 const SidebarMenuItem: FC<Props> = ({ className, menuItem }) => {
   const menuItemRef = useRef<HTMLLIElement>(null);
   const [dropdownOpen, setDropdownOpen] = useState(false);
- 
+
   const { pathname } = useLocation();
 
   const classes =
@@ -62,11 +56,11 @@ const SidebarMenuItem: FC<Props> = ({ className, menuItem }) => {
       ) : (
         <NavLink
           to={menuItem.to || "#"}
-          className={({ isActive }: any) =>
-            `${classes} ${
+          className={({ isActive }: any) => {            
+            return `${classes} ${
               isActive ? "bg-[#013A44] text-white" : "text-gray-600"
-            }`
-          }
+            }`;
+          }}
         >
           {menuItem.icon && (
             <span className="text-xl mr-3 w-[20px]">

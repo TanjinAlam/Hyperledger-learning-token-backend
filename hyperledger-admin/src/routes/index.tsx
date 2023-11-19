@@ -24,7 +24,7 @@ const AllRoutes = () => {
           <Route path="instructor" element={<Instructor />} />
           <Route path="institution" element={<Institution />} />
           <Route path="learner" element={<Learner />} />
-          <Route path="course" element={<Course />} />
+          <Route path="course/list" element={<Course />} />
           <Route path="course/add" element={<CourseNew />} />
           <Route path="course/set-token" element={<SetToken />} />
           <Route path="course/attendance" element={<Attendance />} />
