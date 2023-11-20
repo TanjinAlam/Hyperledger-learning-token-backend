@@ -48,7 +48,7 @@ const mainMenuItems = [
     subMenu: [
       {
         name: "List",
-        to: "/course",
+        to: "/course/list",
         requiredPermissions: ["instructor"],
       },
       {
