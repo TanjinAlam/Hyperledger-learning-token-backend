@@ -33,8 +33,8 @@ const initialValues = {
   confirm: "",
   publicAddress: "",
   type: "learner",
-  latitude: "",
-  longitude: "",
+  latitude: "23.7984463",
+  longitude: "90.4031033",
 };
 
 const validationSchema = object().shape({
@@ -221,57 +221,55 @@ const Login = () => {
           innerRef={formikRef}
           onSubmit={handleSubmit}
         >
-          {({ values }) => {
-            return (
-              <Form className="flex flex-col items-center justify-between">
-                <TextInput
-                  name="name"
-                  type="text"
-                  label="Name"
-                  containerStyle={`w-full`}
-                  size="small"
-                />
-                <TextInput
-                  name="email"
-                  type="email"
-                  label="Email"
-                  containerStyle={`w-full`}
-                  size="small"
-                />
-                <TextInput
-                  name="password"
-                  type="password"
-                  label="Password"
-                  containerStyle={`w-full`}
-                  size="small"
-                />
-                <TextInput
-                  name="confirm"
-                  type="password"
-                  label="Confirm Password"
-                  containerStyle={`w-full`}
-                  size="small"
-                />
-                <TextInput
-                  name="publicAddress"
-                  type="text"
-                  label="Public Address"
-                  containerStyle={`w-full`}
-                  size="small"
-                />
-                <SelectInput
-                  containerStyle={"w-full"}
-                  label="Type"
-                  size="small"
-                  name="type"
-                  options={[
-                    { value: "admin", label: "Admin" },
-                    { value: "institution", label: "Institution" },
-                    { value: "instructor", label: "Instructor" },
-                    { value: "learner", label: "Learner" },
-                  ]}
-                />
-                {(values.type === "learner" ||
+          <Form className="flex flex-col items-center justify-between">
+            <TextInput
+              name="name"
+              type="text"
+              label="Name"
+              containerStyle={`w-full`}
+              size="small"
+            />
+            <TextInput
+              name="email"
+              type="email"
+              label="Email"
+              containerStyle={`w-full`}
+              size="small"
+            />
+            <TextInput
+              name="password"
+              type="password"
+              label="Password"
+              containerStyle={`w-full`}
+              size="small"
+            />
+            <TextInput
+              name="confirm"
+              type="password"
+              label="Confirm Password"
+              containerStyle={`w-full`}
+              size="small"
+            />
+            <TextInput
+              name="publicAddress"
+              type="text"
+              label="Public Address"
+              containerStyle={`w-full`}
+              size="small"
+            />
+            <SelectInput
+              containerStyle={"w-full"}
+              label="Type"
+              size="small"
+              name="type"
+              options={[
+                { value: "admin", label: "Admin" },
+                { value: "institution", label: "Institution" },
+                { value: "instructor", label: "Instructor" },
+                { value: "learner", label: "Learner" },
+              ]}
+            />
+            {/* {(values.type === "learner" ||
                   values.type === "institution") && (
                   <TextInput
                     name="latitude"
@@ -290,19 +288,17 @@ const Login = () => {
                     containerStyle={`w-full`}
                     size="small"
                   />
-                )}
+                )} */}
 
-                <Button
-                  size="small"
-                  className="w-full"
-                  variant="primary"
-                  type="submit"
-                >
-                  Register
-                </Button>
-              </Form>
-            );
-          }}
+            <Button
+              size="small"
+              className="w-full"
+              variant="primary"
+              type="submit"
+            >
+              Register
+            </Button>
+          </Form>
         </Formik>
         <div className="text-xs my-3 text-center">
           <Link to={"/login"}>Already registered? Login</Link>

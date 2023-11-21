@@ -7,4 +7,8 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ["ethers"],
   },
+  server: {
+    port: 8080,
+    open: true,
+  },
 });
