@@ -220,7 +220,8 @@ const Login = () => {
           validationSchema={validationSchema}
           innerRef={formikRef}
           onSubmit={handleSubmit}
-        >
+        >{({ values }) => {
+          return (
           <Form className="flex flex-col items-center justify-between">
             <TextInput
               name="name"
@@ -269,7 +270,7 @@ const Login = () => {
                 { value: "learner", label: "Learner" },
               ]}
             />
-            {/* {(values.type === "learner" ||
+            {(values.type === "learner" ||
                   values.type === "institution") && (
                   <TextInput
                     name="latitude"
@@ -288,7 +289,7 @@ const Login = () => {
                     containerStyle={`w-full`}
                     size="small"
                   />
-                )} */}
+                )}
 
             <Button
               size="small"
@@ -298,7 +299,7 @@ const Login = () => {
             >
               Register
             </Button>
-          </Form>
+          </Form>)}}
         </Formik>
         <div className="text-xs my-3 text-center">
           <Link to={"/login"}>Already registered? Login</Link>

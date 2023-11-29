@@ -7,8 +7,9 @@ const Course = () => {
   
   const getCourse = async () => {
     const contract = await initWeb3Method();
-    const tx = await contract!.getCoursesBySender();
+    const tx = await contract!.courses(0);
     console.log(tx);
+    
     
     let temp: any = [];
     for (let key in tx) {
