@@ -19,9 +19,9 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-          <Route path="/course/list" element={<Course />} />
         <Route path="/" element={<MasterLayout />}>
           <Route index element={<Dashboard />} />
+        <Route path="/course/list" element={<Course />} />
           <Route path="instructor" element={<Instructor />} />
           <Route path="institution" element={<Institution />} />
           <Route path="learner" element={<Learner />} />
