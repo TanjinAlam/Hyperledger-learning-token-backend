@@ -65,7 +65,9 @@ const validationSchema = object().shape({
     then: (schema) => schema.required("Longitude is required"),
   }),
 });
-
+export const hexString = (number: number) => {
+  return "0x" + number.toString(16);
+}
 const Login = () => {
   const formikRef = useRef<FormikProps<any>>(null);
   const [registerAdmin] = useRegisterAdminMutation();
@@ -79,9 +81,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function hexString(number: number) {
-    return "0x" + number.toString(16);
-  }
+
 
   const handleSubmit = async (values: any) => {
     try {

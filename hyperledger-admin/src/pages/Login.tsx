@@ -1,5 +1,5 @@
 import { Form, Formik, FormikProps } from "formik";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import { userLoggedIn } from "../store/features/auth/authSlice";
 import { useLoginInstitutionMutation } from "../store/features/institution/institutionApi";
 import { useLoginInstructorMutation } from "../store/features/instructor/instructorApi";
 import { useLoginLearnerMutation } from "../store/features/learner/learnerApi";
+import { hexString } from "./Register";
 
 const initialValues = {
   email: "",
@@ -39,6 +40,39 @@ const Login = () => {
   const [loginLearner] = useLoginLearnerMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    handleNetwork()
+  }, [])
+  
+  const handleNetwork = async () => {
+    try {
+      // switch chain request
+      await window.ethereum?.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: hexString(31337) }],
+      });
+    } catch (error: any) {
+      if (error.code === 4902) {
+        window.ethereum?.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: hexString(31337),
+              chainName: "HYPER",
+              rpcUrls: ["http://localhost:8545"],
+              iconUrls: [],
+              nativeCurrency: {
+                name: "GO",
+                symbol: "GO",
+                decimals: 18,
+              },
+              blockExplorerUrls: ["https://blockscout.com/poa/xdai/"],
+            },
+          ],
+        });
+      }
+    }
+  };
   const handleSubmit = async (values: any) => {
     try {
       if (values.type === "admin") {
