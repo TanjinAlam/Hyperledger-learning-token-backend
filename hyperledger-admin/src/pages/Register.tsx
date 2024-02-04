@@ -25,7 +25,11 @@ import {
   useRegisterLearnerMutation,
 } from "../store/features/learner/learnerApi";
 import { initWeb3 } from "../utils";
-
+declare global {
+  interface Window {
+    ethereum?: any;
+  }
+}
 const initialValues = {
   name: "",
   email: "",
@@ -61,7 +65,9 @@ const validationSchema = object().shape({
     then: (schema) => schema.required("Longitude is required"),
   }),
 });
-
+export const hexString = (number: number) => {
+  return "0x" + number.toString(16);
+}
 const Login = () => {
   const formikRef = useRef<FormikProps<any>>(null);
   const [registerAdmin] = useRegisterAdminMutation();
@@ -74,6 +80,9 @@ const Login = () => {
   const [loginLearner] = useLoginLearnerMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+
+
   const handleSubmit = async (values: any) => {
     try {
       if (values.type === "admin") {
@@ -209,7 +218,38 @@ const Login = () => {
         formik?.setFieldValue("longitude", longitude.toString());
       });
     }
+    handleNetwork();
   }, []);
+
+  const handleNetwork = async () => {
+    try {
+      // switch chain request
+      await window.ethereum?.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: hexString(31337) }],
+      });
+    } catch (error: any) {
+      if (error.code === 4902) {
+        window.ethereum?.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainId: hexString(31337),
+              chainName: "HYPER",
+              rpcUrls: ["http://localhost:8545"],
+              iconUrls: [],
+              nativeCurrency: {
+                name: "GO",
+                symbol: "GO",
+                decimals: 18,
+              },
+              blockExplorerUrls: ["https://blockscout.com/poa/xdai/"],
+            },
+          ],
+        });
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen min-w-[100vw] flex items-center justify-center">
@@ -220,57 +260,58 @@ const Login = () => {
           validationSchema={validationSchema}
           innerRef={formikRef}
           onSubmit={handleSubmit}
-        >{({ values }) => {
-          return (
-          <Form className="flex flex-col items-center justify-between">
-            <TextInput
-              name="name"
-              type="text"
-              label="Name"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <TextInput
-              name="email"
-              type="email"
-              label="Email"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <TextInput
-              name="password"
-              type="password"
-              label="Password"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <TextInput
-              name="confirm"
-              type="password"
-              label="Confirm Password"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <TextInput
-              name="publicAddress"
-              type="text"
-              label="Public Address"
-              containerStyle={`w-full`}
-              size="small"
-            />
-            <SelectInput
-              containerStyle={"w-full"}
-              label="Type"
-              size="small"
-              name="type"
-              options={[
-                { value: "admin", label: "Admin" },
-                { value: "institution", label: "Institution" },
-                { value: "instructor", label: "Instructor" },
-                { value: "learner", label: "Learner" },
-              ]}
-            />
-            {(values.type === "learner" ||
+        >
+          {({ values }) => {
+            return (
+              <Form className="flex flex-col items-center justify-between">
+                <TextInput
+                  name="name"
+                  type="text"
+                  label="Name"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <TextInput
+                  name="email"
+                  type="email"
+                  label="Email"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <TextInput
+                  name="password"
+                  type="password"
+                  label="Password"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <TextInput
+                  name="confirm"
+                  type="password"
+                  label="Confirm Password"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <TextInput
+                  name="publicAddress"
+                  type="text"
+                  label="Public Address"
+                  containerStyle={`w-full`}
+                  size="small"
+                />
+                <SelectInput
+                  containerStyle={"w-full"}
+                  label="Type"
+                  size="small"
+                  name="type"
+                  options={[
+                    { value: "admin", label: "Admin" },
+                    { value: "institution", label: "Institution" },
+                    { value: "instructor", label: "Instructor" },
+                    { value: "learner", label: "Learner" },
+                  ]}
+                />
+                {(values.type === "learner" ||
                   values.type === "institution") && (
                   <TextInput
                     name="latitude"
@@ -291,15 +332,17 @@ const Login = () => {
                   />
                 )}
 
-            <Button
-              size="small"
-              className="w-full"
-              variant="primary"
-              type="submit"
-            >
-              Register
-            </Button>
-          </Form>)}}
+                <Button
+                  size="small"
+                  className="w-full"
+                  variant="primary"
+                  type="submit"
+                >
+                  Register
+                </Button>
+              </Form>
+            );
+          }}
         </Formik>
         <div className="text-xs my-3 text-center">
           <Link to={"/login"}>Already registered? Login</Link>
